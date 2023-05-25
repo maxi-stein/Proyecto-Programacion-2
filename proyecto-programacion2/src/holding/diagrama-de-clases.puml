@@ -1,0 +1,113 @@
+@startuml
+class SistemaGestion{
+
+}
+
+class MenuDeInicio{
++mostrarOpciones() : Integer
+}
+
+class BaseDatosHolding{
++autentificarUsuario(Usuario) : Boolean
++iniciarSesion() : void
+}
+
+abstract Usuario{
+-nombre : String
+-direccion : String
+-pass : String
+}
+
+class Vendedor extends Usuario{
+    -codVendedor : Integer
+    -nombre : String
+    -direccion : String
+    -fechaCaptado : Date
+    +Vendedor(String,String)
+    +captarVendedor(Vendedor) : Void
+    +contadorVendedoresCapt() : Integer
+}
+
+class Empresa{
+    -nombre : String
+    -fechaEntrada : Date
+    -facturacionAnual : Double
+
+}
+
+enum  AREAS_MERCADO <<enum>> {
+    -Ingenieria
+    -Construccion
+    -Energia
+    -Mineria
+    -Salud
+
+    -descripcion : String
+
+    -AREAS_MERCADO(String)
+    +getDescripcion() : void
+
+}
+
+class Pais{
+    -nombre : String
+    -pib : double
+    -numHabitantes : double
+    -esSede : Boolean
+
+    +Pais(String,double,double)
+    +hacerSede() : void
+    -eliminarSede() : void
+}
+
+class Ciudad{
+    -nombre: String
+    -desarrollaActividad : Boolean
+    -esSede : Boolean
+
+    +hacerSede() : void
+    -eliminarSede() : void
+}
+
+interface ISede <<interface>>{
+    -esSede : Boolean
+    +hacerSede() : void
+    -eliminarSede() : void
+}
+
+class Asesor extends Usuario{
+-codAsesor: int
+-nombre : String
+-direccion : String
+-titulacion : String
+-fechaInicio : Date
++AsesorarEmpresa(String,String)
++cubrirArea(Asesor) : void
+}
+
+class Admin extends Usuario{
+-codAdmin: int
+-nombre : String
+-direccion : String
+-fechaInicio : Date
++crearEmpresa(): void
++crearPais() : void
+
+}
+
+SistemaGestion -. MenuDeInicio
+MenuDeInicio -. BaseDatosHolding
+BaseDatosHolding -. Usuario
+BaseDatosHolding -. Empresa
+Vendedor "*"<-- "1" Empresa : empresaTrabajo
+Vendedor -> "*" Vendedor : vendedoresCaptados
+Empresa "1"--> "*" AREAS_MERCADO : areasMercado
+Empresa "*" --> "*" Pais : ubicacion
+Pais -> "*" Ciudad : ciudades
+Pais -.> ISede
+Ciudad -.> ISede
+Asesor "*"--> "*" AREAS_MERCADO : cubrirArea
+Asesor "*" --> "*" Empresa : AsesorarEmpresa
+
+
+@enduml
