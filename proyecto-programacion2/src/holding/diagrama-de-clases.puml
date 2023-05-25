@@ -1,14 +1,10 @@
 @startuml
-class SistemaGestion{
-
-}
-
-class MenuDeInicio{
+class SistemaDeGestion{
 +mostrarOpciones() : Integer
 }
 
 class BaseDatosHolding{
-+autentificarUsuario(Usuario) : Boolean
+-autentificarUsuario(Usuario) : Boolean
 +iniciarSesion() : void
 }
 
@@ -95,8 +91,8 @@ class Admin extends Usuario{
 
 }
 
-SistemaGestion -. MenuDeInicio
-MenuDeInicio -. BaseDatosHolding
+
+SistemaDeGestion -. BaseDatosHolding
 BaseDatosHolding -. Usuario
 BaseDatosHolding -. Empresa
 Vendedor "*"<-- "1" Empresa : empresaTrabajo
