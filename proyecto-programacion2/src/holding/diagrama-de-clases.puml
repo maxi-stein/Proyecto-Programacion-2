@@ -93,7 +93,7 @@ class Admin extends Usuario{
 
 
 SistemaDeGestion -. BaseDatosHolding
-BaseDatosHolding -. Usuario
+BaseDatosHolding --> "*"Usuario : usuarios
 BaseDatosHolding -. Empresa
 Vendedor "*"<-- "1" Empresa : empresaTrabajo
 Vendedor -> "*" Vendedor : vendedoresCaptados
