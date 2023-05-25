@@ -4,22 +4,22 @@ class SistemaDeGestion{
 }
 
 class BaseDatosHolding{
--autentificarUsuario(Usuario) : Boolean
+-autentificarUsuario(String,String) : Boolean
 +iniciarSesion() : void
 }
 
 abstract Usuario{
+-codigoUsuario : Integer
 -nombre : String
 -direccion : String
 -pass : String
 }
 
 class Vendedor extends Usuario{
-    -codVendedor : Integer
     -nombre : String
     -direccion : String
     -fechaCaptado : Date
-    +Vendedor(String,String)
+    +Vendedor(String,String,String,Date)
     +captarVendedor(Vendedor) : Void
     +contadorVendedoresCapt() : Integer
 }
@@ -47,7 +47,7 @@ enum  AREAS_MERCADO <<enum>> {
 
 class Pais{
     -nombre : String
-    -pib : double
+    -pbi : Double
     -numHabitantes : double
     -esSede : Boolean
 
@@ -72,20 +72,20 @@ interface ISede <<interface>>{
 }
 
 class Asesor extends Usuario{
--codAsesor: int
 -nombre : String
 -direccion : String
 -titulacion : String
 -fechaInicio : Date
-+AsesorarEmpresa(String,String)
-+cubrirArea(Asesor) : void
++asesorarEmpresa(Empresa)
++cubrirAreaMercado(AREAS_MERCADO) : void
 }
 
 class Admin extends Usuario{
--codAdmin: int
 -nombre : String
 -direccion : String
 -fechaInicio : Date
++crearVendedor() : void
++crearAsesor() : void
 +crearEmpresa(): void
 +crearPais() : void
 
@@ -93,17 +93,17 @@ class Admin extends Usuario{
 
 
 SistemaDeGestion -. BaseDatosHolding
-BaseDatosHolding -. Usuario
+BaseDatosHolding --> "*"Usuario : usuarios
 BaseDatosHolding -. Empresa
 Vendedor "*"<-- "1" Empresa : empresaTrabajo
 Vendedor -> "*" Vendedor : vendedoresCaptados
 Empresa "1"--> "*" AREAS_MERCADO : areasMercado
-Empresa "*" --> "*" Pais : ubicacion
+Empresa "*" --> "*" Pais : ubicaciones
 Pais -> "*" Ciudad : ciudades
 Pais -.> ISede
 Ciudad -.> ISede
-Asesor "*"--> "*" AREAS_MERCADO : cubrirArea
-Asesor "*" --> "*" Empresa : AsesorarEmpresa
+Asesor "*"--> "*" AREAS_MERCADO : mercadosCubiertos
+Asesor "*" --> "*" Empresa : empresasAsesoradas
 
 
 @enduml
