@@ -7,7 +7,7 @@ public class SistemaDeGestion {
     private SistemaDeGestion(){};
 
     public static void run(){
-
+        
     }
 
     private static int mostrarOpciones(){
