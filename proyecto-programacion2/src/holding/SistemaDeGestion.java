@@ -6,13 +6,31 @@ public class SistemaDeGestion {
 
     private SistemaDeGestion(){};
 
+
+
     public static void run(){
+<<<<<<< HEAD
         
+=======
+
+        BaseDatosHolding bd = new BaseDatosHolding();
+
+        int num;
+        do{
+            num = mostrarOpciones();
+        }while(num != 1 && num!=2);
+
+        if(num==1){
+            Usuario loggedInUsuario = bd.iniciarSesion();
+        }
+>>>>>>> main
     }
 
     private static int mostrarOpciones(){
+        System.out.print("1-Iniciar Sesion \n2-Salir del Sistema");
+        System.out.println();
+        return Consola.leerNum();
 
-        return 0;
     }
 
     private class Consola {

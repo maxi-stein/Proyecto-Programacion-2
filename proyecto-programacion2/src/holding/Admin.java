@@ -5,4 +5,8 @@ public class Admin extends Usuario {
         super(nombre, direccion, pass);
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 }
