@@ -1,22 +1,28 @@
 package holding;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
-public class BaseDatosHolding {
+public class BaseDatosHolding implements CapazDeLeerStrings{
     private ArrayList<Usuario> usuarios;
+    private ArrayList<Empresa> empresas;
 
     public BaseDatosHolding(){
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+        usuarios = new ArrayList<>();
+        empresas = new ArrayList<>();
+
         usuarios.add(new Admin("Mati","Calle Falsa","123"));
-        usuarios.add(new Admin("Maxi","Calle Verdadera","321"));
+        empresas.add(new Empresa("Terrabusi", LocalDate.now(),100));
+        usuarios.add(new Vendedor("Maxi","Calle Verdadera","321",LocalDate.now(),empresas.get(0)));
+        Vendedor v = (Vendedor) usuarios.get(1);
+        v.captarVendedor(new Vendedor("Corsi","Calle semifalsa","145",LocalDate.now(),empresas.get(0)));
     }
     public  Usuario iniciarSesion(){
         System.out.println("Usuario:");
-        String user = Consola.leerString();
+        String user = CapazDeLeerStrings.leerString();
         System.out.println("Contraseña:");
-        String pass = Consola.leerString();
+        String pass = CapazDeLeerStrings.leerString();
 
         return autentificarUsuario(user,pass);
     }
@@ -27,24 +33,11 @@ public class BaseDatosHolding {
             if(usuario.validarNombre(user)){
                 if(usuario.validarPass(pass)){
                     usuarioEncontrado = usuario;
+                    break;
                 }
             }
         }
         return usuarioEncontrado;
     }
 
-    private class Consola {
-        private Consola(){};
-        private static Scanner input = new Scanner(System.in);
-
-        public static int leerNum(){
-            String numero = input.nextLine();
-            return Integer.parseInt(numero);
-        }
-
-        public static String leerString(){
-            return input.nextLine();
-        }
-
-    }
 }

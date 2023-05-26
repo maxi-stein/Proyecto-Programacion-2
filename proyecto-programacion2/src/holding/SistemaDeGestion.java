@@ -1,46 +1,34 @@
 package holding;
 
-import java.util.Scanner;
+public class SistemaDeGestion implements CapazDeLeerEnteros,CapazDeVisualizarMenu {
 
-public class SistemaDeGestion {
-
-    private SistemaDeGestion(){};
-
-
-
-    public static void run(){
+    public SistemaDeGestion(){}
+    public void run(){
 
         BaseDatosHolding bd = new BaseDatosHolding();
 
         int num;
         do{
-            num = mostrarOpciones();
+            num = mostrarMenu();
         }while(num != 1 && num!=2);
 
         if(num==1){
             Usuario loggedInUsuario = bd.iniciarSesion();
+            loggedInUsuario.proceder();
         }
+
     }
 
-    private static int mostrarOpciones(){
-        System.out.print("1-Iniciar Sesion \n2-Salir del Sistema");
+    public int mostrarMenu(){
+        System.out.print("1-Iniciar Sesion \n2-Salir del Sistema \n-");
         System.out.println();
-        return Consola.leerNum();
+        return leerNum();
 
     }
 
-    private class Consola {
-        private Consola(){};
-        private static Scanner input = new Scanner(System.in);
-
-        public static int leerNum(){
-            String numero = input.nextLine();
-            return Integer.parseInt(numero);
-        }
-
-        public static String leerString(){
-            return input.nextLine();
-        }
-
+    public int leerNum(){
+        String numero = input.nextLine();
+        return Integer.parseInt(numero);
     }
+
 }
