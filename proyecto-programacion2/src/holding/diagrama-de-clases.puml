@@ -13,6 +13,8 @@ abstract Usuario{
 -nombre : String
 -direccion : String
 -pass : String
+
++proceder() : void
 }
 
 class Vendedor extends Usuario{
@@ -22,6 +24,7 @@ class Vendedor extends Usuario{
     +Vendedor(String,String,String,Date)
     +captarVendedor(Vendedor) : Void
     +contadorVendedoresCapt() : Integer
+    +proceder() : void
 }
 
 class Empresa{
@@ -66,9 +69,22 @@ class Ciudad{
 }
 
 interface ISede <<interface>>{
-    -esSede : Boolean
     +hacerSede() : void
     -eliminarSede() : void
+}
+
+interface CapazDeLeerEnteros <<interface>>{
+    +input
+    +{static} leerNum() : Integer
+}
+
+interface CapazDeLeerStrings <<interface>>{
+    +input
+    +{static} leerString() : String
+}
+
+interface CapazDeVisualizarMenu <<interface>>{
+    +{abstract} mostrarMenu() : void
 }
 
 class Asesor extends Usuario{
@@ -93,15 +109,18 @@ class Admin extends Usuario{
 
 
 SistemaDeGestion -. BaseDatosHolding
-BaseDatosHolding --> "*"Usuario : usuarios
+SistemaDeGestion -.|> CapazDeLeerEnteros
+BaseDatosHolding -> "*"Usuario : usuarios
 BaseDatosHolding -. Empresa
+BaseDatosHolding -.|> CapazDeLeerStrings
+Usuario -.|> CapazDeVisualizarMenu
 Vendedor "*"<-- "1" Empresa : empresaTrabajo
 Vendedor -> "*" Vendedor : vendedoresCaptados
 Empresa "1"--> "*" AREAS_MERCADO : areasMercado
 Empresa "*" --> "*" Pais : ubicaciones
 Pais -> "*" Ciudad : ciudades
-Pais -.> ISede
-Ciudad -.> ISede
+Pais -.|> ISede
+Ciudad -.|> ISede
 Asesor "*"--> "*" AREAS_MERCADO : mercadosCubiertos
 Asesor "*" --> "*" Empresa : empresasAsesoradas
 
