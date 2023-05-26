@@ -1,2 +1,5 @@
-package holding;public interface CapazDeVisualizarMenu {
+package holding;
+
+public interface CapazDeVisualizarMenu {
+    int mostrarMenu();
 }
