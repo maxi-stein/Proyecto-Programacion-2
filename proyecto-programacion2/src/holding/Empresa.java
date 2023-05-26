@@ -17,4 +17,8 @@ public class Empresa{
         this.facturacionAnual = facturacionAnual;
     }
 
+    public String displayInfo(){
+        return String.format("%s \n",nombre);
+    }
+
 }
