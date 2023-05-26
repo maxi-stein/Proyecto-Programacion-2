@@ -9,9 +9,6 @@ public class SistemaDeGestion {
 
 
     public static void run(){
-<<<<<<< HEAD
-        
-=======
 
         BaseDatosHolding bd = new BaseDatosHolding();
 
@@ -23,7 +20,6 @@ public class SistemaDeGestion {
         if(num==1){
             Usuario loggedInUsuario = bd.iniciarSesion();
         }
->>>>>>> main
     }
 
     private static int mostrarOpciones(){

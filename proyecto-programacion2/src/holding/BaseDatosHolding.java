@@ -1,12 +1,8 @@
 package holding;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-
-public class BaseDatosHolding {
-    public static ArrayList<Usuario> usuarios = new ArrayList<>();
-=======
 import java.util.Scanner;
+
 
 public class BaseDatosHolding {
     private ArrayList<Usuario> usuarios;
@@ -51,5 +47,4 @@ public class BaseDatosHolding {
         }
 
     }
->>>>>>> main
 }
