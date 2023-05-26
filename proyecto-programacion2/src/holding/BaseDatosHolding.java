@@ -24,10 +24,10 @@ public class BaseDatosHolding implements CapazDeLeerStrings{
         System.out.println("Contraseña:");
         String pass = CapazDeLeerStrings.leerString();
 
-        return autentificarUsuario(user,pass);
+        return autenticarUsuario(user,pass);
     }
 
-    private Usuario autentificarUsuario(String user,String pass){
+    private Usuario autenticarUsuario(String user, String pass){
         Usuario usuarioEncontrado = null;
         for(Usuario usuario : usuarios){
             if(usuario.validarNombre(user)){

@@ -29,10 +29,10 @@ public class Vendedor extends Usuario {
         while(opcion != 4){
             switch (opcion){
                 case 1:
-                    System.out.println(empresaTrabajo.displayInfo());;
+                    System.out.println(empresaTrabajo.displayInfo());
                     break;
                 case 2:
-                    contadorVendedoresCapt();
+                    System.out.println(contadorVendedoresCapt());
                     break;
                 case 3:
                     if(vendedoresCaptados.size()==0){

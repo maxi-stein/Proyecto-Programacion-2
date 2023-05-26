@@ -24,10 +24,6 @@ public abstract class Usuario implements CapazDeVisualizarMenu,CapazDeLeerEntero
         return this.pass.equals(pass);
     }
 
-    public int getCodigo(){
-        return this.codigoUsuario;
-    }
-
     @Override
     public String toString() {
         return String.format("%s - COD:%d - %s \n",nombre,codigoUsuario,direccion);

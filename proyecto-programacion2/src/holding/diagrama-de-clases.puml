@@ -1,20 +1,25 @@
 @startuml
 class SistemaDeGestion{
-+mostrarOpciones() : Integer
++mostrarMenu() : Integer
++run() : void
++leerNum() : Integer
 }
 
 class BaseDatosHolding{
--autentificarUsuario(String,String) : Boolean
-+iniciarSesion() : void
+-autenticarUsuario(String,String) : Usuario
++iniciarSesion() : Usuario
 }
 
 abstract Usuario{
+-{static} CONTADOR
 -codigoUsuario : Integer
 -nombre : String
 -direccion : String
 -pass : String
 
 +proceder() : void
++validarNombre() : Boolean
++validarPass() : Boolean
 }
 
 class Vendedor extends Usuario{
@@ -31,7 +36,8 @@ class Empresa{
     -nombre : String
     -fechaEntrada : Date
     -facturacionAnual : Double
-
+    +Empresa(String,Date,Double)
+    +displayInfo() : String
 }
 
 enum  AREAS_MERCADO <<enum>> {
@@ -104,14 +110,16 @@ class Admin extends Usuario{
 +crearAsesor() : void
 +crearEmpresa(): void
 +crearPais() : void
-
++proceder() : void
++leerNum() : void
++mostrarMenu() : Integer
 }
 
 
 SistemaDeGestion -. BaseDatosHolding
 SistemaDeGestion -.|> CapazDeLeerEnteros
-BaseDatosHolding -> "*"Usuario : usuarios
-BaseDatosHolding -. Empresa
+BaseDatosHolding -> "*" Usuario : usuarios
+BaseDatosHolding -> "*" Empresa : empresas
 BaseDatosHolding -.|> CapazDeLeerStrings
 Usuario -.|> CapazDeVisualizarMenu
 Vendedor "*"<-- "1" Empresa : empresaTrabajo

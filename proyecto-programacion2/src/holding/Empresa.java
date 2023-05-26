@@ -9,10 +9,10 @@ public class Empresa{
     private LocalDate fechaEntrada;
     private double facturacionAnual;
     private ArrayList<Pais> ubicaciones;
-    private ArrayList<AREAS_MERCADO> areaMercado;
+    private ArrayList<AREAS_MERCADO> areasMercado;
 
-    public Empresa(String nom, LocalDate date,double facturacionAnual) {
-        this.nombre = nom;
+    public Empresa(String nombre, LocalDate date,double facturacionAnual) {
+        this.nombre = nombre;
         this.fechaEntrada = date;
         this.facturacionAnual = facturacionAnual;
     }
