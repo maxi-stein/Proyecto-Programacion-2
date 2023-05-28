@@ -97,9 +97,10 @@ class Asesor extends Usuario{
 -nombre : String
 -direccion : String
 -titulacion : String
--fechaInicio : Date
+-fechasInicio : List
 +asesorarEmpresa(Empresa)
 +cubrirAreaMercado(AREAS_MERCADO) : void
+
 }
 
 class Admin extends Usuario{
