@@ -11,6 +11,11 @@ public class Admin extends Usuario {
     }
 
     @Override
+    public void mostrarInformacionUsuario() {
+
+    }
+
+    @Override
     public int leerNum() {
         return 0;
     }

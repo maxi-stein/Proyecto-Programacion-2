@@ -21,4 +21,8 @@ public class Empresa{
         return String.format("%s \n",nombre);
     }
 
+    public String getNombre(){
+        return nombre;
+    }
+
 }
