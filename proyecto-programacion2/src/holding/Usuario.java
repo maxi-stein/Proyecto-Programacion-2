@@ -17,6 +17,8 @@ public abstract class Usuario implements CapazDeVisualizarMenu,CapazDeLeerEntero
 
     public abstract void proceder();
 
+    public abstract void mostrarInformacionUsuario();
+
     public boolean validarNombre(String nombre){
         return this.nombre.equals(nombre);
     }
