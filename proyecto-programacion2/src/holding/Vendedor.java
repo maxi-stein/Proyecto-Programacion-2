@@ -29,21 +29,22 @@ public class Vendedor extends Usuario {
         while(opcion != 4){
             switch (opcion){
                 case 1:
-                    System.out.println(empresaTrabajo.displayInfo());
+                    mostrarEmpresaActual();
                     break;
                 case 2:
-                    System.out.println(contadorVendedoresCapt());
+                    mostrarCantVendCaptados();
                     break;
                 case 3:
-                    if(vendedoresCaptados.size()==0){
-                        System.out.println("Aun no posee vendedores captados");
-                    }else{
-                        listarVendedoresCaptados();
-                    }
+                    listarVendedoresCaptados();
                     break;
             }
             opcion = mostrarMenu();
         }
+    }
+
+    @Override
+    public void mostrarInformacionUsuario() {
+
     }
 
     @Override
@@ -65,9 +66,22 @@ public class Vendedor extends Usuario {
         return Integer.parseInt(numero);
     }
 
+    public void mostrarEmpresaActual(){
+        System.out.println(empresaTrabajo.displayInfo());
+    }
+
+    public void mostrarCantVendCaptados(){
+        System.out.println(contadorVendedoresCapt());
+    }
+
     private void listarVendedoresCaptados(){
-        for(Vendedor v : vendedoresCaptados){
-            System.out.println(v.toString());
+        if(vendedoresCaptados.size()==0){
+            System.out.println("Aun no posee vendedores captados");
+        }
+        else {
+            for (Vendedor v : vendedoresCaptados) {
+                System.out.println(v.toString());
+            }
         }
     }
 }
