@@ -52,10 +52,10 @@ public class Vendedor extends Usuario {
 
     @Override
     public int mostrarMenu() {
-        int opcion = 5;
-        while(opcion>5 || opcion<1){
+        int opcion = 0;
+        while(opcion>6 || opcion<1){
             System.out.print("1 - Mostrar Datos de Usuario. \n" +
-                    "2 - - Mostrar empresa actual. \n" +
+                    "2 - Mostrar empresa actual. \n" +
                     "3 - Mostrar cantidad vendedores captados. \n" +
                     "4 - Listar vendedores captados. \n" +
                     "5 - Salir.-  \n-");
@@ -75,7 +75,7 @@ public class Vendedor extends Usuario {
     }
 
     public void mostrarCantVendCaptados(){
-        System.out.println(contadorVendedoresCapt());
+        System.out.println("La cantidad de vendedores captados es: "+contadorVendedoresCapt());
     }
 
     private void listarVendedoresCaptados(){
