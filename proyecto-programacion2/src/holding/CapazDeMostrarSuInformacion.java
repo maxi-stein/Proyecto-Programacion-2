@@ -1,2 +1,5 @@
-package holding;public interface CapazDeMostrarSuInformacion {
+package holding;
+
+public interface CapazDeMostrarSuInformacion {
+    void mostrarInformacion();
 }

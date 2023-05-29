@@ -22,7 +22,7 @@ public class Asesor extends Usuario{
         while(opcion != 4){
             switch (opcion){
                 case 1:
-                    mostrarInformacionUsuario();
+                    mostrarInformacion();
                     break;
                 case 2:
                     listarEmpresas();
@@ -38,7 +38,7 @@ public class Asesor extends Usuario{
     }
 
     @Override
-    public void mostrarInformacionUsuario() {
+    public void mostrarInformacion() {
         System.out.println("Datos del Usuario: "+this.toString()+" || Titulacion: "+ titulacion);
     }
 
