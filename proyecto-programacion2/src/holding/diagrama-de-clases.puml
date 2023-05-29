@@ -20,6 +20,7 @@ abstract Usuario{
 +proceder() : void
 +validarNombre() : Boolean
 +validarPass() : Boolean
++mostrarInformacionUsuario() : void
 }
 
 class Vendedor extends Usuario{
@@ -30,6 +31,8 @@ class Vendedor extends Usuario{
     +captarVendedor(Vendedor) : Void
     +contadorVendedoresCapt() : Integer
     +proceder() : void
+    +mostrarInformacionUsuario() : void
+
 }
 
 class Empresa{
@@ -100,6 +103,7 @@ class Asesor extends Usuario{
 -fechasInicio : List
 +asesorarEmpresa(Empresa)
 +cubrirAreaMercado(AREAS_MERCADO) : void
++mostrarInformacionUsuario() : void
 
 }
 
@@ -114,6 +118,7 @@ class Admin extends Usuario{
 +proceder() : void
 +leerNum() : void
 +mostrarMenu() : Integer
++mostrarInformacionUsuario() : void
 }
 
 
