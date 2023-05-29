@@ -15,8 +15,12 @@ public class Pais implements ISede {
         this.pbi = pbi;
         this.numHabitantes = numHabitantes;
         esSede = false;
+        ciudades = new ArrayList<>();
     }
 
+    public void agregarCiudad(Ciudad ciudad){
+        ciudades.add(ciudad);
+    }
     @Override
     public void hacerSede() {
         esSede = true;
