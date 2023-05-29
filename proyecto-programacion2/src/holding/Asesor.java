@@ -28,22 +28,25 @@ public class Asesor extends Usuario{
                     listarAreasMercado();
                     break;
             }
-
             opcion = mostrarMenu();
+            if(opcion>3 || opcion<1) System.out.println("Opcion incorrecta, intente de nuevo.");
         }
 
     }
 
     @Override
     public void mostrarInformacionUsuario() {
-
+        System.out.println("Datos del Usuario: "+toString()+" Titulacion: "+ titulacion);
     }
 
     @Override
     public int mostrarMenu() {
         int opcion=0;
         while (opcion < 1 || opcion > 4) {
-            System.out.print("1-Mostrar Informacion Usuario \n2-Listar Empresas Asesoradas \n3-Listar Areas de Mercado asesoradas \n4-Salir");
+            System.out.print("1-Mostrar Datos de Usuario. \n" +
+                    "2-Listar Empresas Asesoradas. \n" +
+                    "3-Listar Areas de Mercado asesoradas. \n" +
+                    "4-Salir.-");
             opcion = leerNum();
         }
         return opcion;
