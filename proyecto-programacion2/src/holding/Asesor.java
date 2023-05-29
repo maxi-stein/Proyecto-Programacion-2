@@ -12,6 +12,9 @@ public class Asesor extends Usuario{
     public Asesor(String nombre, String direccion, String pass, String titulacion) {
         super(nombre, direccion, pass);
         this.titulacion = titulacion;
+        mercadosCubiertos = new ArrayList<>();
+        empresasAsesoradas = new ArrayList<>();
+        fechasInicio = new ArrayList<>();
     }
     @Override
     public void proceder() {
@@ -28,40 +31,53 @@ public class Asesor extends Usuario{
                     listarAreasMercado();
                     break;
             }
-
             opcion = mostrarMenu();
+            if(opcion>4 || opcion<1) System.out.println("Opcion incorrecta, intente de nuevo.");
         }
 
     }
 
     @Override
     public void mostrarInformacionUsuario() {
-
+        System.out.println("Datos del Usuario: "+this.toString()+" || Titulacion: "+ titulacion);
     }
 
     @Override
     public int mostrarMenu() {
         int opcion=0;
         while (opcion < 1 || opcion > 4) {
-            System.out.print("1-Mostrar Informacion Usuario \n2-Listar Empresas Asesoradas \n3-Listar Areas de Mercado asesoradas \n4-Salir");
+            System.out.print("1-Mostrar Datos de Usuario. \n" +
+                    "2-Listar Empresas Asesoradas. \n" +
+                    "3-Listar Areas de Mercado asesoradas. \n" +
+                    "4-Salir.-");
             opcion = leerNum();
         }
         return opcion;
     }
 
     public void listarEmpresas(){
-        for(int i=0;i<empresasAsesoradas.size();i++){
-            System.out.println(empresasAsesoradas.get(i).getNombre() + "(desde "+fechasInicio.get(i).toString()+")");
+        if(empresasAsesoradas.isEmpty()){
+            System.out.println("No hay empresas que asesore el usuario.");
         }
-        System.out.println();
+        else {
+            for (int i = 0; i < empresasAsesoradas.size(); i++) {
+                System.out.println(empresasAsesoradas.get(i).getNombre() + "(desde " + fechasInicio.get(i) + ")");
+            }
+            System.out.println();
+        }
     }
 
     public void listarAreasMercado(){
-        System.out.println("AREAS:");
-        for(AREAS_MERCADO area : mercadosCubiertos){
-            System.out.println(area.name()+" - "+area.getDescripcion());
+        if(mercadosCubiertos.isEmpty()){
+            System.out.println("El usuario no asesora ningun area de mercado aún.");
         }
-        System.out.println();
+        else {
+            System.out.println("AREAS:");
+            for (AREAS_MERCADO area : mercadosCubiertos) {
+                System.out.println(area.name() + " - " + area.getDescripcion());
+            }
+            System.out.println();
+        }
     }
 
     public void agregarEmpresaAsesorada(Empresa empresa,LocalDate fechaInicio){

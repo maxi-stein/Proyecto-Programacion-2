@@ -12,7 +12,7 @@ public class Admin extends Usuario {
 
     @Override
     public void mostrarInformacionUsuario() {
-
+        System.out.println("Datos de Usuario: "+ toString());
     }
 
     @Override

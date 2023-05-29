@@ -26,15 +26,18 @@ public class Vendedor extends Usuario {
     @Override
     public void proceder() {
         int opcion = mostrarMenu();
-        while(opcion != 4){
+        while(opcion != 5){
             switch (opcion){
                 case 1:
-                    mostrarEmpresaActual();
+                    mostrarInformacionUsuario();
                     break;
                 case 2:
-                    mostrarCantVendCaptados();
+                    mostrarEmpresaActual();
                     break;
                 case 3:
+                    mostrarCantVendCaptados();
+                    break;
+                case 4:
                     listarVendedoresCaptados();
                     break;
             }
@@ -44,19 +47,20 @@ public class Vendedor extends Usuario {
 
     @Override
     public void mostrarInformacionUsuario() {
-
+        System.out.println("Datos del Usuario: "+toString()+" || Fecha de Ingreso: "+ fechaCaptado);
     }
 
     @Override
     public int mostrarMenu() {
-        int opcion = 5;
-        while(opcion>4 || opcion<1){
-            System.out.print("1 - Mostrar empresa actual \n" +
-                    "2 - Mostrar cantidad vendedores captados \n" +
-                    "3 - Listar vendedores captados \n" +
-                    "4 - Salir \n-");
+        int opcion = 0;
+        while(opcion>6 || opcion<1){
+            System.out.print("1 - Mostrar Datos de Usuario. \n" +
+                    "2 - Mostrar empresa actual. \n" +
+                    "3 - Mostrar cantidad vendedores captados. \n" +
+                    "4 - Listar vendedores captados. \n" +
+                    "5 - Salir.-  \n-");
             opcion = leerNum();
-            if(opcion>4 || opcion<1) System.out.println("Opcion incorrecta, intente de nuevo.");
+            if(opcion>5 || opcion<1) System.out.println("Opcion incorrecta, intente de nuevo.");
         }
         return opcion;
     }
@@ -71,7 +75,7 @@ public class Vendedor extends Usuario {
     }
 
     public void mostrarCantVendCaptados(){
-        System.out.println(contadorVendedoresCapt());
+        System.out.println("La cantidad de vendedores captados es: "+contadorVendedoresCapt());
     }
 
     private void listarVendedoresCaptados(){
