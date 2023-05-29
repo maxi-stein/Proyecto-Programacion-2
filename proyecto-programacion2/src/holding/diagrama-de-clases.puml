@@ -61,25 +61,23 @@ class Pais{
     -nombre : String
     -pbi : Double
     -numHabitantes : double
-    -esSede : Boolean
 
     +Pais(String,double,double)
-    +hacerSede() : void
-    -eliminarSede() : void
+    +hacerSede(Empresa) : void
+    -eliminarSede(Empresa) : void
 }
 
 class Ciudad{
     -nombre: String
     -desarrollaActividad : Boolean
-    -esSede : Boolean
 
-    +hacerSede() : void
-    -eliminarSede() : void
+    +hacerSede(Empresa) : void
+    -eliminarSede(Empresa) : void
 }
 
 interface ISede <<interface>>{
-    +hacerSede() : void
-    -eliminarSede() : void
+    +hacerSede(Empresa) : void
+    -eliminarSede(Empresa) : void
 }
 
 interface CapazDeLeerEnteros <<interface>>{
@@ -94,6 +92,10 @@ interface CapazDeLeerStrings <<interface>>{
 
 interface CapazDeVisualizarMenu <<interface>>{
     +{abstract} mostrarMenu() : void
+}
+
+interface CapazDeMostrarSuInformacion <<interface>>{
+    +{abstract} mostrarInformacion() : void
 }
 
 class Asesor extends Usuario{
@@ -128,13 +130,17 @@ BaseDatosHolding -> "*" Usuario : usuarios
 BaseDatosHolding -> "*" Empresa : empresas
 BaseDatosHolding -.|> CapazDeLeerStrings
 Usuario -.|> CapazDeVisualizarMenu
-Vendedor "*"<-- "1" Empresa : empresaTrabajo
+Usuario -.|> CapazDeMostrarSuInformacion
+Vendedor "*"<-- "1" Empresa : empresaDondeTrabaja
 Vendedor -> "*" Vendedor : vendedoresCaptados
 Empresa "1"--> "*" AREAS_MERCADO : areasMercado
 Empresa "*" --> "*" Pais : ubicaciones
+Empresa -.|> CapazDeMostrarSuInformacion
 Pais -> "*" Ciudad : ciudades
 Pais -.|> ISede
+Pais -> "*" Empresa : empresasSede
 Ciudad -.|> ISede
+Ciudad -> "*" Empresa : empresasSede
 Asesor "*"--> "*" AREAS_MERCADO : mercadosCubiertos
 Asesor "*" --> "*" Empresa : empresasAsesoradas
 
