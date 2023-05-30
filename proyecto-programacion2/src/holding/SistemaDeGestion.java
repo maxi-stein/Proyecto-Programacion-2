@@ -1,6 +1,6 @@
 package holding;
 
-public class SistemaDeGestion implements CapazDeLeerEnteros,CapazDeVisualizarMenu {
+public class SistemaDeGestion implements CapazDeVisualizarMenu {
 
     private BaseDatosHolding bd;
     public SistemaDeGestion(){
@@ -23,13 +23,8 @@ public class SistemaDeGestion implements CapazDeLeerEnteros,CapazDeVisualizarMen
     public int mostrarMenu(){
         System.out.print("1-Iniciar Sesion \n2-Salir del Sistema \n-");
         System.out.println();
-        return leerNum();
+        return Consola.leerEntero();
 
-    }
-
-    public int leerNum(){
-        String numero = input.nextLine();
-        return Integer.parseInt(numero);
     }
 
 }

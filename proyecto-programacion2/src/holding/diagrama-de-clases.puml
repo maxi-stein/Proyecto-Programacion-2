@@ -2,7 +2,6 @@
 class SistemaDeGestion{
 +mostrarMenu() : Integer
 +run() : void
-+leerNum() : Integer
 }
 
 class BaseDatosHolding{
