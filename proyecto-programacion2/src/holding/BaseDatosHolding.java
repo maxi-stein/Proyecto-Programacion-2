@@ -17,7 +17,7 @@ public class BaseDatosHolding{
         //usuarios.add(new Vendedor("Maxi","Calle Verdadera","321",LocalDate.now(),empresas.get(0)));
         usuarios.add(new Asesor("Pepe","Fal 123","1","Especialista en Mineria"));
         Asesor a = (Asesor) usuarios.get(2);
-        a.agregarAreaMercadoCubierto(AREAS_MERCADO.MINERIA);
+        a.agregarAreaMercadoCubierto(AreasMercado.MINERIA);
         a.agregarEmpresaAsesorada(empresas.get(0),LocalDate.now());
         Vendedor v = (Vendedor) usuarios.get(1);
         v.captarVendedor(new Vendedor("Corsi","Calle semifalsa","145",LocalDate.now(),empresas.get(0)));
