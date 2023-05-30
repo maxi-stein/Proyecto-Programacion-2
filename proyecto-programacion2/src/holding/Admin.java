@@ -16,11 +16,6 @@ public class Admin extends Usuario {
     }
 
     @Override
-    public int leerNum() {
-        return 0;
-    }
-
-    @Override
     public int mostrarMenu() {
         System.out.printf("1-Mostrar datos de Usuario \n2-Crear Administrador \n3-Crear Vendedor \n4-Crear Asesor" +
                 "\n5-Crear Empresa \n6-Agregar Pais al listado \n7- Agregar Ciudad al Listado");

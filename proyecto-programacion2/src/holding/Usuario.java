@@ -1,6 +1,6 @@
 package holding;
 
-public abstract class Usuario implements CapazDeVisualizarMenu,CapazDeLeerEnteros,CapazDeMostrarSuInformacion {
+public abstract class Usuario implements CapazDeVisualizarMenu,CapazDeMostrarSuInformacion {
     private static int CONTADOR = 0;
     private int codigoUsuario;
     private String nombre;

@@ -1,6 +1,6 @@
 package holding;
 
-public class Ciudad implements ISede {
+public class Ciudad implements CapazDeTenerSede {
     private String nombre;
     private boolean desarrollaActividad;
     private boolean esSede;

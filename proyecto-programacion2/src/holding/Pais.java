@@ -2,7 +2,7 @@ package holding;
 
 import java.util.ArrayList;
 
-public class Pais implements ISede {
+public class Pais implements CapazDeTenerSede {
     private boolean esSede;
     private String nombre;
     private double pbi;

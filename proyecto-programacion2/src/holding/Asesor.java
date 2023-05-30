@@ -50,7 +50,7 @@ public class Asesor extends Usuario{
                     "2-Listar Empresas Asesoradas. \n" +
                     "3-Listar Areas de Mercado asesoradas. \n" +
                     "4-Salir.-");
-            opcion = leerNum();
+            opcion = Consola.leerEntero();
         }
         return opcion;
     }
@@ -96,11 +96,5 @@ public class Asesor extends Usuario{
 
     public void eliminarAreaMercadoCubierto(AREAS_MERCADO area){
         mercadosCubiertos.remove((area));
-    }
-
-    @Override
-    public int leerNum() {
-        String numero = input.nextLine();
-        return Integer.parseInt(numero);
     }
 }

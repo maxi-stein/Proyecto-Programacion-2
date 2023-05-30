@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public class BaseDatosHolding implements CapazDeLeerStrings{
+public class BaseDatosHolding{
     private ArrayList<Usuario> usuarios;
     private ArrayList<Empresa> empresas;
 
@@ -13,8 +13,8 @@ public class BaseDatosHolding implements CapazDeLeerStrings{
         empresas = new ArrayList<>();
 
         usuarios.add(new Admin("Mati","Calle Falsa","123"));
-        empresas.add(new Empresa("Terrabusi", LocalDate.now(),100));
-        usuarios.add(new Vendedor("Maxi","Calle Verdadera","321",LocalDate.now(),empresas.get(0)));
+        //empresas.add(new Empresa("Terrabusi", LocalDate.now(),100));
+        //usuarios.add(new Vendedor("Maxi","Calle Verdadera","321",LocalDate.now(),empresas.get(0)));
         usuarios.add(new Asesor("Pepe","Fal 123","1","Especialista en Mineria"));
         Asesor a = (Asesor) usuarios.get(2);
         a.agregarAreaMercadoCubierto(AREAS_MERCADO.MINERIA);
@@ -24,9 +24,9 @@ public class BaseDatosHolding implements CapazDeLeerStrings{
     }
     public  Usuario iniciarSesion(){
         System.out.println("Usuario:");
-        String user = CapazDeLeerStrings.leerString();
+        String user = Consola.leerString();
         System.out.println("Contraseña:");
-        String pass = CapazDeLeerStrings.leerString();
+        String pass = Consola.leerString();
 
         return autenticarUsuario(user,pass);
     }

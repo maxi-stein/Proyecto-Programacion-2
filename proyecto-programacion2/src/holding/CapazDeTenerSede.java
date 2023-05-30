@@ -1,6 +1,6 @@
 package holding;
 
-public interface ISede {
+public interface CapazDeTenerSede {
     void hacerSede();
     void eliminarSede();
 }

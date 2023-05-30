@@ -66,7 +66,7 @@ public class Vendedor extends Usuario {
     }
 
     public int leerNum(){
-        String numero = input.nextLine();
+        String numero = Consola.leerString();
         return Integer.parseInt(numero);
     }
 
