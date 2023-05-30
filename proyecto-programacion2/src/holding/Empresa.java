@@ -9,7 +9,8 @@ public class Empresa implements CapazDeMostrarSuInformacion{
     private LocalDate fechaEntrada;
     private double facturacionAnual;
     private ArrayList<Pais> ubicaciones;
-    private ArrayList<AREAS_MERCADO> areasMercado;
+    private ArrayList<VinculacionEmpresaAsesor> asesores;
+    private ArrayList<AreasMercado> areasMercado;
 
     public Empresa(String nombre, LocalDate fechaEntrada, double facturacionAnual,Pais pais,Ciudad ciudad) {
         this.nombre = nombre;

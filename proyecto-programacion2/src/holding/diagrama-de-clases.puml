@@ -42,18 +42,44 @@ class Empresa{
     +displayInfo() : String
 }
 
-enum  AREAS_MERCADO <<enum>> {
-    -Ingenieria
-    -Construccion
-    -Energia
-    -Mineria
-    -Salud
-
+class AreaMercado {
+    -nombre : String
     -descripcion : String
 
-    -AREAS_MERCADO(String)
-    +getDescripcion() : void
+    +AreaMercado()
+    +mostrarInformacion() : Void
+}
 
+class Asesor extends Usuario{
+-nombre : String
+-direccion : String
+-titulacion : String
+-fechasInicio : List
++asesorarEmpresa(Empresa)
++cubrirAreaMercado(AREAS_MERCADO) : void
++mostrarInformacionUsuario() : void
+}
+
+class VinculacionAsesorEmpresa{
+    -fechaInicio : Date
+
+    +VinculacionAsesorEmpresa()
+    +getAsesor() : Asesor
+    +getFechaInicio() : Date
+}
+
+class Admin extends Usuario{
+-nombre : String
+-direccion : String
+-fechaInicio : Date
++crearVendedor() : void
++crearAsesor() : void
++crearEmpresa(): void
++crearPais() : void
++proceder() : void
++leerNum() : void
++mostrarMenu() : Integer
++mostrarInformacionUsuario() : void
 }
 
 class Pais{
@@ -87,30 +113,7 @@ interface CapazDeMostrarSuInformacion <<interface>>{
     +{abstract} mostrarInformacion() : void
 }
 
-class Asesor extends Usuario{
--nombre : String
--direccion : String
--titulacion : String
--fechasInicio : List
-+asesorarEmpresa(Empresa)
-+cubrirAreaMercado(AREAS_MERCADO) : void
-+mostrarInformacionUsuario() : void
 
-}
-
-class Admin extends Usuario{
--nombre : String
--direccion : String
--fechaInicio : Date
-+crearVendedor() : void
-+crearAsesor() : void
-+crearEmpresa(): void
-+crearPais() : void
-+proceder() : void
-+leerNum() : void
-+mostrarMenu() : Integer
-+mostrarInformacionUsuario() : void
-}
 
 
 SistemaDeGestion -> BaseDatosHolding : "baseDeDatos"
@@ -121,16 +124,17 @@ Usuario -.|> CapazDeVisualizarMenu
 Usuario -.|> CapazDeMostrarSuInformacion
 Vendedor "*"<-- "1" Empresa : empresaDondeTrabaja
 Vendedor -> "*" Vendedor : vendedoresCaptados
-Empresa "1"--> "*" AREAS_MERCADO : areasMercado
+Empresa "1"--> "*" AreaMercado : areasMercado
 Empresa "*" --> "*" Pais : ubicaciones
 Empresa -.|> CapazDeMostrarSuInformacion
+Empresa -> "*" VinculacionAsesorEmpresa : asesores
 Pais -> "*" Ciudad : ciudades
 Pais -.|> CapazDeTenerSede
 Pais --> "*" Empresa : empresasSede
 Ciudad -.|> ICapazDeTenerSede
 Ciudad --> "*" Empresa : empresasSede
-Asesor "*"--> "*" AREAS_MERCADO : mercadosCubiertos
-Asesor "*" -> "*" Empresa : empresasAsesoradas
+Asesor "*"--> "*" AreaMercado : mercadosCubiertos
+Asesor o-> VinculacionAsesorEmpresa : asesor
 
 
 @enduml

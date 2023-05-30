@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Asesor extends Usuario{
     private String titulacion;
-    private ArrayList<AREAS_MERCADO> mercadosCubiertos;
+    private ArrayList<AreasMercado> mercadosCubiertos;
     private ArrayList<Empresa> empresasAsesoradas;
     private ArrayList<LocalDate> fechasInicio;
 
@@ -73,8 +73,8 @@ public class Asesor extends Usuario{
         }
         else {
             System.out.println("AREAS:");
-            for (AREAS_MERCADO area : mercadosCubiertos) {
-                System.out.println(area.name() + " - " + area.getDescripcion());
+            for (AreasMercado area : mercadosCubiertos) {
+                //System.out.println(area.name() + " - " + area.getDescripcion());
             }
             System.out.println();
         }
@@ -90,11 +90,11 @@ public class Asesor extends Usuario{
         fechasInicio.remove((fechaInicio));
     }
 
-    public void agregarAreaMercadoCubierto(AREAS_MERCADO area){
+    public void agregarAreaMercadoCubierto(AreasMercado area){
         mercadosCubiertos.add((area));
     }
 
-    public void eliminarAreaMercadoCubierto(AREAS_MERCADO area){
+    public void eliminarAreaMercadoCubierto(AreasMercado area){
         mercadosCubiertos.remove((area));
     }
 }
