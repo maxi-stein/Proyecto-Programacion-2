@@ -2,10 +2,11 @@ package holding;
 
 public class SistemaDeGestion implements CapazDeLeerEnteros,CapazDeVisualizarMenu {
 
-    public SistemaDeGestion(){}
+    private BaseDatosHolding bd;
+    public SistemaDeGestion(){
+        bd = new BaseDatosHolding();
+    }
     public void run(){
-
-        BaseDatosHolding bd = new BaseDatosHolding();
 
         int num;
         do{

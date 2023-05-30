@@ -124,7 +124,7 @@ class Admin extends Usuario{
 }
 
 
-SistemaDeGestion -. BaseDatosHolding
+SistemaDeGestion -> BaseDatosHolding : "baseDeDatos"
 SistemaDeGestion -.|> CapazDeLeerEnteros
 SistemaDeGestion -.|> CapazDeVisualizarMenu
 BaseDatosHolding -> "*" Usuario : usuarios
