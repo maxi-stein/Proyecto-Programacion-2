@@ -8,7 +8,8 @@ public class Empresa implements CapazDeMostrarSuInformacion{
     private String nombre;
     private LocalDate fechaEntrada;
     private double facturacionAnual;
-    private ArrayList<Pais> ubicaciones;
+    private ArrayList<Ciudad> ciudades;
+    private Ciudad sede;
     private ArrayList<VinculacionEmpresaAsesor> asesores;
     private ArrayList<AreasMercado> areasMercado;
 
@@ -20,6 +21,7 @@ public class Empresa implements CapazDeMostrarSuInformacion{
         ubicaciones.add(pais);
         pais.agregarCiudad(ciudad);
         areasMercado = new ArrayList<>();
+        asesores = new ArrayList<>();
     }
 
     public String displayInfo(){
@@ -39,5 +41,7 @@ public class Empresa implements CapazDeMostrarSuInformacion{
     public String getNombre(){
         return nombre;
     }
+
+    //public void agregar
 
 }

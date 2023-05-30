@@ -94,7 +94,6 @@ class Pais{
 
 class Ciudad{
     -nombre: String
-    -desarrollaActividad : Boolean
 
     +hacerSede(Empresa) : void
     -eliminarSede(Empresa) : void
@@ -122,19 +121,18 @@ BaseDatosHolding -> "*" Usuario : usuarios
 BaseDatosHolding -> "*" Empresa : empresas
 Usuario -.|> CapazDeVisualizarMenu
 Usuario -.|> CapazDeMostrarSuInformacion
-Vendedor "*"<-- "1" Empresa : empresaDondeTrabaja
+Vendedor "*" o--> Empresa : vendedores
 Vendedor -> "*" Vendedor : vendedoresCaptados
+
 Empresa "1"--> "*" AreaMercado : areasMercado
-Empresa "*" --> "*" Pais : ubicaciones
 Empresa -.|> CapazDeMostrarSuInformacion
-Empresa -> "*" VinculacionAsesorEmpresa : asesores
-Pais -> "*" Ciudad : ciudades
-Pais -.|> CapazDeTenerSede
-Pais --> "*" Empresa : empresasSede
-Ciudad -.|> ICapazDeTenerSede
-Ciudad --> "*" Empresa : empresasSede
-Asesor "*"--> "*" AreaMercado : mercadosCubiertos
-Asesor o-> VinculacionAsesorEmpresa : asesor
+Empresa <- Ciudad : sede
+VinculacionAsesorEmpresa "*" <- Empresa: asesores
+Ciudad <-o Pais : Pais
+Ciudad -> "*" Empresa : ciudades
+
+Asesor "*"-> "*" AreaMercado : mercadosCubiertos
+Asesor <-o VinculacionAsesorEmpresa : asesor
 
 
 @enduml

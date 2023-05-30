@@ -48,6 +48,7 @@ public class Vendedor extends Usuario {
     @Override
     public void mostrarInformacion() {
         System.out.println("Datos del Usuario: "+toString()+" || Fecha de Ingreso: "+ fechaCaptado);
+        System.out.println("Empresa: "+ empresaTrabajo);;
     }
 
     @Override
