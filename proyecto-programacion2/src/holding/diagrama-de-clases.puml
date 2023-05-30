@@ -74,19 +74,9 @@ class Ciudad{
     -eliminarSede(Empresa) : void
 }
 
-interface ISede <<interface>>{
+interface CapazDeTenerSede <<interface>>{
     +hacerSede(Empresa) : void
     -eliminarSede(Empresa) : void
-}
-
-interface CapazDeLeerEnteros <<interface>>{
-    +input
-    +{static} leerNum() : Integer
-}
-
-interface CapazDeLeerStrings <<interface>>{
-    +input
-    +{static} leerString() : String
 }
 
 interface CapazDeVisualizarMenu <<interface>>{
@@ -124,11 +114,9 @@ class Admin extends Usuario{
 
 
 SistemaDeGestion -> BaseDatosHolding : "baseDeDatos"
-SistemaDeGestion -.|> CapazDeLeerEnteros
 SistemaDeGestion -.|> CapazDeVisualizarMenu
 BaseDatosHolding -> "*" Usuario : usuarios
 BaseDatosHolding -> "*" Empresa : empresas
-BaseDatosHolding -.|> CapazDeLeerStrings
 Usuario -.|> CapazDeVisualizarMenu
 Usuario -.|> CapazDeMostrarSuInformacion
 Vendedor "*"<-- "1" Empresa : empresaDondeTrabaja
@@ -137,12 +125,12 @@ Empresa "1"--> "*" AREAS_MERCADO : areasMercado
 Empresa "*" --> "*" Pais : ubicaciones
 Empresa -.|> CapazDeMostrarSuInformacion
 Pais -> "*" Ciudad : ciudades
-Pais -.|> ISede
+Pais -.|> CapazDeTenerSede
 Pais --> "*" Empresa : empresasSede
-Ciudad -.|> ISede
+Ciudad -.|> ICapazDeTenerSede
 Ciudad --> "*" Empresa : empresasSede
 Asesor "*"--> "*" AREAS_MERCADO : mercadosCubiertos
-Asesor "*" --> "*" Empresa : empresasAsesoradas
+Asesor "*" -> "*" Empresa : empresasAsesoradas
 
 
 @enduml
