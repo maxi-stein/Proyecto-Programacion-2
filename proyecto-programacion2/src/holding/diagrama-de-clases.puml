@@ -126,6 +126,7 @@ class Admin extends Usuario{
 
 SistemaDeGestion -. BaseDatosHolding
 SistemaDeGestion -.|> CapazDeLeerEnteros
+SistemaDeGestion -.|> CapazDeVisualizarMenu
 BaseDatosHolding -> "*" Usuario : usuarios
 BaseDatosHolding -> "*" Empresa : empresas
 BaseDatosHolding -.|> CapazDeLeerStrings
@@ -138,9 +139,9 @@ Empresa "*" --> "*" Pais : ubicaciones
 Empresa -.|> CapazDeMostrarSuInformacion
 Pais -> "*" Ciudad : ciudades
 Pais -.|> ISede
-Pais -> "*" Empresa : empresasSede
+Pais --> "*" Empresa : empresasSede
 Ciudad -.|> ISede
-Ciudad -> "*" Empresa : empresasSede
+Ciudad --> "*" Empresa : empresasSede
 Asesor "*"--> "*" AREAS_MERCADO : mercadosCubiertos
 Asesor "*" --> "*" Empresa : empresasAsesoradas
 
