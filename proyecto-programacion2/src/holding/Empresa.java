@@ -12,16 +12,17 @@ public class Empresa implements CapazDeMostrarSuInformacion{
     private Ciudad sede;
     private ArrayList<VinculacionEmpresaAsesor> asesores;
     private ArrayList<AreasMercado> areasMercado;
+    private ArrayList<Vendedor> vendedores;
 
-    public Empresa(String nombre, LocalDate fechaEntrada, double facturacionAnual,Pais pais,Ciudad ciudad) {
+    public Empresa(String nombre, LocalDate fechaEntrada, double facturacionAnual) {
         this.nombre = nombre;
         this.fechaEntrada = fechaEntrada;
         this.facturacionAnual = facturacionAnual;
-        ubicaciones = new ArrayList<>();
-        ubicaciones.add(pais);
-        pais.agregarCiudad(ciudad);
+        ciudades = new ArrayList<>();
+        sede = null;
         areasMercado = new ArrayList<>();
         asesores = new ArrayList<>();
+        vendedores = new ArrayList<>();
     }
 
     public String displayInfo(){
@@ -33,15 +34,94 @@ public class Empresa implements CapazDeMostrarSuInformacion{
         System.out.println(nombre + "Fecha de entrada: "+fechaEntrada);
         System.out.println("    - Facturacion anual: $"+facturacionAnual);
         System.out.println("    - Ubicaciones: ");
-        for(Pais pais : ubicaciones){
-            System.out.println("        *"+pais);
-        }
+
     }
 
     public String getNombre(){
         return nombre;
     }
 
-    //public void agregar
+    public void agregarCiudad(Ciudad c){
+        if(ciudades.contains(c)){
+            throw new RuntimeException("La ciudad ya se encuentra ingresada");
+        }
+       ciudades.add(c);
+    }
+
+    public void eliminarCiudad(Ciudad c){
+        if(!ciudades.contains(c)){
+            throw new RuntimeException("La ciudad no esta ingresada en la empresa!");
+        }
+        if(sede == c){
+            sede = null;
+            System.out.println("ADVERTENCIA: Se elimino la ciudad sede");
+        }
+        ciudades.remove(c);
+    }
+    public void seleccionarSede(Ciudad c){ //recordar que para seleccionar una sede, antes hay que listar todas las disponibles
+        if(!ciudades.contains(c)){
+            throw new RuntimeException("La ciudad no se encuentra ingresada a la empresa");
+        }
+        if(sede == c){
+            throw new RuntimeException("La ciudad ya es sede");
+        }
+        sede=c;
+    }
+
+    public void agregarAsesor(Asesor a,LocalDate fechaInicio){
+        for(int i=0;i<asesores.size();i++){
+            if(asesores.get(i).contiene(a)) {
+                throw new RuntimeException("El asesor ya se encuentra vinculado a la empresa");
+            }
+        }
+        asesores.add(new VinculacionEmpresaAsesor(a,fechaInicio));
+    }
+
+    public void eliminarAsesor(Asesor a) {
+        int flag=0;
+        for(int i=0;i<asesores.size();i++){
+            if(asesores.get(i).contiene(a)) {
+                asesores.remove(asesores.get(i));
+                flag=1;
+            }
+        }
+        if(flag ==0 ) {
+            throw new RuntimeException("El asesor ya se encuentra vinculado a la empresa");
+        }
+
+    }
+
+    public void agregarAreaMercado(AreasMercado a){
+        if(areasMercado.contains(a))
+        {
+            throw new RuntimeException("El área ya se encuentra ingresada.");
+        }
+        areasMercado.add(a);
+    }
+
+    public void eliminarAreaMercado(AreasMercado a)
+    {
+        if(!areasMercado.contains(a))
+        {
+          throw new RuntimeException("Area no encontrada.");
+        }
+        areasMercado.remove(a);
+    }
+
+    public void agregarVendedor(Vendedor v)
+    {
+        if(vendedores.contains(v)){
+            throw new RuntimeException("El vendedor ya se encuentra asociado.");
+        }
+
+        vendedores.add(v);
+    }
+
+    public void eliminarVendedor(Vendedor v){
+        if(!vendedores.contains(v)){
+            throw new RuntimeException("Vendedor no encontrado.");
+        }
+        vendedores.remove(v);
+    }
 
 }

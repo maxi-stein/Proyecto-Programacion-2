@@ -19,4 +19,12 @@ public class VinculacionEmpresaAsesor {
     public LocalDate getFechaInicio() {
         return fechaInicio;
     }
+
+    public boolean contiene(Asesor a){
+        return a == asesor;
+    }
+
+    public VinculacionEmpresaAsesor getInstance(){
+        return this;
+    }
 }
