@@ -1,6 +1,6 @@
 package holding;
 
-public class Ciudad implements {
+public class Ciudad {
     private String nombre;
 
     private Pais paisOrigen;
@@ -12,5 +12,10 @@ public class Ciudad implements {
 
     public boolean esIgual(Ciudad c){
         return (nombre.equals(c.nombre)) && paisOrigen==c.paisOrigen;
+    }
+
+    @Override
+    public String toString() {
+        return nombre +"," + paisOrigen;
     }
 }
