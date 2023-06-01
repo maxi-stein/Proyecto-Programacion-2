@@ -11,30 +11,22 @@ public class Admin extends Usuario {
         while(opcion != 9){
             switch (opcion){
                 case 1:
-                    mostrarInformacion();
-                    break;
-                case 2: //crear admin
 
                     break;
-                case 3: //crear vendedor
+                case 2:
+
+                    break;
+                case 3:
                          
                     break;
-                case 4: //crear asesor
+                case 4:
 
                     break;
-                case 5: //crear empresa
+                case 5:
 
                     break;
-                case 6: //asignar vendedor captado
-
+                case 6:
                     break;
-                case 7: //crear ciudad
-
-                    break;
-                case 8: //crear País
-
-                    break;
-
             }
             if(opcion != 9) opcion = mostrarMenu();
         }
@@ -44,24 +36,25 @@ public class Admin extends Usuario {
     public void mostrarInformacion() {
         System.out.println("Datos de Usuario: "+ super.toString());
     }
-
-
-
     @Override
     public int mostrarMenu() {
         int opcion = 0;
-        while (opcion>9 || opcion<1) {
-            System.out.printf("1-Mostrar datos de Usuario \t2-Crear Administrador " +
-                    "\n3-Crear Vendedor \t4-Crear Asesor" +
-                    "\n5-Crear Empresa \t6-Asignar Vendedor Captado " +
-                    "\n7- Crear Ciudad \t8-Crear Pais \t 9-Salir");
-            opcion = leerNum();
-            if(opcion>9 || opcion<1) System.out.println("Opcion incorrecta, intente de nuevo.");
+        while (opcion>6 || opcion<1) {
+            System.out.printf("1-Mostrar datos del Administrador \t2-ABM Usuarios" +
+                    "\n3-ABM Empresas \t4-ABM Ciudad y Pais" +
+                    "\n5-ABM Areas de Mercado \t6-Salir");
+            opcion = Consola.leerEntero();
         }
         return opcion;
     }
-    public int leerNum(){
-        String numero = Consola.leerString();
-        return Integer.parseInt(numero);
+    public int mostrarAbmUsuario(){
+        int opcion = 0;
+        while (opcion>6 || opcion<1) {
+            System.out.printf("1-Crear Administrador \t2-Modificar Administrador \t3-Eliminar Administrador" +
+                    "\n4-Agregar Vendedor \t5-Modificar Vendedor \t6-Eliminar Vendedor" +
+                    "\n7-Agregar Asesor \t8-Modificar Asesor \t9-Eliminar Asesor");
+            opcion = Consola.leerEntero();
+        }
+        return opcion;
     }
 }

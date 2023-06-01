@@ -60,17 +60,11 @@ public class Vendedor extends Usuario {
                     "3 - Mostrar cantidad vendedores captados. \n" +
                     "4 - Listar vendedores captados. \n" +
                     "5 - Salir.-  \n-");
-            opcion = leerNum();
+            opcion = Consola.leerEntero();
             if(opcion>5 || opcion<1) System.out.println("Opcion incorrecta, intente de nuevo.");
         }
         return opcion;
     }
-
-    public int leerNum(){
-        String numero = Consola.leerString();
-        return Integer.parseInt(numero);
-    }
-
     public void mostrarEmpresaActual(){
         System.out.println(empresaTrabajo.displayInfo());
     }

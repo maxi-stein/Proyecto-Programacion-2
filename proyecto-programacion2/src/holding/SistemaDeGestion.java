@@ -7,17 +7,15 @@ public class SistemaDeGestion implements CapazDeVisualizarMenu {
         bd = new BaseDatosHolding();
     }
     public void run(){
-
-        int num;
-        do{
-            num = mostrarMenu();
-        }while(num != 1 && num!=2);
-
-        if(num==1){
-            Usuario loggedInUsuario = bd.iniciarSesion();
-            loggedInUsuario.proceder();
+        int num=1;//mati do while
+        while(num!=2) {
+            num=mostrarMenu();
+            if (num == 1) {
+                Usuario loggedInUsuario = bd.iniciarSesion();
+                loggedInUsuario.proceder();
+                num = mostrarMenu();
+            }
         }
-
     }
 
     public int mostrarMenu(){
