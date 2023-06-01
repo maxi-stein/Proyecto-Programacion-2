@@ -94,9 +94,8 @@ class Pais{
 
 class Ciudad{
     -nombre: String
-
-    +hacerSede(Empresa) : void
-    -eliminarSede(Empresa) : void
+    +Ciudad(String,Pais);
+    +esIgual(Ciudad) : Boolean
 }
 
 interface CapazDeTenerSede <<interface>>{
@@ -128,7 +127,7 @@ Empresa "1"--> "*" AreaMercado : areasMercado
 Empresa -.|> CapazDeMostrarSuInformacion
 Empresa <- Ciudad : sede
 VinculacionAsesorEmpresa "*" <- Empresa: asesores
-Ciudad <-o Pais : Pais
+Ciudad <-o Pais : paisOrigen
 Ciudad -> "*" Empresa : ciudades
 
 Asesor "*"-> "*" AreaMercado : mercadosCubiertos

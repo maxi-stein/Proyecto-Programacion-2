@@ -1,23 +1,16 @@
 package holding;
 
-public class Ciudad implements CapazDeTenerSede {
+public class Ciudad implements {
     private String nombre;
-    private boolean desarrollaActividad;
-    private boolean esSede;
-    public Ciudad(String nombre, boolean desarrollaActividad)
-    {
+
+    private Pais paisOrigen;
+
+    public Ciudad(String nombre, Pais paisOrigen) {
         this.nombre = nombre;
-        this.desarrollaActividad = desarrollaActividad;
-        this.esSede = false;
+        this.paisOrigen = paisOrigen;
     }
 
-    @Override
-    public void hacerSede() {
-        esSede = true;
-    }
-
-    @Override
-    public void eliminarSede() {
-        esSede = false;
+    public boolean esIgual(Ciudad c){
+        return (nombre.equals(c.nombre)) && paisOrigen==c.paisOrigen;
     }
 }
