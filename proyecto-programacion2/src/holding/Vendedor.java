@@ -54,7 +54,7 @@ public class Vendedor extends Usuario {
     @Override
     public int mostrarMenu() {
         int opcion = 0;
-        while(opcion>6 || opcion<1){
+        while(opcion>5 || opcion<1){
             System.out.print("1 - Mostrar Datos de Usuario. \n" +
                     "2 - Mostrar empresa actual. \n" +
                     "3 - Mostrar cantidad vendedores captados. \n" +

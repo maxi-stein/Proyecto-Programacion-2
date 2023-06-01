@@ -77,7 +77,6 @@ class Admin extends Usuario{
 +crearEmpresa(): void
 +crearPais() : void
 +proceder() : void
-+leerNum() : void
 +mostrarMenu() : Integer
 +mostrarInformacionUsuario() : void
 }
@@ -98,10 +97,6 @@ class Ciudad{
     +esIgual(Ciudad) : Boolean
 }
 
-interface CapazDeTenerSede <<interface>>{
-    +hacerSede(Empresa) : void
-    -eliminarSede(Empresa) : void
-}
 
 interface CapazDeVisualizarMenu <<interface>>{
     +{abstract} mostrarMenu() : void
@@ -110,9 +105,6 @@ interface CapazDeVisualizarMenu <<interface>>{
 interface CapazDeMostrarSuInformacion <<interface>>{
     +{abstract} mostrarInformacion() : void
 }
-
-
-
 
 SistemaDeGestion -> BaseDatosHolding : "baseDeDatos"
 SistemaDeGestion -.|> CapazDeVisualizarMenu

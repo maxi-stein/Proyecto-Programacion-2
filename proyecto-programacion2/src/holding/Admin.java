@@ -12,13 +12,24 @@ public class Admin extends Usuario {
 
     @Override
     public void mostrarInformacion() {
-        System.out.println("Datos de Usuario: "+ toString());
+        System.out.println("Datos de Usuario: "+ super.toString());
     }
 
     @Override
     public int mostrarMenu() {
-        System.out.printf("1-Mostrar datos de Usuario \n2-Crear Administrador \n3-Crear Vendedor \n4-Crear Asesor" +
-                "\n5-Crear Empresa \n6-Agregar Pais al listado \n7- Agregar Ciudad al Listado");
-        return 0;
+        int opcion = 0;
+        while (opcion>8 || opcion<1) {
+            System.out.printf("1-Mostrar datos de Usuario \t2-Crear Administrador " +
+                    "\n3-Crear Vendedor \t4-Crear Asesor" +
+                    "\n5-Crear Empresa \t6-Asignar Vendedor Captado " +
+                    "\n7- Crear Ciudad \t8-Crear Pais");
+            opcion = leerNum();
+            if(opcion>8 || opcion<1) System.out.println("Opcion incorrecta, intente de nuevo.");
+        }
+        return opcion;
+    }
+    public int leerNum(){
+        String numero = Consola.leerString();
+        return Integer.parseInt(numero);
     }
 }
