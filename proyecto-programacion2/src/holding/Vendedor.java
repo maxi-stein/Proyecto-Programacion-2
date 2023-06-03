@@ -51,6 +51,7 @@ public class Vendedor extends Usuario {
         System.out.println("Empresa: "+ empresaTrabajo);;
     }
 
+
     @Override
     public int mostrarMenu() {
         int opcion = 0;

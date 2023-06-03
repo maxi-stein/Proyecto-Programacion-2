@@ -23,6 +23,10 @@ public abstract class Usuario implements CapazDeVisualizarMenu,CapazDeMostrarSuI
     public boolean validarPass(String pass){
         return this.pass.equals(pass);
     }
+    public void mostrarCredenciales(){
+        System.out.println("Código Usuario: "+ codigoUsuario);
+        System.out.println("Contraseña: "+ pass;
+    }
 
     @Override
     public String toString() {

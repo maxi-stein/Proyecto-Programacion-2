@@ -1,5 +1,8 @@
 package holding;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+import java.sql.SQLOutput;
+
 public class Admin extends Usuario {
     public Admin(String nombre, String direccion, String pass) {
         super(nombre, direccion, pass);
@@ -36,6 +39,7 @@ public class Admin extends Usuario {
     public void mostrarInformacion() {
         System.out.println("Datos de Usuario: "+ super.toString());
     }
+
     @Override
     public int mostrarMenu() {
         int opcion = 0;
@@ -70,7 +74,10 @@ public class Admin extends Usuario {
                 System.out.println("Ingrese Contraseña: ");
                 pass = Consola.leerEntero();
                 ad = new Admin(nombre, direccion,pass);
-                // agregar a la BD y verificar que no exista - DNI?
+                System.out.println("* USUARIO CREADO *");
+                ad.mostrarCredenciales();
+                ad.mostrarInformacion();
+                //guardar en BD
                 break;
             case 2:
                 break;
