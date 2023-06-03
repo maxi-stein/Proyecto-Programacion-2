@@ -97,7 +97,6 @@ class Ciudad{
     +esIgual(Ciudad) : Boolean
 }
 
-
 interface CapazDeVisualizarMenu <<interface>>{
     +{abstract} mostrarMenu() : void
 }
