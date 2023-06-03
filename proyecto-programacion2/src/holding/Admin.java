@@ -11,19 +11,19 @@ public class Admin extends Usuario {
         while(opcion != 9){
             switch (opcion){
                 case 1:
-
+                    mostrarInformacion();
                     break;
                 case 2:
                     mostrarABMUsuario();
                     break;
                 case 3:
-                         
+                    mostrarABMEmpresas();
                     break;
                 case 4:
-
+                    mostrarABMAreasMercado();
                     break;
                 case 5:
-
+                    crearCiudad();
                     break;
                 case 6:
                     break;
@@ -58,11 +58,45 @@ public class Admin extends Usuario {
         }
         switch (opcion){
             case 1:
+                String nombre;
+                String direccion;
+                int pass;
+                Admin ad;
+
+                System.out.println("Ingrese Nombre: ");
+                nombre = Consola.leerString();
+                System.out.println("Ingrese Dirección: ");
+                direccion = Consola.leerString();
+                System.out.println("Ingrese Contraseña: ");
+                pass = Consola.leerEntero();
+                ad = new Admin(nombre, direccion,pass);
+                // agregar a la BD y verificar que no exista - DNI?
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+            case 11:
                 break;
         }
+        if(opcion!= 11) mostrarABMUsuario();
     }
 
-    public int mostrarABMEmpresas(){
+    public void mostrarABMEmpresas(){
         int opcion = 0;
         while (opcion>13 || opcion<1) {
             System.out.printf("1-Crear Empresa \t2-Modificar Empresa \t3-Eliminar Empresa" +
@@ -73,7 +107,36 @@ public class Admin extends Usuario {
                     "\n13-Salir");
             opcion = Consola.leerEntero();
         }
-        return opcion;
+
+        switch (opcion){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+            case 11:
+                break;
+            case 12:
+                break;
+            case 13:
+                break;
+        }
+        if(opcion!= 13) mostrarABMEmpresas();
     }
 
     public void crearCiudad(){
@@ -81,13 +144,22 @@ public class Admin extends Usuario {
         //implementacion faltante
     }
 
-    public int mostrarABMAreasMercado(){
+    public void mostrarABMAreasMercado(){
         int opcion = 0;
         while (opcion>6 || opcion<1) {
             System.out.printf("1-Crear Area Mercado \t2-Modificar Area Mercado" +
                     "\n3-Salir");
             opcion = Consola.leerEntero();
         }
-        return opcion;
+
+        switch (opcion) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
+        if(opcion != 3) mostrarABMAreasMercado();
     }
 }
