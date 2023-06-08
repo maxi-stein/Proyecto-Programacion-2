@@ -1,6 +1,6 @@
 package holding;
 
-public abstract class Usuario implements CapazDeVisualizarMenu,CapazDeMostrarSuInformacion {
+public abstract class Usuario implements CapazDeVisualizarMenu {
     private static int CONTADOR = 0;
     private int codigoUsuario;
     private String nombre;
@@ -25,7 +25,7 @@ public abstract class Usuario implements CapazDeVisualizarMenu,CapazDeMostrarSuI
     }
     public void mostrarCredenciales(){
         System.out.println("Código Usuario: "+ codigoUsuario);
-        System.out.println("Contraseña: "+ pass;
+        System.out.println("Contraseña: "+ pass);
     }
 
     @Override

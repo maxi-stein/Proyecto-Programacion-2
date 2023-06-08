@@ -1,11 +1,31 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+class MenuPrincipal implements CapazDeEjecutarUnaAccionMenu{
+    -acciones : HashMap
+    +agregarAccion(Integer,CapazDeEjecutarUnaAccionMenu) : void
+    +ejecutarAccion(Integer) : void
+}
 
-autonumber
+class MenuVerInformacion implements CapazDeEjecutarUnaAccionMenu{
+    +ejecutarAccion(Integer): void
+}
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+class MenuABMCUsuarios implements CapazDeEjecutarUnaAccionMenu{
+    +ejecutarAccion(Integer): void
+}
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+class MenuABMCEmpresa implements CapazDeEjecutarUnaAccionMenu{
+    +ejecutarAccion(Integer): void
+}
+
+class MenuABMCAreaMercado implements CapazDeEjecutarUnaAccionMenu{
+    +ejecutarAccion(Integer): void
+}
+
+class MenuABMCCiudad implements CapazDeEjecutarUnaAccionMenu{
+    +ejecutarAccion(Integer): void
+}
+
+interface CapazDeEjecutarUnaAccionMenu{
+    +ejecutar() : void
+}
 @enduml

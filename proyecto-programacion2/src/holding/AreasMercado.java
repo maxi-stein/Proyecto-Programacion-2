@@ -1,6 +1,6 @@
 package holding;
 
-public class AreasMercado implements CapazDeMostrarSuInformacion{
+public class AreasMercado{
     private String nombre;
     private String descripcion;
 
@@ -10,7 +10,7 @@ public class AreasMercado implements CapazDeMostrarSuInformacion{
     }
 
     @Override
-    public void mostrarInformacion() {
-        System.out.printf("%s - %s",nombre,descripcion);
+    public String toString() {
+        return nombre + "-" +  descripcion + '\n' + "*".repeat(25) + '\n';
     }
 }

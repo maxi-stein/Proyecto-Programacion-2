@@ -1,8 +1,5 @@
 package holding;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
-import java.sql.SQLOutput;
-
 public class Admin extends Usuario {
     public Admin(String nombre, String direccion, String pass) {
         super(nombre, direccion, pass);
@@ -10,43 +7,17 @@ public class Admin extends Usuario {
 
     @Override
     public void proceder() {
-        int opcion = mostrarMenu();
-        while(opcion != 9){
-            switch (opcion){
-                case 1:
-                    mostrarInformacion();
-                    break;
-                case 2:
-                    mostrarABMUsuario();
-                    break;
-                case 3:
-                    mostrarABMEmpresas();
-                    break;
-                case 4:
-                    mostrarABMAreasMercado();
-                    break;
-                case 5:
-                    crearCiudad();
-                    break;
-                case 6:
-                    break;
-            }
-            if(opcion != 6) opcion = mostrarMenu();
-        }
-    }
-
-    @Override
-    public void mostrarInformacion() {
-        System.out.println("Datos de Usuario: "+ super.toString());
+        MenuPrincipal mp = new MenuPrincipal();
+        mp.ejecutar();
     }
 
     @Override
     public int mostrarMenu() {
         int opcion = 0;
         while (opcion>6 || opcion<1) {
-            System.out.printf("1-Mostrar datos del Administrador \t2-ABM Usuarios" +
-                    "\n3-ABM Empresas \t4-ABM Areas de Mercado "+
-                    "\n5-Crear Ciudad - Pais \t6-Salir");
+            System.out.printf("1-Mostrar datos del Administrador \t2-ABCM Usuarios" +
+                    "\n3-ABCM Empresas \t4-ABCM Areas de Mercado "+
+                    "\n5-ABCM Ciudad/Pais \t6-Salir");
             opcion = Consola.leerEntero();
         }
         return opcion;
@@ -54,17 +25,15 @@ public class Admin extends Usuario {
     public void mostrarABMUsuario(){
         int opcion = 0;
         while (opcion>11 || opcion<1) {
-            System.out.printf("1-Crear Administrador \t2-Modificar Administrador \t3-Eliminar Administrador" +
-                    "\n4-Agregar Vendedor \t5-Agregar Vendedor Captado \t6-Modificar Vendedor \t7-Eliminar Vendedor" +
-                    "\n8-Agregar Asesor \t9-Modificar Asesor \t10-Eliminar Asesor" +
-                    "\n11-Salir");
+            System.out.printf("1-Crear Usuario \t2-Modificar Usuario \t3-Eliminar Usuario" +
+                    "\n4-Agregar Vendedor Captado + \n11-Salir");
             opcion = Consola.leerEntero();
         }
         switch (opcion){
             case 1:
                 String nombre;
                 String direccion;
-                int pass;
+                String pass;
                 Admin ad;
 
                 System.out.println("Ingrese Nombre: ");
@@ -72,11 +41,10 @@ public class Admin extends Usuario {
                 System.out.println("Ingrese Dirección: ");
                 direccion = Consola.leerString();
                 System.out.println("Ingrese Contraseña: ");
-                pass = Consola.leerEntero();
+                pass = Consola.leerString();
                 ad = new Admin(nombre, direccion,pass);
                 System.out.println("* USUARIO CREADO *");
                 ad.mostrarCredenciales();
-                ad.mostrarInformacion();
                 //guardar en BD
                 break;
             case 2:

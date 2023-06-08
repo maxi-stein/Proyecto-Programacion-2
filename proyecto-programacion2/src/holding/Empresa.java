@@ -3,7 +3,7 @@ package holding;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Empresa implements CapazDeMostrarSuInformacion{
+public class Empresa{
 
     private String nombre;
     private LocalDate fechaEntrada;
@@ -30,11 +30,17 @@ public class Empresa implements CapazDeMostrarSuInformacion{
     }
 
     @Override
-    public void mostrarInformacion() {
-        System.out.println(nombre + "Fecha de entrada: "+fechaEntrada);
-        System.out.println("    - Facturacion anual: $"+facturacionAnual);
-        System.out.println("    - Ubicaciones: ");
-
+    public String toString() {
+        return "Empresa{" +
+                "nombre='" + nombre + '\'' +
+                ", fechaEntrada=" + fechaEntrada +
+                ", facturacionAnual=" + facturacionAnual +
+                ", ciudades=" + ciudades +
+                ", sede=" + sede +
+                ", asesores=" + asesores +
+                ", areasMercado=" + areasMercado +
+                ", vendedores=" + vendedores +
+                '}';
     }
 
     public String getNombre(){

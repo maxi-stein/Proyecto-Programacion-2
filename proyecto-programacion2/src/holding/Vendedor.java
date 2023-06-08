@@ -29,7 +29,7 @@ public class Vendedor extends Usuario {
         while(opcion != 5){
             switch (opcion){
                 case 1:
-                    mostrarInformacion();
+
                     break;
                 case 2:
                     mostrarEmpresaActual();
@@ -46,11 +46,13 @@ public class Vendedor extends Usuario {
     }
 
     @Override
-    public void mostrarInformacion() {
-        System.out.println("Datos del Usuario: "+toString()+" || Fecha de Ingreso: "+ fechaCaptado);
-        System.out.println("Empresa: "+ empresaTrabajo);;
+    public String toString() {
+        return "Vendedor{" +
+                "fechaCaptado=" + fechaCaptado +
+                ", vendedoresCaptados=" + vendedoresCaptados +
+                ", empresaTrabajo=" + empresaTrabajo +
+                '}';
     }
-
 
     @Override
     public int mostrarMenu() {
