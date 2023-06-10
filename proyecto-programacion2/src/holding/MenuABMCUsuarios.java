@@ -1,15 +1,13 @@
 package holding;
 
-import java.util.HashMap;
+public class MenuABMCUsuarios extends MenuSuper{
 
-public class MenuABMCUsuarios implements CapazDeEjecutarAccionMenu{
-    private HashMap<Integer,CapazDeEjecutarAccionMenu> acciones;
     public MenuABMCUsuarios(){
-        acciones = new HashMap<>();
-        acciones.put(1,new MenuCrearObjeto());
-        acciones.put(2,new MenuModificarUsuario());
-        acciones.put(3,new MenuEliminarUsuario());
-        acciones.put(4,new MenuVendedorCaptado());
+        super();
+        agregarAccion(1,new MenuCrearUsuario());
+        agregarAccion(2,new MenuModificarUsuario());
+        agregarAccion(3,new MenuEliminarUsuario());
+        agregarAccion(4,new MenuVendedorCaptado());
     }
     @Override
     public void ejecutar() {
@@ -25,7 +23,7 @@ public class MenuABMCUsuarios implements CapazDeEjecutarAccionMenu{
     }
 
     public void ejecutarAccion(int key){
-        Usuario usuario = null;
-        acciones.get(key).ejecutar();
+        getAccion(key).ejecutar();
     }
+
 }

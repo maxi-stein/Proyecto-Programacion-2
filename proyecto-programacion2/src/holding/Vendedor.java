@@ -25,24 +25,7 @@ public class Vendedor extends Usuario {
     }
     @Override
     public void proceder() {
-        int opcion = mostrarMenu();
-        while(opcion != 5){
-            switch (opcion){
-                case 1:
 
-                    break;
-                case 2:
-                    mostrarEmpresaActual();
-                    break;
-                case 3:
-                    mostrarCantVendCaptados();
-                    break;
-                case 4:
-                    listarVendedoresCaptados();
-                    break;
-            }
-            opcion = mostrarMenu();
-        }
     }
 
     @Override
@@ -52,21 +35,6 @@ public class Vendedor extends Usuario {
                 ", vendedoresCaptados=" + vendedoresCaptados +
                 ", empresaTrabajo=" + empresaTrabajo +
                 '}';
-    }
-
-    @Override
-    public int mostrarMenu() {
-        int opcion = 0;
-        while(opcion>5 || opcion<1){
-            System.out.print("1 - Mostrar Datos de Usuario. \n" +
-                    "2 - Mostrar empresa actual. \n" +
-                    "3 - Mostrar cantidad vendedores captados. \n" +
-                    "4 - Listar vendedores captados. \n" +
-                    "5 - Salir.-  \n-");
-            opcion = Consola.leerEntero();
-            if(opcion>5 || opcion<1) System.out.println("Opcion incorrecta, intente de nuevo.");
-        }
-        return opcion;
     }
     public void mostrarEmpresaActual(){
         System.out.println(empresaTrabajo.displayInfo());

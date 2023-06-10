@@ -1,6 +1,6 @@
 package holding;
 
-public abstract class Usuario implements CapazDeVisualizarMenu {
+public abstract class Usuario{
     private static int CONTADOR = 0;
     private int codigoUsuario;
     private String nombre;
@@ -15,15 +15,10 @@ public abstract class Usuario implements CapazDeVisualizarMenu {
         this.direccion = direccion;
         this.pass = pass;
     }
-
-
     public abstract void proceder();
 
     public boolean validarNombre(String nombre){
         return this.nombre.equals(nombre);
-    }
-    public boolean validarDNI(int dniUsuario){
-        return this.dni == dniUsuario;
     }
     public boolean validarPass(String pass){
         return this.pass.equals(pass);
@@ -32,9 +27,12 @@ public abstract class Usuario implements CapazDeVisualizarMenu {
         System.out.println("Código Usuario: "+ codigoUsuario);
         System.out.println("Contraseña: "+ pass);
     }
-
     @Override
     public String toString() {
         return String.format("%s - COD:%d - %s \n",nombre,codigoUsuario,direccion);
+    }
+
+    public int getCodigoUsuario() {
+        return codigoUsuario;
     }
 }
