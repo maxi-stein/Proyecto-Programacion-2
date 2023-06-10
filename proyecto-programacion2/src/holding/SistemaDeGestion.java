@@ -1,5 +1,7 @@
 package holding;
 
+import java.util.Objects;
+
 public class SistemaDeGestion implements CapazDeVisualizarMenu {
 
     private BaseDatosHolding bd;
@@ -7,12 +9,12 @@ public class SistemaDeGestion implements CapazDeVisualizarMenu {
         bd = new BaseDatosHolding();
     }
     public void run(){
-        int num;//mati do while
+        int num;
         do{
             num=mostrarMenu();
             if (num == 1) {
                 Usuario loggedInUsuario = bd.iniciarSesion();
-                loggedInUsuario.proceder();
+                if(Objects.nonNull(loggedInUsuario)){loggedInUsuario.proceder();}
                 num = mostrarMenu();
             }
         }while(num!=2);

@@ -23,8 +23,9 @@ public class BaseDatosHolding{
     public  Usuario iniciarSesion(){
         Usuario usuarioIN = null;
         int intentos = 0;
-        while(usuarioIN == null || intentos < 3 ) {
+        while(usuarioIN == null && intentos < 3 ) {
             intentos ++;
+
             System.out.println("Numero de Usuario:");
             int user = Consola.leerEntero();
             //String user = Consola.leerString();
