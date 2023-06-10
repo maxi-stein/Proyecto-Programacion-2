@@ -2,7 +2,7 @@ package holding;
 
 import java.util.Objects;
 
-public class SistemaDeGestion implements CapazDeVisualizarMenu {
+public class SistemaDeGestion {
 
     private BaseDatosHolding bd;
     public SistemaDeGestion(){
