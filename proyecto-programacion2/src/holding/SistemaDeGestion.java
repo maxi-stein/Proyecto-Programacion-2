@@ -7,9 +7,11 @@ public class SistemaDeGestion implements CapazDeVisualizarMenu {
     private BaseDatosHolding bd;
     public SistemaDeGestion(){
         bd = new BaseDatosHolding();
+
     }
     public void run(){
         int num;
+        
         do{
             num=mostrarMenu();
             if (num == 1) {

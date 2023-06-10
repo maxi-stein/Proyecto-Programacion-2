@@ -1,18 +1,19 @@
 package holding;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class BaseDatosHolding{
     //private ArrayList<Usuario> usuarios;
+    //private ArrayList<Empresa> empresas;
     private HashMap<Integer,Usuario> users; //CAMBIAR NOMBRE A USUARIOS
-    private ArrayList<Empresa> empresas;
+    private HashMap<Integer,Empresa> empresas;
+
 
     public BaseDatosHolding(){
         //users = new ArrayList<>();
         users = new HashMap<>();
-        empresas = new ArrayList<>();
+        empresas = new HashMap<>();
 
         //usuarios.add(new Admin("abc","Calle Falsa","123"));
         users.put(123,new Admin("abc","Calle Falsa","123"));

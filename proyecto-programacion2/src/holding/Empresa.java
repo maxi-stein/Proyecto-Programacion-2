@@ -13,8 +13,12 @@ public class Empresa{
     private ArrayList<VinculacionEmpresaAsesor> asesores;
     private ArrayList<AreasMercado> areasMercado;
     private ArrayList<Vendedor> vendedores;
+    private int contador;
+    private int codigoEmpresa;
 
     public Empresa(String nombre, LocalDate fechaEntrada, double facturacionAnual) {
+        contador++;
+        this.codigoEmpresa = codigoEmpresa;
         this.nombre = nombre;
         this.fechaEntrada = fechaEntrada;
         this.facturacionAnual = facturacionAnual;
