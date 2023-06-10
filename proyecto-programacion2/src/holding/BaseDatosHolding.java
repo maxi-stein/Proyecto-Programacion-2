@@ -4,8 +4,11 @@ import java.util.HashMap;
 
 
 public class BaseDatosHolding{
+<<<<<<< HEAD
     //private ArrayList<Usuario> usuarios;
     //private ArrayList<Empresa> empresas;
+=======
+>>>>>>> develop
     private HashMap<Integer,Usuario> users; //CAMBIAR NOMBRE A USUARIOS
     private HashMap<Integer,Empresa> empresas;
 
@@ -48,5 +51,9 @@ public class BaseDatosHolding{
                 usuarioEncontrado = users.get(userCod);
             }
         return usuarioEncontrado;
+    }
+
+    public void agregarUsuario(Usuario u){
+        users.put(u.getCodigoUsuario(),u);
     }
 }

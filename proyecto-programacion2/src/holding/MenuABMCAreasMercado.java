@@ -1,6 +1,6 @@
 package holding;
 
-public class MenuABMCAreasMercado implements CapazDeEjecutarAccionMenu{
+public class MenuABMCAreasMercado extends MenuSuper{
     @Override
     public void ejecutar() {
         System.out.println("menu mercado sin implementar");

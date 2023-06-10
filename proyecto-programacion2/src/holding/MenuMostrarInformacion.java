@@ -1,6 +1,6 @@
 package holding;
 
-public class MenuMostrarInformacion implements CapazDeEjecutarAccionMenu {
+public class MenuMostrarInformacion extends MenuSuper {
     @Override
     public void ejecutar() {
         System.out.println("menu info sin implementar");

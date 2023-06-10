@@ -1,6 +1,7 @@
 package holding;
 
-public class MenuPrincipal<Usuario> extends MenuSuper {
+public class MenuCrearUsuario implements CapazDeEjecutarAccionMenu{
+
     @Override
     public void ejecutar() {
 

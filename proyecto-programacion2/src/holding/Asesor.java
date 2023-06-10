@@ -18,38 +18,9 @@ public class Asesor extends Usuario{
     }
     @Override
     public void proceder() {
-        int opcion = mostrarMenu();
-        while(opcion != 4){
-            switch (opcion){
-                case 1:
-
-                    break;
-                case 2:
-                    listarEmpresas();
-                    break;
-                case 3:
-                    listarAreasMercado();
-                    break;
-            }
-            opcion = mostrarMenu();
-            if(opcion>4 || opcion<1) System.out.println("Opcion incorrecta, intente de nuevo.");
-        }
-
+        MenuPrincipalAsesor mpa = new MenuPrincipalAsesor();
+        mpa.ejecutar();
     }
-
-    @Override
-    public int mostrarMenu() {
-        int opcion=0;
-        while (opcion < 1 || opcion > 4) {
-            System.out.print("1-Mostrar Datos de Usuario. \n" +
-                    "2-Listar Empresas Asesoradas. \n" +
-                    "3-Listar Areas de Mercado asesoradas. \n" +
-                    "4-Salir.-");
-            opcion = Consola.leerEntero();
-        }
-        return opcion;
-    }
-
     public void listarEmpresas(){
         if(empresasAsesoradas.isEmpty()){
             System.out.println("No hay empresas que asesore el usuario.");
@@ -61,7 +32,6 @@ public class Asesor extends Usuario{
             System.out.println();
         }
     }
-
     public void listarAreasMercado(){
         if(mercadosCubiertos.isEmpty()){
             System.out.println("El usuario no asesora ningun area de mercado aún.");
@@ -74,7 +44,6 @@ public class Asesor extends Usuario{
             System.out.println();
         }
     }
-
     public void agregarEmpresaAsesorada(Empresa empresa,LocalDate fechaInicio){
         empresasAsesoradas.add((empresa));
         fechasInicio.add((fechaInicio));
