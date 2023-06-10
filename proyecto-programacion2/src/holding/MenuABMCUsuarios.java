@@ -26,6 +26,6 @@ public class MenuABMCUsuarios implements CapazDeEjecutarAccionMenu{
 
     public void ejecutarAccion(int key){
         Usuario usuario = null;
-        acciones.get(key).ejecutar(usuario);
+        acciones.get(key).ejecutar();
     }
 }

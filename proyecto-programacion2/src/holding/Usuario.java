@@ -4,6 +4,7 @@ public abstract class Usuario implements CapazDeVisualizarMenu {
     private static int CONTADOR = 0;
     private int codigoUsuario;
     private String nombre;
+    private int dni;
     private String direccion;
     private String pass;
 
@@ -15,10 +16,14 @@ public abstract class Usuario implements CapazDeVisualizarMenu {
         this.pass = pass;
     }
 
+
     public abstract void proceder();
 
     public boolean validarNombre(String nombre){
         return this.nombre.equals(nombre);
+    }
+    public boolean validarDNI(int dniUsuario){
+        return this.dni == dniUsuario;
     }
     public boolean validarPass(String pass){
         return this.pass.equals(pass);
