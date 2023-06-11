@@ -1,14 +1,11 @@
 package holding;
 
+import java.io.*;
 import java.util.HashMap;
 
 
 public class BaseDatosHolding{
-<<<<<<< HEAD
-    //private ArrayList<Usuario> usuarios;
-    //private ArrayList<Empresa> empresas;
-=======
->>>>>>> develop
+
     private HashMap<Integer,Usuario> users; //CAMBIAR NOMBRE A USUARIOS
     private HashMap<Integer,Empresa> empresas;
 
@@ -56,4 +53,31 @@ public class BaseDatosHolding{
     public void agregarUsuario(Usuario u){
         users.put(u.getCodigoUsuario(),u);
     }
+
+    private void serializarBD(){
+        try {
+            FileOutputStream fileOut = new FileOutputStream("User.txt");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(users);
+            out.close();
+            fileOut.close();
+            System.out.println("HashMap serializado se guardó en User.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deserizalizarBD(){
+
+        try {
+            FileInputStream fileIn = new FileInputStream("User.txt");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            users = (HashMap<Integer, Usuario>) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

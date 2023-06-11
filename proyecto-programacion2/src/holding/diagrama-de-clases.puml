@@ -5,7 +5,7 @@ class SistemaDeGestion{
 }
 
 class BaseDatosHolding{
--autenticarUsuario(String,String) : Usuario
+-autenticarUsuario(Integer,String) : Usuario
 +iniciarSesion() : Usuario
 }
 
@@ -20,6 +20,7 @@ abstract Usuario{
 +validarNombre() : Boolean
 +validarPass() : Boolean
 +mostrarInformacionUsuario() : void
++getCodigoUsuario() : Integer
 }
 
 class Vendedor extends Usuario{
@@ -38,6 +39,8 @@ class Empresa{
     -nombre : String
     -fechaEntrada : Date
     -facturacionAnual : Double
+    -contador : Integer
+    -codigoEmpresa : Integer
     +Empresa(String,Date,Double)
     +displayInfo() : String
 }
@@ -105,6 +108,69 @@ interface CapazDeMostrarSuInformacion <<interface>>{
     +{abstract} mostrarInformacion() : void
 }
 
+interface CapazDeEjecutarAccionMenu <<interface>>{
+    +ejecutar() : void
+}
+
+abstract class MenuSuper{
+    -acciones : Hashmap<Integer, CapazDeEjecutarAccionMenu>
+    +agregarAccion(Integer,  CapazDeEjecutarAccionMenu) : void
+    +getAccion(Integer) : CapazDeEjecutarAccionMenu
+    }
+
+
+class MenuABMCAreasMercado extends MenuSuper{
+    +ejecutar() : void
+}
+
+class MenuABMCUsuarios extends MenuSuper{
+    +ejecutar() : void
+    +ejecutarAccion(Integer) : void
+}
+
+class MenuABMCEmpresas extends MenuSuper{
+    +ejecutar() : void
+    +ejecutarAccion(Integer) : void
+}
+
+class MenuABMCUbicaciones extends MenuSuper{
+    +ejecutar() : void
+}
+
+
+class MenuPrincipalAdmin extends MenuSuper{
+    +ejecutar() : void
+    +ejecutarAccion(Integer) : void
+}
+
+class MenuPrincipalAsesor extends MenuSuper{
+    +ejecutar() : void
+    +ejecutarAccion(Integer) : void
+}
+
+class MenuPrincipalVendedor extends MenuSuper{
+    +ejecutar() : void
+    +ejecutarAccion(Integer) : void
+}
+
+
+class MenuCrearUsuario extends CapazDeEjecutarAccionMenu{
+    +ejecutar() : void
+}
+
+class MenuVendedorCaptado extends CapazDeEjecutarAccionMenu{
+      +ejecutar() : void
+}
+
+class MenuEliminarUsuario extends CapazDeEjecutarAccionMenu{
+    +ejecutar() : void
+}
+
+class MenuModificarUsuario extends CapazDeEjecutarAccionMenu{
+    +ejecutar() : void
+}
+
+
 SistemaDeGestion -> BaseDatosHolding : "baseDeDatos"
 SistemaDeGestion -.|> CapazDeVisualizarMenu
 BaseDatosHolding -> "*" Usuario : usuarios
@@ -123,6 +189,11 @@ Ciudad -> "*" Empresa : ciudades
 
 Asesor "*"-> "*" AreaMercado : mercadosCubiertos
 Asesor <-o VinculacionAsesorEmpresa : asesor
+
+Admin -.|> MenuPrincipalAdmin
+MenuSuper -.|> CapazDeEjecutarAccionMenu
+Asesor -.|> MenuPrincipalAsesor
+Vendedor -.|> MenuPrincipalVendedor
 
 
 @enduml

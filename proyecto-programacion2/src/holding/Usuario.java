@@ -4,7 +4,6 @@ public abstract class Usuario{
     private static int CONTADOR = 0;
     private int codigoUsuario;
     private String nombre;
-    private int dni;
     private String direccion;
     private String pass;
 
@@ -15,7 +14,7 @@ public abstract class Usuario{
         this.direccion = direccion;
         this.pass = pass;
     }
-    public abstract void proceder();
+    public abstract void proceder(BaseDatosHolding bd);
 
     public boolean validarNombre(String nombre){
         return this.nombre.equals(nombre);
