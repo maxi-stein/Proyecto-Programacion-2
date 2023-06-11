@@ -13,11 +13,9 @@ public class Empresa{
     private ArrayList<VinculacionEmpresaAsesor> asesores;
     private ArrayList<AreasMercado> areasMercado;
     private ArrayList<Vendedor> vendedores;
-    private int contador;
     private int codigoEmpresa;
 
     public Empresa(String nombre, LocalDate fechaEntrada, double facturacionAnual) {
-        contador++;
         this.codigoEmpresa = codigoEmpresa;
         this.nombre = nombre;
         this.fechaEntrada = fechaEntrada;
@@ -132,6 +130,14 @@ public class Empresa{
             throw new RuntimeException("Vendedor no encontrado.");
         }
         vendedores.remove(v);
+    }
+    public Boolean areaCompatible(AreasMercado a){
+        return areasMercado.contains(a);
+    }
+
+    public void traspasoDeVendedor(Vendedor v,int keyEmpresa,BaseDatosHolding bd){
+        this.eliminarVendedor(v);
+        bd.getEmpresa(keyEmpresa).agregarVendedor(v);
     }
 
 }

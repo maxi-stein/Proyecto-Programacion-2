@@ -16,7 +16,9 @@ public class SistemaDeGestion {
             num=mostrarMenu();
             if (num == 1) {
                 Usuario loggedInUsuario = bd.iniciarSesion();
-                if(Objects.nonNull(loggedInUsuario)){loggedInUsuario.proceder();}
+                if(Objects.nonNull(loggedInUsuario)){
+                    loggedInUsuario.proceder(bd);
+                }
                 num = mostrarMenu();
             }
         }while(num!=2);

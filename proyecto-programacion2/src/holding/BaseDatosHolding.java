@@ -1,13 +1,17 @@
 package holding;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class BaseDatosHolding{
 
     private HashMap<Integer,Usuario> users; //CAMBIAR NOMBRE A USUARIOS
     private HashMap<Integer,Empresa> empresas;
+    private HashMap<Integer,AreasMercado> areasDeMercado;
+    private HashMap<Integer,Ciudad> ciudades;
 
 
     public BaseDatosHolding(){
@@ -80,4 +84,59 @@ public class BaseDatosHolding{
         }
     }
 
+    public HashMap<Integer,Empresa> listarEmpresas(){
+        for (Map.Entry<Integer, Empresa> empresa : empresas.entrySet()) {
+            Integer key = empresa.getKey();
+            Empresa value = empresa.getValue();
+            System.out.println(key + " " + value + '\n');
+        }
+        return empresas;
+    }
+
+    public HashMap<Integer,AreasMercado> listarAreasDeMercado(){
+        for (Map.Entry<Integer, AreasMercado> area : areasDeMercado.entrySet()) {
+            Integer key = area.getKey();
+            AreasMercado value = area.getValue();
+            System.out.println(key + " " + value + '\n');
+        }
+        return areasDeMercado;
+    }
+    public void agregarAsesorAEmpresa(Integer keyEmpresa, Asesor a, LocalDate fechaInicio){
+        empresas.get(keyEmpresa).agregarAsesor(a,fechaInicio);
+    }
+    public HashMap<Integer,Usuario> listarUsuarios(Admin adminBuscado){
+        HashMap usuariosAListar = new HashMap();
+        for(int i=0;i< users.size();i++){
+            if(users.get(i) instanceof Admin){
+                usuariosAListar.put(i,users.get(i));
+                System.out.println(i+" - "+users.get(i).toString());
+            }
+        }
+        return usuariosAListar;
+    }
+    public HashMap<Integer,Usuario> listarUsuarios(Vendedor vendedorBuscado){
+        HashMap usuariosAListar = new HashMap();
+        for(int i=0;i< users.size();i++){
+            if(users.get(i) instanceof Vendedor){
+                usuariosAListar.put(i,users.get(i));
+                System.out.println(i+" - "+users.get(i).toString());
+            }
+        }
+        return usuariosAListar;
+    }
+
+    public HashMap<Integer,Usuario> listarUsuarios(Asesor asesorBuscado){
+        HashMap usuariosAListar = new HashMap();
+        for(int i=0;i< users.size();i++){
+            if(users.get(i) instanceof Asesor){
+                usuariosAListar.put(i,users.get(i));
+                System.out.println(i+" - "+users.get(i).toString());
+            }
+        }
+        return usuariosAListar;
+    }
+
+    public Empresa getEmpresa(int keyEmpresa){
+        return empresas.get(keyEmpresa);
+    }
 }

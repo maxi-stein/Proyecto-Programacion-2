@@ -1,36 +1,27 @@
 package holding;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Asesor extends Usuario{
     private String titulacion;
     private ArrayList<AreasMercado> mercadosCubiertos;
-    private ArrayList<Empresa> empresasAsesoradas;
-    private ArrayList<LocalDate> fechasInicio;
 
     public Asesor(String nombre, String direccion, String pass, String titulacion) {
         super(nombre, direccion, pass);
         this.titulacion = titulacion;
         mercadosCubiertos = new ArrayList<>();
-        empresasAsesoradas = new ArrayList<>();
-        fechasInicio = new ArrayList<>();
+    }
+    public Asesor(){
+        super();
     }
     @Override
-    public void proceder() {
+    public void proceder(BaseDatosHolding bd) {
         MenuPrincipalAsesor mpa = new MenuPrincipalAsesor();
-        mpa.ejecutar();
+        mpa.ejecutar(bd);
     }
     public void listarEmpresas(){
-        if(empresasAsesoradas.isEmpty()){
-            System.out.println("No hay empresas que asesore el usuario.");
-        }
-        else {
-            for (int i = 0; i < empresasAsesoradas.size(); i++) {
-                System.out.println(empresasAsesoradas.get(i).getNombre() + "(desde " + fechasInicio.get(i) + ")");
-            }
-            System.out.println();
-        }
+        System.out.println("Implementar codigo de listado de empresas. Se debe acceder al hashmap de empresas de basededatos, luego al arraylist de VinculacionEmpresa asesor" +
+                "y verificar si dicho asesor esta dentro o no. Si nolo esta, se avanza a la siguiente empresa y asi sucesivamente...");
     }
     public void listarAreasMercado(){
         if(mercadosCubiertos.isEmpty()){
@@ -43,15 +34,6 @@ public class Asesor extends Usuario{
             }
             System.out.println();
         }
-    }
-    public void agregarEmpresaAsesorada(Empresa empresa,LocalDate fechaInicio){
-        empresasAsesoradas.add((empresa));
-        fechasInicio.add((fechaInicio));
-    }
-
-    public void eliminarEmpresaAsesorada(Empresa empresa,LocalDate fechaInicio){
-        empresasAsesoradas.remove((empresa));
-        fechasInicio.remove((fechaInicio));
     }
 
     public void agregarAreaMercadoCubierto(AreasMercado area){

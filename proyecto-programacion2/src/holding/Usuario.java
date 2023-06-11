@@ -14,6 +14,13 @@ public abstract class Usuario{
         this.direccion = direccion;
         this.pass = pass;
     }
+
+    public Usuario(){
+        codigoUsuario=Integer.MIN_VALUE;
+        nombre  = null;
+        direccion = null;
+        pass = null;
+    }
     public abstract void proceder(BaseDatosHolding bd);
 
     public boolean validarNombre(String nombre){
@@ -33,5 +40,17 @@ public abstract class Usuario{
 
     public int getCodigoUsuario() {
         return codigoUsuario;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 }

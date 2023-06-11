@@ -24,7 +24,4 @@ public class VinculacionEmpresaAsesor {
         return a == asesor;
     }
 
-    public VinculacionEmpresaAsesor getInstance(){
-        return this;
-    }
 }

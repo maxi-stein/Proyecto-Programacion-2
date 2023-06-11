@@ -17,6 +17,10 @@ public class Vendedor extends Usuario {
         vendedoresCaptados = new ArrayList<>();
     }
 
+    public Vendedor(){
+        super();
+    }
+
     public void captarVendedor(Vendedor vendedor){
         vendedoresCaptados.add(vendedor);
     }
@@ -24,8 +28,9 @@ public class Vendedor extends Usuario {
         return vendedoresCaptados.size();
     }
     @Override
-    public void proceder() {
-
+    public void proceder(BaseDatosHolding bd) {
+        MenuPrincipalVendedor mp = new MenuPrincipalVendedor();
+        mp.ejecutar(bd);
     }
 
     @Override
@@ -53,5 +58,14 @@ public class Vendedor extends Usuario {
                 System.out.println(v.toString());
             }
         }
+    }
+
+    public void setEmpresaTrabajo(Empresa empresaTrabajo) {
+        this.empresaTrabajo = empresaTrabajo;
+    }
+
+
+    public Empresa getEmpresaTrabajo() {
+        return empresaTrabajo;
     }
 }
