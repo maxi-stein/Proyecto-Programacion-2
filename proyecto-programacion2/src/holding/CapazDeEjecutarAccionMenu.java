@@ -2,5 +2,5 @@ package holding;
 
 public interface CapazDeEjecutarAccionMenu {
 
-    void ejecutar();
+    void ejecutar(BaseDatosHolding bd);
 }
