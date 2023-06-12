@@ -1,15 +1,17 @@
 package holding;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Asesor extends Usuario{
     private String titulacion;
-    private ArrayList<AreasMercado> mercadosCubiertos;
+    private HashMap<Integer,AreasMercado> mercadosCubiertos;
+    private int cantidadMercadosCubiertos;
 
     public Asesor(String nombre, String direccion, String pass, String titulacion) {
         super(nombre, direccion, pass);
         this.titulacion = titulacion;
-        mercadosCubiertos = new ArrayList<>();
+        mercadosCubiertos = new HashMap<>();
+        cantidadMercadosCubiertos = 0;
     }
     public Asesor(){
         super();
@@ -29,18 +31,40 @@ public class Asesor extends Usuario{
         }
         else {
             System.out.println("AREAS:");
-            for (AreasMercado area : mercadosCubiertos) {
-                //System.out.println(area.name() + " - " + area.getDescripcion());
+            for (int i=0;i<mercadosCubiertos.size();i++){
+                System.out.println(i+" - "+mercadosCubiertos.get(i));
             }
             System.out.println();
         }
     }
 
     public void agregarAreaMercadoCubierto(AreasMercado area){
-        mercadosCubiertos.add((area));
+        mercadosCubiertos.put(cantidadMercadosCubiertos,area);
+        cantidadMercadosCubiertos++;
     }
 
-    public void eliminarAreaMercadoCubierto(AreasMercado area){
-        mercadosCubiertos.remove((area));
+    public void eliminarAreaMercadoCubierto(int keyArea){
+        mercadosCubiertos.remove(keyArea);
+    }
+
+    public void setTitulacion(String titulacion) {
+        this.titulacion = titulacion;
+    }
+
+    public boolean asesoraElArea(AreasMercado area){
+        boolean contiene =false;
+        for(int i=0;i<mercadosCubiertos.size();i++){
+            if(mercadosCubiertos.get(i) == area){
+                contiene = true;
+            }
+        }
+        return contiene;
+    }
+
+    public HashMap<Integer,AreasMercado> listarAreasMercadoCubiertas(){
+        for(int i=0;i<mercadosCubiertos.size();i++){
+            System.out.println(i+" - "+mercadosCubiertos.get(i));
+        }
+        return mercadosCubiertos;
     }
 }

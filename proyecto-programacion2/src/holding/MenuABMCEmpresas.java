@@ -9,7 +9,7 @@ public class MenuABMCEmpresas extends MenuSuper{
         agregarAccion(3,new MenuEliminarUsuario());
     }
     @Override
-    public void ejecutar() {
+    public void ejecutar(BaseDatosHolding bd) {
         int opcion = 0;
         while (opcion>5 || opcion<1) {
             System.out.printf("1-Crear Usuario \t2-Modificar Usuario \t3-Eliminar Usuario" +
@@ -17,12 +17,12 @@ public class MenuABMCEmpresas extends MenuSuper{
             opcion = Consola.leerEntero();
         }
         if(opcion!=5){
-            ejecutarAccion(opcion);
+            ejecutarAccion(opcion,bd);
         }
     }
 
-    public void ejecutarAccion(int key){
-        getAccion(key).ejecutar();
+    public void ejecutarAccion(int key,BaseDatosHolding bd){
+        getAccion(key).ejecutar(bd);
     }
 }
 

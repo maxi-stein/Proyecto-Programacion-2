@@ -23,9 +23,11 @@ public class BaseDatosHolding{
         users.put(123,new Admin("abc","Calle Falsa","123"));
         //empresas.add(new Empresa("Terrabusi", LocalDate.now(),100));
         //usuarios.add(new Vendedor("Maxi","Calle Verdadera","321",LocalDate.now(),empresas.get(0)));
+        areasDeMercado = new HashMap<>();
+        ciudades = new HashMap<>();
 
     }
-    public  Usuario iniciarSesion(){
+    public Usuario iniciarSesion(){
         Usuario usuarioIN = null;
         int intentos = 0;
         while(usuarioIN == null && intentos < 3 ) {
@@ -104,33 +106,13 @@ public class BaseDatosHolding{
     public void agregarAsesorAEmpresa(Integer keyEmpresa, Asesor a, LocalDate fechaInicio){
         empresas.get(keyEmpresa).agregarAsesor(a,fechaInicio);
     }
-    public HashMap<Integer,Usuario> listarUsuarios(Admin adminBuscado){
-        HashMap usuariosAListar = new HashMap();
-        for(int i=0;i< users.size();i++){
-            if(users.get(i) instanceof Admin){
-                usuariosAListar.put(i,users.get(i));
-                System.out.println(i+" - "+users.get(i).toString());
-            }
-        }
-        return usuariosAListar;
-    }
-    public HashMap<Integer,Usuario> listarUsuarios(Vendedor vendedorBuscado){
-        HashMap usuariosAListar = new HashMap();
-        for(int i=0;i< users.size();i++){
-            if(users.get(i) instanceof Vendedor){
-                usuariosAListar.put(i,users.get(i));
-                System.out.println(i+" - "+users.get(i).toString());
-            }
-        }
-        return usuariosAListar;
-    }
-
-    public HashMap<Integer,Usuario> listarUsuarios(Asesor asesorBuscado){
-        HashMap usuariosAListar = new HashMap();
-        for(int i=0;i< users.size();i++){
-            if(users.get(i) instanceof Asesor){
-                usuariosAListar.put(i,users.get(i));
-                System.out.println(i+" - "+users.get(i).toString());
+    public HashMap<Integer, Usuario> listarUsuarios(Usuario usuarioBuscado) {
+        HashMap<Integer, Usuario> usuariosAListar = new HashMap<>();
+        for (int i = 0; i < users.size(); i++) {
+            Usuario usuario = users.get(i);
+            if (usuario.getClass().equals(usuarioBuscado.getClass())) {
+                usuariosAListar.put(i, usuario);
+                System.out.println(i + " - " + usuario.toString());
             }
         }
         return usuariosAListar;
