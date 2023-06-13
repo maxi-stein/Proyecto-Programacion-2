@@ -121,4 +121,7 @@ public class BaseDatosHolding{
     public Empresa getEmpresa(int keyEmpresa){
         return empresas.get(keyEmpresa);
     }
+    public boolean usuarioAsesoraAEmpresa(Asesor a,Empresa e){
+        return e.esAsesoradoPor(a);
+    }
 }

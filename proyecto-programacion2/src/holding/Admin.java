@@ -7,7 +7,6 @@ public class Admin extends Usuario {
     public Admin(){
         super();
     }
-
     @Override
     public void proceder(BaseDatosHolding bd) {
         MenuPrincipalAdmin mp = new MenuPrincipalAdmin();
@@ -21,5 +20,4 @@ public class Admin extends Usuario {
     public void agregarUsuario(Usuario u,BaseDatosHolding bd){
         bd.agregarUsuario(u);
     }
-
 }

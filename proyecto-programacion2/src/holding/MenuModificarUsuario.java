@@ -133,6 +133,10 @@ public class MenuModificarUsuario implements CapazDeEjecutarAccionMenu{
         while(opcion<1 || opcion>9){
             opcion = Consola.leerEntero();
         }
+
+        HashMap<Integer,Empresa> empresas = bd.listarEmpresas();
+        int keyEmpresa = 0;
+
         System.out.println("Ingrese el registro: ");
         switch (opcion){
             case 1:
@@ -175,11 +179,31 @@ public class MenuModificarUsuario implements CapazDeEjecutarAccionMenu{
                 asesorAModificar.eliminarAreaMercadoCubierto(keyAreaCubierta);
                 break;
             case 7:
-
+                do {
+                    keyEmpresa = Consola.leerEntero();
+                } while (keyEmpresa < 0 || keyEmpresa > empresas.size());
+                if(bd.usuarioAsesoraAEmpresa(asesorAModificar,empresas.get(keyEmpresa))){
+                    System.out.println("El usuario ya asesora dicha empresa!");
+                }
+                else{
+                    System.out.println("Ingrese la fecha de inicio dd/mm/aaaa:");
+                    empresas.get(keyEmpresa).agregarAsesor(asesorAModificar,Consola.leerFecha());
+                }
+                break;
+            case 8:
+                do {
+                    keyEmpresa = Consola.leerEntero();
+                } while (keyEmpresa < 0 || keyEmpresa > empresas.size());
+                if(!bd.usuarioAsesoraAEmpresa(asesorAModificar,empresas.get(keyEmpresa))){
+                    empresas.get(keyEmpresa).eliminarAsesor(asesorAModificar);
+                    System.out.println("El asesor " + asesorAModificar.toString() + " se desvinculo exitosamente de la empresa " +
+                            empresas.get(keyEmpresa).getNombre());
+                }
+            default:
                 break;
         }
     }
-    public void listarTiposDeUsuario(){
+    private void listarTiposDeUsuario(){
         for (Map.Entry<Integer, Usuario> user : usuarios.entrySet()) {
             Integer key = user.getKey();
             Usuario value = user.getValue();

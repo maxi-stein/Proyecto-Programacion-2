@@ -32,7 +32,6 @@ public class Vendedor extends Usuario {
         MenuPrincipalVendedor mp = new MenuPrincipalVendedor();
         mp.ejecutar(bd);
     }
-
     @Override
     public String toString() {
         return "Vendedor{" +

@@ -21,6 +21,7 @@ public class Asesor extends Usuario{
         MenuPrincipalAsesor mpa = new MenuPrincipalAsesor();
         mpa.ejecutar(bd);
     }
+
     public void listarEmpresas(){
         System.out.println("Implementar codigo de listado de empresas. Se debe acceder al hashmap de empresas de basededatos, luego al arraylist de VinculacionEmpresa asesor" +
                 "y verificar si dicho asesor esta dentro o no. Si nolo esta, se avanza a la siguiente empresa y asi sucesivamente...");

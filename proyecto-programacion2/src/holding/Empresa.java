@@ -86,17 +86,14 @@ public class Empresa{
     }
 
     public void eliminarAsesor(Asesor a) {
-        int flag=0;
-        for(int i=0;i<asesores.size();i++){
+        int flag=0,i=0;
+        while(i<asesores.size() && flag==0){
             if(asesores.get(i).contiene(a)) {
-                asesores.remove(asesores.get(i));
+                asesores.remove(i);
                 flag=1;
             }
+            i++;
         }
-        if(flag ==0 ) {
-            throw new RuntimeException("El asesor ya se encuentra vinculado a la empresa");
-        }
-
     }
 
     public void agregarAreaMercado(AreasMercado a){
@@ -139,5 +136,19 @@ public class Empresa{
         this.eliminarVendedor(v);
         bd.getEmpresa(keyEmpresa).agregarVendedor(v);
     }
+
+    public boolean esAsesoradoPor(Asesor a){
+        boolean contiene = false;
+        int i=0;
+        while(i<asesores.size() && !contiene){
+            if(asesores.get(i).contiene(a)){
+                contiene = true;
+            }
+            i++;
+        }
+        return contiene;
+    }
+
+
 
 }
