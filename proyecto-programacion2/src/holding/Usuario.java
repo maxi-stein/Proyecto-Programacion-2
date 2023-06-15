@@ -57,12 +57,8 @@ public abstract class Usuario{
         this.pass = pass;
     }
 
-    public void eliminar(){
-        this.bloqueado = true;
-    }
-
-    public void desbloquear(){
-        this.bloqueado = false;
+    public void setBloqueo(boolean valor){
+        this.bloqueado = valor;
     }
 
     public boolean estaBloqueado(){

@@ -20,9 +20,10 @@ public class BaseDatosHolding{
         empresas = new HashMap<>();
 
         //usuarios.add(new Admin("abc","Calle Falsa","123"));
-        users.put(123,new Admin("abc","Calle Falsa","123"));
-        //empresas.add(new Empresa("Terrabusi", LocalDate.now(),100));
-        //usuarios.add(new Vendedor("Maxi","Calle Verdadera","321",LocalDate.now(),empresas.get(0)));
+        users.put(1,new Admin("abc","Calle Falsa","123"));
+        empresas.put(1, new Empresa("Terrabusi", LocalDate.now(),100));
+        users.put(2, new Vendedor("Maxi","Calle Verdadera","321",LocalDate.now(),empresas.get(0)));
+        users.put(3, new Asesor("Asesor","direc","123","Profesional"));
         areasDeMercado = new HashMap<>();
         ciudades = new HashMap<>();
 

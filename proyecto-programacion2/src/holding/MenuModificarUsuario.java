@@ -12,6 +12,7 @@ public class MenuModificarUsuario implements CapazDeEjecutarAccionMenu{
         usuarios.put(2,new Vendedor());
         usuarios.put(3,new Asesor());
         System.out.println("Elija el tipo de usuario a modificar");
+
         listarTiposDeUsuario();
         int key = 1;
         do{

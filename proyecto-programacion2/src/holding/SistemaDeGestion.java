@@ -8,6 +8,7 @@ public class SistemaDeGestion {
     public SistemaDeGestion(){
         bd = new BaseDatosHolding();
 
+
     }
     public void run(){
         int num;

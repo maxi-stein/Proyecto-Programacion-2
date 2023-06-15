@@ -7,23 +7,32 @@ public class MenuEliminarUsuario implements CapazDeEjecutarAccionMenu{
     private Admin adminTemporal;
     @Override
     public void ejecutar(BaseDatosHolding bd) {
-        adminTemporal = new Admin();
+
         usuarios = new HashMap<>();
         usuarios.put(1, new Admin());
         usuarios.put(2, new Vendedor());
         usuarios.put(3, new Asesor());
-        eleccionTipoDeUsuario(bd);
+        int key = eleccionTipoDeUsuario();
+        eleccionDeUsuario(key, bd);
+
     }
 
-    private void eleccionTipoDeUsuario(BaseDatosHolding bd){
-        System.out.println("Elija el tipo de usuario a crear");
+    private int eleccionTipoDeUsuario(){
+        System.out.println("Elija el tipo de usuario a eliminar");
         listarTiposDeUsuario();
-        Integer key = 1;
+
+        int key = 1;
         do{
             key = Consola.leerEntero();
         }while (key<1 || key>usuarios.size());
-        eliminarUsuario(bd,usuarios.get(key));
+        return key;
+    }
 
+    private int eleccionDeUsuario(int key, BaseDatosHolding bd){
+        //switch (key)
+        //case 1:
+        //    bd.listarUsuarios(Admin );
+            return 1;
     }
     public void listarTiposDeUsuario(){
         for(int i=1;i<=usuarios.size();i++){
