@@ -1,11 +1,9 @@
 package holding;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class MenuModificarUsuario implements CapazDeEjecutarAccionMenu{
     private HashMap<Integer,Usuario> usuarios;
-
     @Override
     public void ejecutar(BaseDatosHolding bd) {
         Admin adminTemporal = new Admin();
@@ -15,7 +13,7 @@ public class MenuModificarUsuario implements CapazDeEjecutarAccionMenu{
         usuarios.put(3,new Asesor());
         System.out.println("Elija el tipo de usuario a modificar");
         listarTiposDeUsuario();
-        Integer key = 1;
+        int key = 1;
         do{
             key = Consola.leerEntero();
         }while (key<1 || key>usuarios.size());
@@ -33,7 +31,7 @@ public class MenuModificarUsuario implements CapazDeEjecutarAccionMenu{
     public void modificarAdmin(BaseDatosHolding bd){
         System.out.println("Elija el admin a modificar");
         HashMap<Integer,Usuario> adminsDelSistema = bd.listarUsuarios(new Admin());
-        Integer keyAdmin = 0;
+        int keyAdmin = 0;
         do {
             keyAdmin = Consola.leerEntero();
             if(!adminsDelSistema.containsKey(keyAdmin)){
@@ -68,7 +66,7 @@ public class MenuModificarUsuario implements CapazDeEjecutarAccionMenu{
         //seleccionar el vendedor
         System.out.println("Elija el Vendedor a modificar");
         HashMap<Integer,Usuario> vendedoresDelSistema = bd.listarUsuarios(new Vendedor());
-        Integer keyVendedor = 0;
+        int keyVendedor = 0;
         do {
             keyVendedor = Consola.leerEntero();
             if(!vendedoresDelSistema.containsKey(keyVendedor)){
@@ -100,7 +98,7 @@ public class MenuModificarUsuario implements CapazDeEjecutarAccionMenu{
             case 4:
                 System.out.println("Elija la empresa a la cual cambiar: ");
                 HashMap<Integer,Empresa> empresas = bd.listarEmpresas();
-                Integer keyEmpresa = 0;
+                int keyEmpresa = 0;
                 do {
                     keyEmpresa = Consola.leerEntero();
                 } while (keyEmpresa < 0 || keyEmpresa > empresas.size());
@@ -115,7 +113,7 @@ public class MenuModificarUsuario implements CapazDeEjecutarAccionMenu{
         //seleccionar el asesor
         System.out.println("Elija el Asesor a modificar");
         HashMap<Integer,Usuario> asesoresDelSistema = bd.listarUsuarios(new Asesor());
-        Integer keyAsesor = 0;
+        int keyAsesor = 0;
         do {
             keyAsesor = Consola.leerEntero();
             if(!asesoresDelSistema.containsKey(keyAsesor)){
@@ -157,7 +155,7 @@ public class MenuModificarUsuario implements CapazDeEjecutarAccionMenu{
                 break;
             case 5:
                 HashMap <Integer,AreasMercado> areas = bd.listarAreasDeMercado();
-                Integer keyArea = 0;
+                int keyArea = 0;
                 do {
                     keyArea = Consola.leerEntero();
                 } while (keyArea < 0 || keyArea > areas.size());
@@ -172,7 +170,7 @@ public class MenuModificarUsuario implements CapazDeEjecutarAccionMenu{
                 break;
             case 6:
                 HashMap<Integer,AreasMercado> areasCubiertas = asesorAModificar.listarAreasMercadoCubiertas();
-                Integer keyAreaCubierta = 0;
+                int keyAreaCubierta = 0;
                 do {
                     keyArea = Consola.leerEntero();
                 } while (keyArea < 0 || keyArea > areasCubiertas.size());
@@ -203,11 +201,12 @@ public class MenuModificarUsuario implements CapazDeEjecutarAccionMenu{
                 break;
         }
     }
-    private void listarTiposDeUsuario(){
-        for (Map.Entry<Integer, Usuario> user : usuarios.entrySet()) {
-            Integer key = user.getKey();
-            Usuario value = user.getValue();
-            System.out.println(key + " " + value + '\n');
+    public void listarTiposDeUsuario(){
+        for(int i=1;i<=usuarios.size();i++){
+            if(usuarios.get(i) != null){
+                System.out.println(i+" - "+ usuarios.get(i).getClass().getSimpleName());
+            }
+
         }
     }
 }

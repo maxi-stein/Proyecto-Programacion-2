@@ -22,15 +22,8 @@ public class MenuEliminarUsuario implements CapazDeEjecutarAccionMenu{
         do{
             key = Consola.leerEntero();
         }while (key<1 || key>usuarios.size());
-        if(key == 1){
-            eliminarUsuario(bd);
-        }
-        else if(key == 2){
-            eliminarUsuario(bd);
-        }
-        else{
-            eliminarUsuario(bd);
-        }
+        eliminarUsuario(bd,usuarios.get(key));
+
     }
     public void listarTiposDeUsuario(){
         for(int i=1;i<=usuarios.size();i++){
@@ -38,15 +31,5 @@ public class MenuEliminarUsuario implements CapazDeEjecutarAccionMenu{
                 System.out.println(i+" - "+ usuarios.get(i).getClass().getSimpleName());
             }
         }
-    }
-
-    private void eliminarUsuario(BaseDatosHolding bd,Admin admin){
-
-    }
-    private void eliminarUsuario(BaseDatosHolding bd,Vendedor vendedor){
-
-    }
-    private void eliminarUsuario(BaseDatosHolding bd,Asesor asesor){
-
     }
 }

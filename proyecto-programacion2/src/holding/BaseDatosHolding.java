@@ -67,6 +67,7 @@ public class BaseDatosHolding{
             out.writeObject(users);
             out.close();
             fileOut.close();
+            //out.writeObject(MyEnumSingleton.INSTANCE);
             System.out.println("HashMap serializado se guardó en User.txt");
         } catch (IOException e) {
             e.printStackTrace();

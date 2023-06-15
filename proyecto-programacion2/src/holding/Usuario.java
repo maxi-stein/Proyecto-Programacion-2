@@ -6,6 +6,7 @@ public abstract class Usuario{
     private String nombre;
     private String direccion;
     private String pass;
+    private Boolean bloqueado;
 
     public Usuario( String nombre, String direccion, String pass) {
         CONTADOR++;
@@ -13,6 +14,8 @@ public abstract class Usuario{
         this.nombre = nombre;
         this.direccion = direccion;
         this.pass = pass;
+        this.bloqueado = false;
+
     }
 
     public Usuario(){
@@ -52,5 +55,17 @@ public abstract class Usuario{
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public void eliminar(){
+        this.bloqueado = true;
+    }
+
+    public void desbloquear(){
+        this.bloqueado = false;
+    }
+
+    public boolean estaBloqueado(){
+        return bloqueado;
     }
 }

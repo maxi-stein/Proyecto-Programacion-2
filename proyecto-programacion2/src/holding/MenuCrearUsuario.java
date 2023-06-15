@@ -15,11 +15,10 @@ public class MenuCrearUsuario implements CapazDeEjecutarAccionMenu{
         usuarios.put(3, new Asesor());
         eleccionTipoDeUsuario(bd);
     }
-
     private void eleccionTipoDeUsuario(BaseDatosHolding bd){
         System.out.println("Elija el tipo de usuario a crear");
         listarTiposDeUsuario();
-        Integer key = 1;
+        int key = 1;
         do{
             key = Consola.leerEntero();
         }while (key<1 || key>usuarios.size());
@@ -33,7 +32,6 @@ public class MenuCrearUsuario implements CapazDeEjecutarAccionMenu{
             crearAsesor(bd);
         }
     }
-
     public void crearAdmin(BaseDatosHolding bd){
         System.out.println("Ingrese el nombre: ");
         String nombre = Consola.leerString();
