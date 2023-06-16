@@ -112,7 +112,6 @@ public class Empresa{
         }
         areasMercado.remove(a);
     }
-
     public void agregarVendedor(Vendedor v)
     {
         if(vendedores.contains(v)){
@@ -121,7 +120,6 @@ public class Empresa{
 
         vendedores.add(v);
     }
-
     public void eliminarVendedor(Vendedor v){
         if(!vendedores.contains(v)){
             throw new RuntimeException("Vendedor no encontrado.");
@@ -131,12 +129,11 @@ public class Empresa{
     public Boolean areaCompatible(AreasMercado a){
         return areasMercado.contains(a);
     }
-
-    public void traspasoDeVendedor(Vendedor v,int keyEmpresa,BaseDatosHolding bd){
-        this.eliminarVendedor(v);
-        bd.getEmpresa(keyEmpresa).agregarVendedor(v);
+    public void traspasoDeVendedor(Vendedor v){
+        BaseDeDatosSingleton bd = BaseDeDatosSingleton.getInstance();
+        eliminarVendedor(v);
+        agregarVendedorAEmpresa(v);
     }
-
     public boolean esAsesoradoPor(Asesor a){
         boolean contiene = false;
         int i=0;
@@ -149,6 +146,9 @@ public class Empresa{
         return contiene;
     }
 
-
-
+    private void agregarVendedorAEmpresa(Vendedor v){
+        vendedores.add(v);
+        v.setEmpresaTrabajo(this); //actualizo la nueva empresa de trabajo
+        v.getEmpresaTrabajo().eliminarVendedor(v); //elimino el vendedor de la empresa de trabajo vieja
+    }
 }
