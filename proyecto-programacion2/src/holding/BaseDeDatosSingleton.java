@@ -99,4 +99,22 @@ public class BaseDeDatosSingleton {
     public static boolean usuarioAsesoraAEmpresa(Asesor a,Empresa e){
         return e.esAsesoradoPor(a);
     }
+    public static void listarVendedores(){
+        for (int i = 0; i < usuarios.size(); i++) {
+            Usuario usuario = usuarios.get(i);
+            if(!usuario.estaBloqueado() && usuario instanceof Vendedor){
+                System.out.println(i + " - " + usuario.toString());
+            }
+        }
+    }
+    public static HashMap<Integer,Vendedor> obtenerVendedores(){
+        HashMap<Integer,Vendedor> vendedores = new HashMap<>();
+        for (int i = 0; i < usuarios.size(); i++) {
+            Usuario usuario = usuarios.get(i);
+            if(!usuario.estaBloqueado() && usuario instanceof Vendedor){
+                vendedores.put(i,(Vendedor) usuario);
+            }
+        }
+        return vendedores;
+    }
 }

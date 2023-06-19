@@ -45,10 +45,6 @@ public class Vendedor extends Usuario {
         System.out.println(empresaTrabajo.displayInfo());
     }
 
-    public void mostrarCantVendCaptados(){
-        System.out.println("La cantidad de vendedores captados es: "+contadorVendedoresCapt());
-    }
-
     private void listarVendedoresCaptados(){
         if(vendedoresCaptados.size()==0){
             System.out.println("Aun no posee vendedores captados");
