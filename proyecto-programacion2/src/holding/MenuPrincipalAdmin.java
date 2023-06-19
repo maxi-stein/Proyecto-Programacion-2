@@ -17,7 +17,7 @@ public class MenuPrincipalAdmin extends MenuSuper {
         while (opcion>6 || opcion<1) {
             System.out.printf("1-Mostrar datos del Administrador \t2-ABCM Usuarios" +
                     "\n3-ABCM Empresas \t4-ABCM Areas de Mercado "+
-                    "\n5-ABCM Ciudad/Pais \t6-Salir");
+                    "\n5-ABCM Ciudad/Pais \t6-Salir \n");
             opcion = Consola.leerEntero();
         }
         if(opcion!=6){

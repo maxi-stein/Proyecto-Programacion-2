@@ -20,6 +20,8 @@ public class Vendedor extends Usuario {
 
     public Vendedor(){
         super();
+        this.fechaCaptado = LocalDate.now();
+        vendedoresCaptados = new ArrayList<>();
     }
 
     public void captarVendedor(Vendedor vendedor){

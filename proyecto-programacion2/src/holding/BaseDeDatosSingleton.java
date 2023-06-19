@@ -36,12 +36,10 @@ public class BaseDeDatosSingleton {
         int intentos = 0;
         while(usuarioIN == null && intentos < 3 ) {
             intentos ++;
-
-            System.out.println("Numero de Usuario:");
+            System.out.println("Codigo de Usuario:");
             int user = Consola.leerEntero();
             System.out.println("Contraseña:");
             String pass = Consola.leerString();
-
             try{
                 usuarioIN =  autenticarUsuario(user,pass);
             }catch (NullPointerException e) {
@@ -72,10 +70,8 @@ public class BaseDeDatosSingleton {
         usuarios.get(key).setBloqueo(true);
     }
     public static HashMap<Integer,Empresa> listarEmpresas(){
-        for (Map.Entry<Integer, Empresa> empresa : empresas.entrySet()) {
-            Integer key = empresa.getKey();
-            Empresa value = empresa.getValue();
-            System.out.println(key + " " + value + '\n');
+        for(int i=0;i<empresas.size();i++){
+            System.out.println(i+" - "+empresas.get(i).getNombre());
         }
         return empresas;
     }

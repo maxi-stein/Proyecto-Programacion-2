@@ -20,41 +20,43 @@ public class FactoryUsuarios {
         }
     }
     private static void crearAdmin(){
-        String nombre = null,direccion = null,pass = null;
-        pedirDatosBasicos(nombre,direccion,pass);
-        bd.agregarUsuario(new Admin(nombre,direccion,pass));
+        Admin a = new Admin();
+        a.pedirDatosBasicos();
+        a.mostrarCredenciales();
+        bd.agregarUsuario(a);
     }
     private static void crearVendedor(){
-        String nombre = null,direccion = null,pass = null;
-        pedirDatosBasicos(nombre,direccion,pass);
-        System.out.println("Elija la empresa en la que trabaja: ");
+        Vendedor v = new Vendedor();
+        v.pedirDatosBasicos();
+        System.out.println("Seleccione la empresa en la que trabaja: ");
         HashMap<Integer, Empresa> empresas = bd.listarEmpresas();
         Integer key = 0;
         do {
             key = Consola.leerEntero();
         } while (key < 0 || key > empresas.size());
-        Vendedor v = new Vendedor(nombre, direccion, pass, LocalDate.now(), empresas.get(key));
+        v.setEmpresaTrabajo(empresas.get(key));
         v.mostrarCredenciales();
         bd.agregarUsuario(v);
     }
     private static void crearAsesor(){
-        String nombre = null,direccion = null,pass = null;
-        pedirDatosBasicos(nombre,direccion,pass);
+        Asesor asesor = new Asesor();
+        asesor.pedirDatosBasicos();
         System.out.println("Ingrese la titulacion");
         String titulacion = Consola.leerString();
+        asesor.setTitulacion(titulacion);
+
         System.out.println("Elija el area de mercado que asesora");
         HashMap <Integer,AreasMercado> areas = bd.listarAreasDeMercado();
         Integer keyArea = 0;
         do {
             keyArea = Consola.leerEntero();
         } while (keyArea < 0 || keyArea > areas.size());
-        Asesor asesor = new Asesor(nombre,direccion,pass,titulacion);
 
         //se agrega el area de mercado cubierta
         asesor.agregarAreaMercadoCubierto(areas.get(keyArea));
 
         //se agrega la empresa para la que trabaja y se establece VinculacionAsesorEmpresa
-        System.out.println("Elija la empresa que asesora: ");
+        System.out.println("Seleccione la empresa que asesora: ");
         HashMap<Integer, Empresa> empresas = bd.listarEmpresas();
         int keyEmpresa = 0;
         boolean compatible;
@@ -67,15 +69,15 @@ public class FactoryUsuarios {
         } while (keyEmpresa < 0 || keyEmpresa > empresas.size() || !compatible);
         System.out.println("Ingresa la fecha de inicio (dd/mm/aaaa): ");
         LocalDate fechaInicio = Consola.leerFecha();
-
+        asesor.mostrarCredenciales();
         bd.agregarAsesorAEmpresa(keyEmpresa,asesor,fechaInicio);//se agrega el asesor a la empresa
         bd.agregarUsuario(asesor);//se agrega el asesor a la base de datos de usuarios
     }
 
     private static void crearVendedorCaptado(){
         HashMap<Integer,Vendedor> vendedores = null;
-        String nombre = null,direccion = null,pass = null;
-        pedirDatosBasicos(nombre,direccion,pass);
+        Vendedor vendedorCaptado = new Vendedor();
+        vendedorCaptado.pedirDatosBasicos();
         System.out.println("Determine el vendedor maestro: ");
         bd.listarVendedores();
         vendedores = bd.obtenerVendedores();
@@ -85,16 +87,10 @@ public class FactoryUsuarios {
             opcion = Consola.leerEntero();
         }
         Vendedor vendedorMaestro = vendedores.get(opcion);
-        Vendedor vendedorCaptado = new Vendedor(nombre,direccion,pass,LocalDate.now(),vendedorMaestro.getEmpresaTrabajo());
-        bd.agregarUsuario(vendedorCaptado);
-        vendedorMaestro.captarVendedor(vendedorCaptado);
+        vendedorCaptado.setEmpresaTrabajo(vendedorMaestro.getEmpresaTrabajo());
+        vendedorCaptado.mostrarCredenciales();
+        bd.agregarUsuario(vendedorCaptado); //se agrega el vendedor a la base de datos
+        vendedorMaestro.captarVendedor(vendedorCaptado); //se asocia el vendedor captado con su vendedor maestro
     }
-    private static void pedirDatosBasicos(String nombre,String direccion,String pass){
-        System.out.println("Ingrese el nombre: ");
-        nombre = Consola.leerString();
-        System.out.println("Ingrese la direccion: ");
-        direccion = Consola.leerString();
-        System.out.println("Ingrese la contrasenia: ");
-        pass = Consola.leerString();
-    }
+
 }

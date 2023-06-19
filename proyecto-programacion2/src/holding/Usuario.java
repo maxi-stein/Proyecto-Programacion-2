@@ -9,8 +9,8 @@ public abstract class Usuario{
     private Boolean bloqueado;
 
     public Usuario( String nombre, String direccion, String pass) {
-        CONTADOR++;
         this.codigoUsuario = CONTADOR;
+        CONTADOR++;
         this.nombre = nombre;
         this.direccion = direccion;
         this.pass = pass;
@@ -18,11 +18,8 @@ public abstract class Usuario{
 
     }
     public Usuario(){
+        codigoUsuario=CONTADOR;
         CONTADOR++;
-        codigoUsuario=Integer.MIN_VALUE;
-        nombre  = null;
-        direccion = null;
-        pass = null;
     }
     public abstract void proceder();
     public void modificar(){
@@ -37,6 +34,7 @@ public abstract class Usuario{
     }
     public void mostrarCredenciales(){
         System.out.println("Código Usuario: "+ codigoUsuario);
+        System.out.println("Nombre y direc: " +nombre + direccion );
         System.out.println("Contraseña: "+ pass);
     }
     @Override
@@ -70,5 +68,13 @@ public abstract class Usuario{
 
     public String getNombre() {
         return nombre;
+    }
+    public void pedirDatosBasicos(){
+        System.out.println("Ingrese el nombre: ");
+        this.nombre = Consola.leerString();
+        System.out.println("Ingrese la direccion: ");
+        this.direccion = Consola.leerString();
+        System.out.println("Ingrese la contrasenia: ");
+        this.pass = Consola.leerString();
     }
 }

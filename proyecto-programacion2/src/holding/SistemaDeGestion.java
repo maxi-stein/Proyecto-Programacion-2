@@ -3,7 +3,6 @@ package holding;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class SistemaDeGestion implements Serializable {
 
@@ -26,18 +25,15 @@ public class SistemaDeGestion implements Serializable {
             if (num == 1) {
                 BaseDeDatosSingleton bd = BaseDeDatosSingleton.getInstance();
                 Usuario loggedInUsuario = bd.iniciarSesion();
-                if(Objects.nonNull(loggedInUsuario)){
+                if(loggedInUsuario != null){
                     loggedInUsuario.proceder();
                 }
-                num = mostrarMenu();
             }
         }while(num!=2);
 
     }
     public int mostrarMenu(){
-        System.out.print("1-Iniciar Sesion \n2-Salir del Sistema \n-");
-        System.out.println();
+        System.out.print("1-Iniciar Sesion \n2-Salir del Sistema\n");
         return Consola.leerEntero();
-
     }
 }
