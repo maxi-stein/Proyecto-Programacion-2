@@ -2,7 +2,7 @@ package menues;
 
 import holding.Consola;
 
-public class MenuABMCUsuarios extends MenuSuper{
+public class MenuABMCUsuarios extends Menu {
 
     public MenuABMCUsuarios(){
         super();
@@ -24,7 +24,7 @@ public class MenuABMCUsuarios extends MenuSuper{
         }
     }
 
-    public void ejecutarAccion(int key){
+    private void ejecutarAccion(int key){
         getAccion(key).ejecutar();
     }
 

@@ -2,14 +2,14 @@ package menues;
 
 import holding.Consola;
 
-public class MenuABMCEmpresas extends MenuSuper{
+public class MenuABMCEmpresas extends Menu {
 
-    /*public MenuABMCEmpresas(){
+    public MenuABMCEmpresas(){
         super();
         agregarAccion(1,new MenuCrearEmpresa());
         agregarAccion(2,new MenuModificarEmpresa());
         agregarAccion(3,new MenuEliminarEmpresa());
-    }*/
+    }
     @Override
     public void ejecutar() {
         int opcion = 0;
@@ -23,7 +23,7 @@ public class MenuABMCEmpresas extends MenuSuper{
         }
     }
 
-    public void ejecutarAccion(int key){
+    private void ejecutarAccion(int key){
         getAccion(key).ejecutar();
     }
 }

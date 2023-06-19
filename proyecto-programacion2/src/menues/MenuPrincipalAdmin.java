@@ -2,7 +2,7 @@ package menues;
 
 import holding.Consola;
 
-public class MenuPrincipalAdmin extends MenuSuper {
+public class MenuPrincipalAdmin extends Menu {
 
 
     public MenuPrincipalAdmin() {

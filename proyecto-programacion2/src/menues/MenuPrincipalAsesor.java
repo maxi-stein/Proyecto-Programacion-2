@@ -1,6 +1,6 @@
 package menues;
 
-public class MenuPrincipalAsesor extends MenuSuper {
+public class MenuPrincipalAsesor extends Menu {
 
     @Override
     public void ejecutar() {
