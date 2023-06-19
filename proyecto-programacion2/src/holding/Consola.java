@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.time.LocalDate;
 
@@ -17,8 +18,16 @@ public class Consola {
     }
 
     public static int leerEntero(){
-        String lectura = sc.nextLine();
-        return Integer.parseInt(lectura);
+        Integer lectura = null;
+        while (lectura == null){
+            try{
+                lectura = sc.nextInt();
+            }
+            catch (InputMismatchException ime){
+                System.out.println("Ingrese un valor correcto!");
+            }
+        }
+        return lectura;
     }
 
     public static LocalDate leerFecha() {
@@ -35,5 +44,17 @@ public class Consola {
             }
         }
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+    public static double leerDouble(){
+        Double lectura = null;
+        while (lectura == null){
+            try{
+                lectura = sc.nextDouble();
+            }
+            catch (InputMismatchException ime){
+                System.out.println("Ingrese un valor correcto!");
+            }
+        }
+        return lectura;
     }
 }
