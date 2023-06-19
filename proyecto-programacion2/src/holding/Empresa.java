@@ -172,4 +172,8 @@ public class Empresa implements CapazDeSerBloqueado{
     public void setSede(Ciudad sede) {
         this.sede = sede;
     }
+
+    public int getCodigoEmpresa() {
+        return codigoEmpresa;
+    }
 }

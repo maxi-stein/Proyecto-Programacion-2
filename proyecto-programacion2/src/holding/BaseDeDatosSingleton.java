@@ -23,11 +23,13 @@ public class BaseDeDatosSingleton {
     public static void cargarDatosSerializados(HashMap<Integer,Usuario> usuarios2,
                                                HashMap<Integer,Empresa> empresas2,
                                                HashMap<Integer,AreasMercado> areasDeMercado2,
-                                               HashMap<Integer,Ciudad> ciudades2){
+                                               HashMap<Integer,Ciudad> ciudades2,
+                                               HashMap<Integer,Pais> paises2){
         usuarios = usuarios2;
         empresas = empresas2;
         areasDeMercado = areasDeMercado2;
         ciudades = ciudades2;
+        paises = paises2;
 
     }
     public static Usuario iniciarSesion(){
@@ -145,17 +147,19 @@ public class BaseDeDatosSingleton {
     public static boolean ciudadYaExiste(Ciudad c){
         boolean existe = false;
         int i=1;
-        while(!existe && i<=ciudades.size()){
-            if(ciudades.get(i).esIgual(c)){
-                existe=true;
+        if(!ciudades.isEmpty()){
+            while(!existe && i<=ciudades.size()){
+                if(ciudades.get(i).esIgual(c)){
+                    existe=true;
+                }
+                i++;
             }
-            i++;
         }
         return existe;
     }
     public static void listarCiudades(){
         for(int i=1;i<=ciudades.size();i++){
-            if(ciudades.get(i).estaBloqueado()){
+            if(!ciudades.get(i).estaBloqueado()){
                 System.out.println(i+" - "+ciudades.get(i));
             }
         }
@@ -188,5 +192,9 @@ public class BaseDeDatosSingleton {
                 System.out.println(empresas.get(i).getNombre());
             }
         }
+    }
+
+    public static void agregarEmpresa(Empresa empresaNueva){
+        empresas.put(empresaNueva.getCodigoEmpresa(), empresaNueva);
     }
 }

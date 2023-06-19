@@ -61,6 +61,8 @@ public abstract class Usuario implements CapazDeSerBloqueado{
     public void setPass(String pass) {
         this.pass = pass;
     }
+
+
     @Override
     public String toString() {
         return String.format("%s - COD:%d - %s \n",nombre,codigoUsuario,direccion);

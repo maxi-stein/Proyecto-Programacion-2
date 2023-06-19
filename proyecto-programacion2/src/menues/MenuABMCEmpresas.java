@@ -13,12 +13,12 @@ public class MenuABMCEmpresas extends Menu {
     @Override
     public void ejecutar() {
         int opcion = 0;
-        while (opcion>5 || opcion<1) {
-            System.out.printf("1-Crear Usuario \t2-Modificar Usuario \t3-Eliminar Usuario" +
-                    "\n4-Agregar Vendedor Captado \n5-Salir \n");
+        while (opcion>4 || opcion<1) {
+            System.out.printf("1-Crear Empresa \t2-Modificar Empresa" +
+                    "\n3-Eliminar Empresa \t4-Salir \n");
             opcion = Consola.leerEntero();
         }
-        if(opcion!=5){
+        if(opcion!=4){
             ejecutarAccion(opcion);
         }
     }
