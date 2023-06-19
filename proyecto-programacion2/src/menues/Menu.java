@@ -2,9 +2,9 @@ package menues;
 
 import java.util.HashMap;
 
-public abstract class MenuSuper implements CapazDeEjecutarAccionMenu {
+public abstract class Menu implements CapazDeEjecutarAccionMenu {
     private HashMap<Integer,CapazDeEjecutarAccionMenu> acciones;
-    public MenuSuper() {
+    public Menu() {
         acciones = new HashMap<>();
     }
     public void agregarAccion(int key,CapazDeEjecutarAccionMenu accion){
