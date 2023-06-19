@@ -37,6 +37,6 @@ El sistema deberá utilizar abstracción, encapsulamiento, herencia, polimorfism
 
 La E/S del sistema será exclusivamente por consola (no GUI).
 
-Se deberán subir a GitLab o GitHub el ejecutable (en formato jar), el código fuente, la documentación
+*Se deberán subir a __GitLab__ o __GitHub__ el ejecutable (en formato jar), el código fuente, la documentación
 (generada con javadoc) y los diagramas UML de caso-uso, de clases y uno de secuencia (generados con
-http://plantuml.com/es o http://www.planttext.com y grabados en formato png)
+http://plantuml.com/es o http://www.planttext.com y grabados en formato png)*
