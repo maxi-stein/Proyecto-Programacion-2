@@ -12,7 +12,7 @@ public class MenuPrincipalAdmin extends MenuSuper {
         agregarAccion(5,new MenuABMCUbicaciones());
     }
     @Override
-    public void ejecutar(BaseDatosHolding bd) {
+    public void ejecutar() {
         int opcion = 0;
         while (opcion>6 || opcion<1) {
             System.out.printf("1-Mostrar datos del Administrador \t2-ABCM Usuarios" +
@@ -21,11 +21,11 @@ public class MenuPrincipalAdmin extends MenuSuper {
             opcion = Consola.leerEntero();
         }
         if(opcion!=6){
-            ejecutarAccion(opcion,bd);
+            ejecutarAccion(opcion);
         }
     }
 
-    public void ejecutarAccion(int key,BaseDatosHolding bd){
-        getAccion(key).ejecutar(bd);
+    public void ejecutarAccion(int key){
+        getAccion(key).ejecutar();
     }
 }

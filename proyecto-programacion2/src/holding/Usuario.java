@@ -17,15 +17,18 @@ public abstract class Usuario{
         this.bloqueado = false;
 
     }
-
     public Usuario(){
+        CONTADOR++;
         codigoUsuario=Integer.MIN_VALUE;
         nombre  = null;
         direccion = null;
         pass = null;
     }
-    public abstract void proceder(BaseDatosHolding bd);
-
+    public abstract void proceder();
+    public void modificar(){
+        System.out.println("Seleccione la opcion a modificar: ");
+        System.out.println("1 - Nombre "+'\t'+"2 - Contraseña"+'\t'+"3 - Direccion");
+    }
     public boolean validarNombre(String nombre){
         return this.nombre.equals(nombre);
     }
@@ -63,5 +66,9 @@ public abstract class Usuario{
 
     public boolean estaBloqueado(){
         return bloqueado;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 }

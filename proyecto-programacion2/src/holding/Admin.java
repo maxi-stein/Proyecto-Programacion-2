@@ -8,16 +8,32 @@ public class Admin extends Usuario {
         super();
     }
     @Override
-    public void proceder(BaseDatosHolding bd) {
+    public void proceder() {
         MenuPrincipalAdmin mp = new MenuPrincipalAdmin();
-        mp.ejecutar(bd);
-    }
-    public void crearCiudad(){
-        System.out.println("Elegir el Pais origen:");
-        //implementacion faltante
+        mp.ejecutar();
     }
 
-    public void agregarUsuario(Usuario u,BaseDatosHolding bd){
-        bd.agregarUsuario(u);
+    @Override
+    public void modificar() {
+        super.modificar();
+        int opcion = 0;
+        while(opcion<1 || opcion>4){
+            opcion = Consola.leerEntero();
+        }
+        System.out.println("Ingrese el registro: ");
+        switch (opcion){
+            case 1:
+                String nombre = Consola.leerString();
+                setNombre(nombre);
+                break;
+            case 2:
+                String pass = Consola.leerString();
+                setPass(pass);
+                break;
+            case 3:
+                String direccion = Consola.leerString();
+                setDireccion(direccion);
+                break;
+        }
     }
 }
