@@ -25,6 +25,7 @@ public class MenuCrearCiudad implements CapazDeEjecutarAccionMenu{
         }
         else{
             bd.agregarCiudad(ciudad);
+            System.out.println("Se agrego la ciudad: \n"+ ciudad);
         }
     }
     private Pais seleccionarPais(HashMap<Integer, Pais> paises){

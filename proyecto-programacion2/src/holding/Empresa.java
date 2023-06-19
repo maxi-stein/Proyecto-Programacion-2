@@ -3,7 +3,7 @@ package holding;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Empresa{
+public class Empresa implements CapazDeSerBloqueado{
     private static int CONTADOR = 0;
     private int codigoEmpresa;
     private String nombre;
@@ -14,8 +14,7 @@ public class Empresa{
     private ArrayList<VinculacionEmpresaAsesor> asesores;
     private ArrayList<AreasMercado> areasMercado;
     private ArrayList<Vendedor> vendedores;
-
-
+    private boolean bloqueado;
     public Empresa(String nombre, LocalDate fechaEntrada, double facturacionAnual) {
         CONTADOR++;
         this.codigoEmpresa = CONTADOR;
@@ -27,32 +26,20 @@ public class Empresa{
         areasMercado = new ArrayList<>();
         asesores = new ArrayList<>();
         vendedores = new ArrayList<>();
+        bloqueado = false;
     }
-    @Override
-    public String toString() {
-        return "Empresa{" +
-                "nombre='" + nombre + '\'' +
-                ", fechaEntrada=" + fechaEntrada +
-                ", facturacionAnual=" + facturacionAnual +
-                ", ciudades=" + ciudades +
-                ", sede=" + sede +
-                ", asesores=" + asesores +
-                ", areasMercado=" + areasMercado +
-                ", vendedores=" + vendedores +
-                '}';
+    public void setBloqueo(boolean valor){
+        this.bloqueado = valor;
     }
-
-    public String getNombre(){
-        return nombre;
+    public boolean estaBloqueado(){
+        return bloqueado;
     }
-
     public void agregarCiudad(Ciudad c){
         if(ciudades.contains(c)){
             throw new RuntimeException("La ciudad ya se encuentra ingresada");
         }
        ciudades.add(c);
     }
-
     public void eliminarCiudad(Ciudad c){
         if(!ciudades.contains(c)){
             throw new RuntimeException("La ciudad no esta ingresada en la empresa!");
@@ -72,7 +59,6 @@ public class Empresa{
         }
         sede=c;
     }
-
     public void agregarAsesor(Asesor a,LocalDate fechaInicio){
         for(int i=0;i<asesores.size();i++){
             if(asesores.get(i).contiene(a)) {
@@ -81,7 +67,6 @@ public class Empresa{
         }
         asesores.add(new VinculacionEmpresaAsesor(a,fechaInicio));
     }
-
     public void eliminarAsesor(Asesor a) {
         int flag=0,i=0;
         while(i<asesores.size() && flag==0){
@@ -92,7 +77,6 @@ public class Empresa{
             i++;
         }
     }
-
     public void agregarAreaMercado(AreasMercado a){
         if(areasMercado.contains(a))
         {
@@ -100,7 +84,6 @@ public class Empresa{
         }
         areasMercado.add(a);
     }
-
     public void eliminarAreaMercado(AreasMercado a)
     {
         if(!areasMercado.contains(a))
@@ -114,7 +97,6 @@ public class Empresa{
         if(vendedores.contains(v)){
             throw new RuntimeException("El vendedor ya se encuentra asociado.");
         }
-
         vendedores.add(v);
     }
     public void eliminarVendedor(Vendedor v){
@@ -147,5 +129,21 @@ public class Empresa{
         vendedores.add(v);
         v.setEmpresaTrabajo(this); //actualizo la nueva empresa de trabajo
         v.getEmpresaTrabajo().eliminarVendedor(v); //elimino el vendedor de la empresa de trabajo vieja
+    }
+    @Override
+    public String toString() {
+        return "Empresa{" +
+                "nombre='" + nombre + '\'' +
+                ", fechaEntrada=" + fechaEntrada +
+                ", facturacionAnual=" + facturacionAnual +
+                ", ciudades=" + ciudades +
+                ", sede=" + sede +
+                ", asesores=" + asesores +
+                ", areasMercado=" + areasMercado +
+                ", vendedores=" + vendedores +
+                '}';
+    }
+    public String getNombre(){
+        return nombre;
     }
 }

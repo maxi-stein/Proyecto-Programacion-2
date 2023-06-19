@@ -34,4 +34,12 @@ public class Ciudad {
     public Pais getPaisOrigen() {
         return paisOrigen;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setPaisOrigen(Pais paisOrigen) {
+        this.paisOrigen = paisOrigen;
+    }
 }

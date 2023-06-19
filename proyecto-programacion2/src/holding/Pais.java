@@ -13,11 +13,9 @@ public class Pais {
         this.pbi = pbi;
         this.numHabitantes = numHabitantes;
     }
-
     public boolean esIgual(Pais p){
         return nombre.equals(p.nombre);
     }
-
     @Override
     public String toString() {
         return nombre +
@@ -26,5 +24,17 @@ public class Pais {
     }
     public String getNombre(){
         return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public int getCodigoPais() {
+        return codigoPais;
+    }
+    public void setPbi(double pbi) {
+        this.pbi = pbi;
+    }
+    public void setNumHabitantes(double numHabitantes) {
+        this.numHabitantes = numHabitantes;
     }
 }

@@ -35,7 +35,9 @@ public class FactoryUsuarios {
         do {
             key = Consola.leerEntero();
         } while (key < 0 || key > empresas.size());
-        v.setEmpresaTrabajo(empresas.get(key));
+        Empresa empresaTrabajo = empresas.get(key);
+        v.setEmpresaTrabajo(empresaTrabajo);
+        empresaTrabajo.agregarVendedor(v);
         v.mostrarCredenciales();
         bd.agregarUsuario(v);
     }
@@ -90,10 +92,12 @@ public class FactoryUsuarios {
             opcion = Consola.leerEntero();
         }
         Vendedor vendedorMaestro = vendedores.get(opcion);
-        vendedorCaptado.setEmpresaTrabajo(vendedorMaestro.getEmpresaTrabajo());
+        vendedorMaestro.getEmpresaTrabajo().agregarVendedor(vendedorCaptado); //agrego el vendedor captado al arraylist de vendedores de la empresa
+        vendedorCaptado.setEmpresaTrabajo(vendedorMaestro.getEmpresaTrabajo());//le asigno la empresa de trabajo al nuevo vendedor
+        vendedorMaestro.captarVendedor(vendedorCaptado); //se asocia el vendedor captado con su vendedor maestro
         vendedorCaptado.mostrarCredenciales();
         bd.agregarUsuario(vendedorCaptado); //se agrega el vendedor a la base de datos
-        vendedorMaestro.captarVendedor(vendedorCaptado); //se asocia el vendedor captado con su vendedor maestro
+
     }
 
 }

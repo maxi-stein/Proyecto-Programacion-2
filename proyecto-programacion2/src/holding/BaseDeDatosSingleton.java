@@ -114,6 +114,9 @@ public class BaseDeDatosSingleton {
         }
         return vendedores;
     }
+    public static void agregarPais(Pais p){
+        paises.put(p.getCodigoPais(),p);
+    }
     public static void listarPaises(){
         for(int i=1;i<=paises.size();i++){
             System.out.println(i+" - "+paises.get(i).getNombre());
@@ -121,6 +124,17 @@ public class BaseDeDatosSingleton {
     }
     public static HashMap<Integer,Pais> obtenerPaises(){
         return paises;
+    }
+    public static boolean paisYaExiste(Pais p){
+        boolean existe = false;
+        int i=1;
+        while(!existe && i<=paises.size()){
+            if(paises.get(i).esIgual(p)){
+                existe=true;
+            }
+            i++;
+        }
+        return existe;
     }
     public static void agregarCiudad(Ciudad c){
         ciudades.put(c.getCodigoCiudad(),c);
@@ -136,4 +150,13 @@ public class BaseDeDatosSingleton {
         }
         return existe;
     }
+    public static void listarCiudades(){
+        for(int i=1;i<=ciudades.size();i++){
+            System.out.println(i+" - "+ciudades.get(i));
+        }
+    }
+    public static HashMap<Integer,Ciudad> obtenerCiudades(){
+        return ciudades;
+    }
+
 }
