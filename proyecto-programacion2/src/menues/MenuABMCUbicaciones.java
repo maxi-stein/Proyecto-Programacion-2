@@ -10,18 +10,17 @@ public class MenuABMCUbicaciones extends Menu {
         agregarAccion(3,new MenuEliminarCiudad());
         agregarAccion(4,new MenuCrearPais());
         agregarAccion(5,new MenuModificarPais());
-        //agregarAccion(6,new MenuEliminarPais());
     }
     @Override
     public void ejecutar() {
         int opcion = 0;
-        while (opcion>7 || opcion<1) {
+        while (opcion>6 || opcion<1) {
             System.out.printf("1-Crear Ciudad \t2-Modificar Ciudad \t3-Eliminar Ciudad" +
-                    "\n4-Crear Pais \t5-Modificar Pais \t6 - Eliminar Pais" +
-                    "\n7 - Salir");
+                    "\n4-Crear Pais \t5-Modificar Pais" +
+                    "\n6 - Salir");
             opcion = Consola.leerEntero();
         }
-        if(opcion!=7){
+        if(opcion!=6){
             ejecutarAccion(opcion);
         }
     }

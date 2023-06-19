@@ -23,7 +23,6 @@ public class MenuABMCUsuarios extends Menu {
             ejecutarAccion(opcion);
         }
     }
-
     private void ejecutarAccion(int key){
         getAccion(key).ejecutar();
     }
