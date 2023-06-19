@@ -24,4 +24,8 @@ public class AreasMercado implements CapazDeSerBloqueado{
     public boolean estaBloqueado() {
         return bloqueado;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
 }

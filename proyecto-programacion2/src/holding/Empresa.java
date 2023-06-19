@@ -2,6 +2,7 @@ package holding;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Empresa implements CapazDeSerBloqueado{
     private static int CONTADOR = 0;
@@ -9,10 +10,10 @@ public class Empresa implements CapazDeSerBloqueado{
     private String nombre;
     private LocalDate fechaEntrada;
     private double facturacionAnual;
-    private ArrayList<Ciudad> ciudades;
+    private HashMap<Integer,Ciudad> ciudades;
     private Ciudad sede;
     private ArrayList<VinculacionEmpresaAsesor> asesores;
-    private ArrayList<AreasMercado> areasMercado;
+    private HashMap<Integer,AreasMercado> areasMercado;
     private ArrayList<Vendedor> vendedores;
     private boolean bloqueado;
     public Empresa(String nombre, LocalDate fechaEntrada, double facturacionAnual) {
@@ -21,9 +22,9 @@ public class Empresa implements CapazDeSerBloqueado{
         this.nombre = nombre;
         this.fechaEntrada = fechaEntrada;
         this.facturacionAnual = facturacionAnual;
-        ciudades = new ArrayList<>();
+        ciudades = new HashMap<>();
         sede = null;
-        areasMercado = new ArrayList<>();
+        areasMercado = new HashMap<>();
         asesores = new ArrayList<>();
         vendedores = new ArrayList<>();
         bloqueado = false;
@@ -34,30 +35,36 @@ public class Empresa implements CapazDeSerBloqueado{
     public boolean estaBloqueado(){
         return bloqueado;
     }
-    public void agregarCiudad(Ciudad c){
-        if(ciudades.contains(c)){
-            throw new RuntimeException("La ciudad ya se encuentra ingresada");
+    public void agregarCiudad(int keyCiudad){
+        Ciudad ciudadSeleccionada = BaseDeDatosSingleton.getInstance().obtenerCiudades().get(keyCiudad);
+        if(ciudades.entrySet().contains(ciudadSeleccionada)){
+            throw new RuntimeException("La ciudad ya se encuentra ingresada!");
         }
-       ciudades.add(c);
+        ciudades.put(ciudades.size()+1,ciudadSeleccionada);
     }
     public void eliminarCiudad(Ciudad c){
-        if(!ciudades.contains(c)){
-            throw new RuntimeException("La ciudad no esta ingresada en la empresa!");
+            ciudades.entrySet().remove(c);
+    }
+    public void listarCiudades(){
+        for(var parClaveValor : ciudades.entrySet()){
+            System.out.println(parClaveValor.getKey()+" - "+parClaveValor.getValue());
         }
-        if(sede == c){
-            sede = null;
-            System.out.println("ADVERTENCIA: Se elimino la ciudad sede");
-        }
-        ciudades.remove(c);
+    }
+    public HashMap<Integer, Ciudad> obtenerCiudades(){
+        return ciudades;
     }
     public void seleccionarSede(Ciudad c){ //recordar que para seleccionar una sede, antes hay que listar todas las disponibles
-        if(!ciudades.contains(c)){
-            throw new RuntimeException("La ciudad no se encuentra ingresada a la empresa");
+        if(ciudades.entrySet().contains(c)){
+            throw new RuntimeException("La ciudad no se encuentra ingresada a la empresa! Verifique haberla ingresado a la empresa antes de convertirla en Sede");
         }
         if(sede == c){
-            throw new RuntimeException("La ciudad ya es sede");
+            throw new RuntimeException("La ciudad ya es sede!");
         }
         sede=c;
+        System.out.println("Sede modificada exitosamente");
+    }
+    public boolean estaUbicadaEnCiudad(Ciudad c){
+        return ciudades.entrySet().contains(c);
     }
     public void agregarAsesor(Asesor a,LocalDate fechaInicio){
         for(int i=0;i<asesores.size();i++){
@@ -77,23 +84,33 @@ public class Empresa implements CapazDeSerBloqueado{
             i++;
         }
     }
+    public boolean contieneCiudad(Ciudad c){
+        return ciudades.entrySet().contains(c);
+    }
+    public boolean contieneAreaDeMercado(AreasMercado a){
+        return areasMercado.entrySet().contains(a);
+    }
+    public void listarAreasDeMercado(){
+        for(var parClaveValor : areasMercado.entrySet()){
+            System.out.println(parClaveValor.getKey()+" - "+parClaveValor.getValue());
+        }
+    }
     public void agregarAreaMercado(AreasMercado a){
-        if(areasMercado.contains(a))
-        {
+        if(areasMercado.entrySet().contains(a)) {
             throw new RuntimeException("El área ya se encuentra ingresada.");
         }
-        areasMercado.add(a);
+        areasMercado.put(areasMercado.size()+1,a);
     }
-    public void eliminarAreaMercado(AreasMercado a)
-    {
-        if(!areasMercado.contains(a))
-        {
+    public void eliminarAreaMercado(AreasMercado a) {
+        if(!areasMercado.entrySet().contains(a)) {
           throw new RuntimeException("Area no encontrada.");
         }
         areasMercado.remove(a);
     }
-    public void agregarVendedor(Vendedor v)
-    {
+    public HashMap<Integer,AreasMercado> obtenerAreasDeMercado(){
+        return areasMercado;
+    }
+    public void agregarVendedor(Vendedor v){
         if(vendedores.contains(v)){
             throw new RuntimeException("El vendedor ya se encuentra asociado.");
         }
@@ -105,13 +122,8 @@ public class Empresa implements CapazDeSerBloqueado{
         }
         vendedores.remove(v);
     }
-    public Boolean areaCompatible(AreasMercado a){
-        return areasMercado.contains(a);
-    }
-    public void traspasoDeVendedor(Vendedor v){
-        BaseDeDatosSingleton bd = BaseDeDatosSingleton.getInstance();
-        eliminarVendedor(v);
-        agregarVendedorAEmpresa(v);
+    public boolean areaCompatible(AreasMercado a){
+        return areasMercado.entrySet().contains(a);
     }
     public boolean esAsesoradoPor(Asesor a){
         boolean contiene = false;
@@ -125,12 +137,8 @@ public class Empresa implements CapazDeSerBloqueado{
         return contiene;
     }
 
-    private void agregarVendedorAEmpresa(Vendedor v){
-        vendedores.add(v);
-        v.setEmpresaTrabajo(this); //actualizo la nueva empresa de trabajo
-        v.getEmpresaTrabajo().eliminarVendedor(v); //elimino el vendedor de la empresa de trabajo vieja
-    }
-    @Override
+
+   /* @Override
     public String toString() {
         return "Empresa{" +
                 "nombre='" + nombre + '\'' +
@@ -142,8 +150,26 @@ public class Empresa implements CapazDeSerBloqueado{
                 ", areasMercado=" + areasMercado +
                 ", vendedores=" + vendedores +
                 '}';
-    }
+    }*/
     public String getNombre(){
         return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public void setFechaEntrada(LocalDate fechaEntrada) {
+        this.fechaEntrada = fechaEntrada;
+    }
+    public double getFacturacionAnual() {
+        return facturacionAnual;
+    }
+    public void setFacturacionAnual(double facturacionAnual) {
+        this.facturacionAnual = facturacionAnual;
+    }
+    public Ciudad getSede() {
+        return sede;
+    }
+    public void setSede(Ciudad sede) {
+        this.sede = sede;
     }
 }

@@ -12,7 +12,6 @@ public class Vendedor extends Usuario {
     private ArrayList<Vendedor> vendedoresCaptados;
     private Empresa empresaTrabajo;
 
-
     public Vendedor(String nombre, String direccion, String pass, LocalDate fechaCaptado,Empresa empresaTrabajo) {
         super(nombre, direccion, pass);
         this.fechaCaptado = fechaCaptado;
@@ -37,18 +36,14 @@ public class Vendedor extends Usuario {
         MenuPrincipalVendedor mp = new MenuPrincipalVendedor();
         mp.ejecutar();
     }
-    @Override
+    /*@Override
     public String toString() {
         return "Vendedor{" +
                 "fechaCaptado=" + fechaCaptado +
                 ", vendedoresCaptados=" + vendedoresCaptados +
                 ", empresaTrabajo=" + empresaTrabajo +
                 '}';
-    }
-    public void mostrarEmpresaActual(){
-        System.out.println(empresaTrabajo.getNombre());
-    }
-
+    }*/
     private void listarVendedoresCaptados(){
         if(vendedoresCaptados.size()==0){
             System.out.println("Aun no posee vendedores captados");
@@ -63,11 +58,11 @@ public class Vendedor extends Usuario {
         BaseDeDatosSingleton bd = BaseDeDatosSingleton.getInstance();
         super.modificar();
         System.out.println("4 - Cambiar Empresa de Trabajo");
+        System.out.println("5 - Salir");
         int opcion = 0;
-        while(opcion<1 || opcion>4){
+        while(opcion<1 || opcion>5){
             opcion = Consola.leerEntero();
         }
-        System.out.println("Ingrese el registro: ");
         switch (opcion){
             case 1:
                 String nombre = Consola.leerString();
@@ -82,17 +77,19 @@ public class Vendedor extends Usuario {
                 setDireccion(direccion);
                 break;
             case 4:
-                System.out.println("Elija la empresa a la cual cambiar: ");
+                System.out.println("Seleccione la empresa a la cual cambiar: ");
                 bd.listarEmpresas();
                 HashMap<Integer,Empresa> empresas = bd.obtenerEmpresas();
                 int keyEmpresa = 0;
                 do {
                     keyEmpresa = Consola.leerEntero();
                 } while (keyEmpresa < 0 || keyEmpresa > empresas.size());
-                //actualizo la empresas vieja
-                empresaTrabajo.traspasoDeVendedor(this);
+
+                empresaTrabajo.eliminarVendedor(this); //retiro el vendedor de la empresa vieja
+                empresas.get(keyEmpresa).agregarVendedor(this); //ingreso el vendedor a la empresa nueva
+                empresaTrabajo = empresas.get(keyEmpresa); //actualizo el atributo de la empresa de trabajo del vendedor
                 break;
-            case 5:
+            default:
                 break;
         }
     }

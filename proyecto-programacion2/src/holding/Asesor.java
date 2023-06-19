@@ -40,7 +40,6 @@ public class Asesor extends Usuario{
         HashMap<Integer,Empresa> empresas = bd.obtenerEmpresas();
         int keyEmpresa = 0;
 
-        System.out.println("Ingrese el registro: ");
         switch (opcion){
             case 1:
                 String nombre = Consola.leerString();
@@ -75,11 +74,11 @@ public class Asesor extends Usuario{
                 }
                 break;
             case 6:
-                HashMap<Integer,AreasMercado> areasCubiertas = listarAreasMercadoCubiertas();
+                listarAreasMercadoCubiertas();
                 int keyAreaCubierta = 0;
                 do {
                     keyArea = Consola.leerEntero();
-                } while (keyArea < 0 || keyArea > areasCubiertas.size());
+                } while (keyArea < 0 || keyArea > cantidadMercadosCubiertos);
                 eliminarAreaMercadoCubierto(keyAreaCubierta);
                 break;
             case 7:
@@ -112,33 +111,19 @@ public class Asesor extends Usuario{
                 "y verificar si dicho asesor esta dentro o no. Si nolo esta, se avanza a la siguiente empresa y asi sucesivamente...");
     }
     public void agregarAreaMercadoCubierto(AreasMercado area){
-        mercadosCubiertos.put(cantidadMercadosCubiertos,area);
+        mercadosCubiertos.put(cantidadMercadosCubiertos+1,area);
         cantidadMercadosCubiertos++;
     }
-
-    public void eliminarAreaMercadoCubierto(int keyArea){
+    private void eliminarAreaMercadoCubierto(int keyArea){
         mercadosCubiertos.remove(keyArea);
     }
-
-    public void setTitulacion(String titulacion) {
-        this.titulacion = titulacion;
-    }
-
     public boolean asesoraElArea(AreasMercado area){
-        boolean contiene =false;
-        for(int i=0;i<mercadosCubiertos.size();i++){
-            if(mercadosCubiertos.get(i) == area){
-                contiene = true;
-            }
-        }
-        return contiene;
+        return mercadosCubiertos.entrySet().contains(area);
     }
-
-    public HashMap<Integer,AreasMercado> listarAreasMercadoCubiertas(){
-        for(int i=0;i<mercadosCubiertos.size();i++){
-            System.out.println(i+" - "+mercadosCubiertos.get(i));
+    public void listarAreasMercadoCubiertas(){
+        for(var parClaveValor : mercadosCubiertos.entrySet()){
+            System.out.println(parClaveValor.getKey()+" - "+parClaveValor.getValue());
         }
-        return mercadosCubiertos;
     }
     @Override
     public String toString() {
@@ -147,5 +132,8 @@ public class Asesor extends Usuario{
                 ", mercadosCubiertos=" + mercadosCubiertos +
                 ", cantidadMercadosCubiertos=" + cantidadMercadosCubiertos +
                 '}';
+    }
+    public void setTitulacion(String titulacion) {
+        this.titulacion = titulacion;
     }
 }

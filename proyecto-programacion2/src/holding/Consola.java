@@ -2,11 +2,10 @@ package holding;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.time.LocalDate;
 
 public class Consola {
     private static Scanner sc = new Scanner(System.in);
@@ -18,16 +17,18 @@ public class Consola {
     }
 
     public static int leerEntero(){
-        Integer lectura = null;
+        String lectura = null;
+        int entero = 0;
         while (lectura == null){
             try{
-                lectura = sc.nextInt();
+                lectura = sc.nextLine();
+                entero = Integer.parseInt(lectura);
             }
-            catch (InputMismatchException ime){
+            catch (NumberFormatException nfe){
                 System.out.println("Ingrese un valor correcto!");
             }
         }
-        return lectura;
+        return entero;
     }
 
     public static LocalDate leerFecha() {
@@ -46,15 +47,17 @@ public class Consola {
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
     public static double leerDouble(){
-        Double lectura = null;
+        String lectura = null;
+        double entero = 0;
         while (lectura == null){
             try{
-                lectura = sc.nextDouble();
+                lectura = sc.nextLine();
+                entero = Double.parseDouble(lectura);
             }
-            catch (InputMismatchException ime){
+            catch (NumberFormatException nfe){
                 System.out.println("Ingrese un valor correcto!");
             }
         }
-        return lectura;
+        return entero;
     }
 }

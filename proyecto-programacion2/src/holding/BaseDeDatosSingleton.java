@@ -55,11 +55,8 @@ public class BaseDeDatosSingleton {
         return usuarioEncontrado;
     }
     public static void listarUsuarios() {
-        for (int i = 1; i <=usuarios.size(); i++) {
-            Usuario usuario = usuarios.get(i);
-            if(!usuario.estaBloqueado()){
-                System.out.println(i + " - " + usuario.toString());
-            }
+        for(var parClaveValor : usuarios.entrySet()){
+            System.out.println(parClaveValor.getKey()+" - "+parClaveValor.getValue());
         }
     }
     public static void agregarUsuario(Usuario u){
@@ -70,7 +67,9 @@ public class BaseDeDatosSingleton {
     }
     public static void listarEmpresas(){
         for(int i=1;i<=empresas.size();i++){
-            System.out.println(i+" - "+empresas.get(i).getNombre());
+            if(!empresas.get(i).estaBloqueado()){
+                System.out.println(i+" - "+empresas.get(i).getNombre());
+            }
         }
     }
     public static HashMap<Integer,Empresa> obtenerEmpresas(){
@@ -78,7 +77,9 @@ public class BaseDeDatosSingleton {
     }
     public static void listarAreasDeMercado(){
         for(int i=1;i<=areasDeMercado.size();i++){
-            System.out.println(i+" - "+areasDeMercado.get(i).toString());
+            if(!areasDeMercado.get(i).estaBloqueado()){
+                System.out.println(i+" - "+areasDeMercado.get(i).toString());
+            }
         }
     }
     public static HashMap<Integer,AreasMercado> obtenerAreasDeMercado(){
@@ -119,7 +120,9 @@ public class BaseDeDatosSingleton {
     }
     public static void listarPaises(){
         for(int i=1;i<=paises.size();i++){
-            System.out.println(i+" - "+paises.get(i).getNombre());
+            if(!paises.get(i).estaBloqueado()){
+                System.out.println(i+" - "+paises.get(i).getNombre());
+            }
         }
     }
     public static HashMap<Integer,Pais> obtenerPaises(){
@@ -152,11 +155,38 @@ public class BaseDeDatosSingleton {
     }
     public static void listarCiudades(){
         for(int i=1;i<=ciudades.size();i++){
-            System.out.println(i+" - "+ciudades.get(i));
+            if(ciudades.get(i).estaBloqueado()){
+                System.out.println(i+" - "+ciudades.get(i));
+            }
         }
+    }
+    public static void listarCiudadesDeEmpresa(int key){
+        Empresa empresa = empresas.get(key);
+        empresa.listarCiudades();
+    }
+    public static HashMap<Integer,Ciudad> obtenerCiudadesDeEmpresa(int keyEmpresa){
+        return empresas.get(keyEmpresa).obtenerCiudades();
     }
     public static HashMap<Integer,Ciudad> obtenerCiudades(){
         return ciudades;
     }
-
+    public static boolean ciudadEnUso(Ciudad c){
+        boolean enUso = false;
+        for(int i=1;i<=empresas.size();i++){
+            if(empresas.get(i).estaUbicadaEnCiudad(c) && !empresas.get(i).estaBloqueado()){
+                enUso = true;
+            }
+        }
+        return enUso;
+    }
+    public static void eliminarCiudad(int key){
+        ciudades.get(key).setBloqueo(true);
+    }
+    public static void listarEmpresasQueUtilizanCiudad(Ciudad c){
+        for(int i=1;i<=empresas.size();i++){
+            if(empresas.get(i).estaUbicadaEnCiudad(c) && !empresas.get(i).estaBloqueado()){
+                System.out.println(empresas.get(i).getNombre());
+            }
+        }
+    }
 }

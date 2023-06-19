@@ -10,7 +10,7 @@ public class MenuABMCUbicaciones extends Menu {
         agregarAccion(3,new MenuEliminarCiudad());
         agregarAccion(4,new MenuCrearPais());
         agregarAccion(5,new MenuModificarPais());
-        agregarAccion(6,new MenuEliminarPais());
+        //agregarAccion(6,new MenuEliminarPais());
     }
     @Override
     public void ejecutar() {

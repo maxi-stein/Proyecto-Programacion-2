@@ -1,8 +1,111 @@
 package menues;
 
+import holding.*;
+
+import java.util.HashMap;
+
 public class MenuModificarEmpresa implements CapazDeEjecutarAccionMenu{
+    private BaseDeDatosSingleton bd;
+    private HashMap<Integer, Ciudad> ciudades;
+    private  HashMap<Integer, Empresa> empresas;
+    public MenuModificarEmpresa(){
+        bd = BaseDeDatosSingleton.getInstance();
+        ciudades = bd.obtenerCiudades();
+        empresas = bd.obtenerEmpresas();
+    }
     @Override
     public void ejecutar() {
+        System.out.println("Seleccione la empresa a modificar");
+        bd.listarEmpresas();
+        int keyEmpresa = 0;
+        while (keyEmpresa < 1 || keyEmpresa>empresas.size()){
+            keyEmpresa = Consola.leerEntero();
+        }
+        Empresa empresaSeleccionada = empresas.get(keyEmpresa);
 
+        System.out.println("Seleccione el atributo a modificar:");
+        System.out.print("1 - Nombre \t"+"2 - Fecha de Entrada \t"+"3 - Facturacion Anual \n");
+        System.out.print("4 - Asignar Sede \t"+"5 - Agregar Ciudad \t"+"6 - Eliminar Ciudad \n");
+        System.out.print("7 - Agregar Area de Mercado \t"+"8 - Eliminar Area de Mercado \n");
+        System.out.println("9 - Salir");
+        int opcion = 0;
+        while (opcion<1 || opcion>9){
+            opcion = Consola.leerEntero();
+        }
+        switch (opcion){
+            case 1:
+                System.out.println("Ingrese el nuevo nombre");
+                empresaSeleccionada.setNombre(Consola.leerString());
+                break;
+            case 2:
+                System.out.println("Ingrese la fecha de entrada:");
+                empresaSeleccionada.setFechaEntrada(Consola.leerFecha());
+                break;
+            case 3:
+                System.out.println("Ingrese la facturacion Anual:");
+                empresaSeleccionada.setFacturacionAnual(Consola.leerDouble());
+                break;
+            case 4:
+                System.out.println("Seleccione la ciudad para convertirla en Sede:");
+                bd.listarCiudades();
+                int keyCiudad = 0;
+                while(keyCiudad<1 || keyCiudad>ciudades.size()){
+                    keyCiudad = Consola.leerEntero();
+                }
+                empresaSeleccionada.seleccionarSede(ciudades.get(keyCiudad));
+                break;
+            case 5:
+                System.out.println("Seleccione la Ciudad a agregar");
+                bd.listarCiudades();
+                HashMap<Integer,Ciudad> ciudades = bd.obtenerCiudades();
+                int opcionCiudad = 0;
+                while (opcionCiudad<1 || opcionCiudad>ciudades.size()){
+                    opcionCiudad = Consola.leerEntero();
+                }
+                if(empresaSeleccionada.contieneCiudad(ciudades.get(opcionCiudad))){
+                    System.out.println("Ciudad "+ciudades.get(opcionCiudad).getNombre()+" ya registrada en la empresa!");
+                }
+                else{
+                    empresaSeleccionada.agregarCiudad(opcionCiudad);
+                    System.out.println("Ciudad agregada exitosamente");
+                }
+            case 6:
+                bd.listarCiudadesDeEmpresa(keyEmpresa);
+                HashMap<Integer,Ciudad> ciudadesDeEmpresa = bd.obtenerCiudadesDeEmpresa(keyEmpresa);
+                int opcionEmpresa = 0;
+                while (opcionEmpresa<1 || opcionEmpresa>ciudadesDeEmpresa.size()){
+                    opcionEmpresa = Consola.leerEntero();
+                }
+                empresaSeleccionada.eliminarCiudad(ciudadesDeEmpresa.get(opcionEmpresa));
+            case 7:
+                System.out.println("Seleccione el area de mercado a agregar");
+                bd.listarAreasDeMercado();
+                HashMap<Integer, AreasMercado> areasMercado = bd.obtenerAreasDeMercado();
+                int opcionAreaMercado = 0;
+                while (opcionAreaMercado<1 || opcionAreaMercado>areasMercado.size()){
+                    opcionAreaMercado = Consola.leerEntero();
+                }
+                if(empresaSeleccionada.contieneAreaDeMercado(areasMercado.get(opcionAreaMercado))){
+                    System.out.println("El area de mercado "+areasMercado.get(opcionAreaMercado).getNombre()+" ya se encuentra registrada en la empresa");
+                }
+                else{
+                    empresaSeleccionada.agregarAreaMercado(areasMercado.get(opcionAreaMercado));
+                    System.out.println("Area de mercado agregada exitosamente");
+                }
+                break;
+            case 8:
+                System.out.println("Seleccione el area de mercado a eliminar");
+                empresaSeleccionada.listarAreasDeMercado();
+                HashMap<Integer, AreasMercado> areasMercadoAEliminar = empresaSeleccionada.obtenerAreasDeMercado();
+                int opcionAreaMercadoAEliminar = 0;
+                while (opcionAreaMercadoAEliminar<1 || opcionAreaMercadoAEliminar>areasMercadoAEliminar.size()){
+                    opcionAreaMercadoAEliminar = Consola.leerEntero();
+                }
+                empresaSeleccionada.eliminarAreaMercado(areasMercadoAEliminar.get(opcionAreaMercadoAEliminar));
+                System.out.println("Area de mercado eliminada exitosamente");
+                break;
+            default:
+                break;
+        }
     }
 }

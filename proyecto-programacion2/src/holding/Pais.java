@@ -1,17 +1,26 @@
 package holding;
 
-public class Pais {
+public class Pais implements CapazDeSerBloqueado {
     private static int CONTADOR = 0;
     private int codigoPais;
     private String nombre;
     private double pbi;
     private double numHabitantes;
+    private boolean bloqueado;
     public Pais(String nombre, double pbi, double numHabitantes){
         CONTADOR++;
         codigoPais=CONTADOR;
         this.nombre = nombre;
         this.pbi = pbi;
         this.numHabitantes = numHabitantes;
+    }
+    @Override
+    public void setBloqueo(boolean valor) {
+        bloqueado = valor;
+    }
+    @Override
+    public boolean estaBloqueado() {
+        return bloqueado;
     }
     public boolean esIgual(Pais p){
         return nombre.equals(p.nombre);
