@@ -28,21 +28,22 @@ public class SistemaDeGestion implements Serializable {
         areasDeMercado.put(1,am);*/
 
         bd.cargarDatosSerializados(usuarios,empresas,areasDeMercado,ciudades, paises);
-        serializarBD(bd.obtenerUsuarios(), bd.obtenerEmpresas(),bd.obtenerAreasDeMercado(),bd.obtenerCiudades(), bd.obtenerPaises());
-    }
-    public void run(){
-        int num;
 
+    }
+    public void run() throws IOException {
+        int num;
+        BaseDeDatosSingleton bd = BaseDeDatosSingleton.getInstance();
         do{
             num=mostrarMenu();
             if (num == 1) {
-                BaseDeDatosSingleton bd = BaseDeDatosSingleton.getInstance();
+
                 Usuario loggedInUsuario = bd.iniciarSesion();
                 if(loggedInUsuario != null){
                     loggedInUsuario.proceder();
                 }
             }
         }while(num!=2);
+        serializarBD(bd.obtenerUsuarios(), bd.obtenerEmpresas(),bd.obtenerAreasDeMercado(),bd.obtenerCiudades(), bd.obtenerPaises());
 
     }
     public int mostrarMenu(){
@@ -50,7 +51,7 @@ public class SistemaDeGestion implements Serializable {
         return Consola.leerEntero();
     }
 
-    public void serializarBD(HashMap<Integer,Usuario> usuarios2,
+    public static void serializarBD(HashMap<Integer,Usuario> usuarios2,
                              HashMap<Integer,Empresa> empresas2,
                              HashMap<Integer,AreasMercado> areasDeMercado2,
                              HashMap<Integer,Ciudad> ciudades2, HashMap<Integer,Pais> paises2) throws IOException {
@@ -79,11 +80,11 @@ public class SistemaDeGestion implements Serializable {
         }
     }
 
-    public void deserializarBD() throws IOException, FileNotFoundException {
+    public static void deserializarBD() throws IOException, FileNotFoundException {
         try{
             try{
                 ObjectInputStream objUser = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Usuarios.bin"))));
-                this.usuarios = (HashMap<Integer, Usuario>)  objUser.readObject();
+                usuarios = (HashMap<Integer, Usuario>)  objUser.readObject();
                 objUser.close();
             }catch (FileNotFoundException e) {
                 System.out.println("Error de E/S: " + e.getMessage());
@@ -97,10 +98,10 @@ public class SistemaDeGestion implements Serializable {
             ObjectInputStream objCiudad = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Ciudades.bin"))));
             ObjectInputStream objPais = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Paises.bin"))));
 
-            this.empresas = (HashMap<Integer, Empresa>) objEmp.readObject();
-            this.areasDeMercado = (HashMap<Integer, AreasMercado>) objArea.readObject();
-            this.ciudades = (HashMap<Integer, Ciudad>)  objCiudad.readObject();
-            this.paises = (HashMap<Integer, Pais>)  objPais.readObject();
+            empresas = (HashMap<Integer, Empresa>) objEmp.readObject();
+            areasDeMercado = (HashMap<Integer, AreasMercado>) objArea.readObject();
+            ciudades = (HashMap<Integer, Ciudad>)  objCiudad.readObject();
+            paises = (HashMap<Integer, Pais>)  objPais.readObject();
 
             objEmp.close();
             objArea.close();
