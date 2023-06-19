@@ -1,6 +1,8 @@
 package holding;
 
-public class AreasMercado implements CapazDeSerBloqueado{
+import java.io.Serializable;
+
+public class AreasMercado implements CapazDeSerBloqueado, Serializable {
     private static int CONTADOR = 0;
     private int codArea;
     private String nombre;

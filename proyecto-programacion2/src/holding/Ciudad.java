@@ -1,6 +1,8 @@
 package holding;
 
-public class Ciudad implements CapazDeSerBloqueado {
+import java.io.Serializable;
+
+public class Ciudad implements CapazDeSerBloqueado, Serializable {
     private static int CONTADOR = 0;
     private int codigoCiudad;
     private String nombre;

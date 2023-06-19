@@ -1,10 +1,11 @@
 package holding;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Empresa implements CapazDeSerBloqueado{
+public class Empresa implements CapazDeSerBloqueado, Serializable {
     private static int CONTADOR = 0;
     private int codigoEmpresa;
     private String nombre;

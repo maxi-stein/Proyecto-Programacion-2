@@ -1,6 +1,8 @@
 package holding;
 
-public abstract class Usuario implements CapazDeSerBloqueado{
+import java.io.Serializable;
+
+public abstract class Usuario implements CapazDeSerBloqueado, Serializable {
     private static int CONTADOR = 0;
     private int codigoUsuario;
     private String nombre;

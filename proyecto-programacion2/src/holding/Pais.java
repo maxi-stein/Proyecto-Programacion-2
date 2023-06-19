@@ -1,6 +1,8 @@
 package holding;
 
-public class Pais implements CapazDeSerBloqueado {
+import java.io.Serializable;
+
+public class Pais implements CapazDeSerBloqueado, Serializable {
     private static int CONTADOR = 0;
     private int codigoPais;
     private String nombre;

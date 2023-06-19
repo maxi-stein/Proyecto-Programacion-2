@@ -87,6 +87,9 @@ public class BaseDeDatosSingleton {
     public static HashMap<Integer,AreasMercado> obtenerAreasDeMercado(){
         return areasDeMercado;
     }
+    public static HashMap<Integer, Usuario> obtenerUsuarios(){
+        return usuarios;
+    }
     public static void agregarAsesorAEmpresa(Integer keyEmpresa, Asesor a, LocalDate fechaInicio){
         empresas.get(keyEmpresa).agregarAsesor(a,fechaInicio);
     }
