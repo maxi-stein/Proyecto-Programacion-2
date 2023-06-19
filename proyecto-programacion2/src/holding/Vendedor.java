@@ -46,7 +46,7 @@ public class Vendedor extends Usuario {
                 '}';
     }
     public void mostrarEmpresaActual(){
-        System.out.println(empresaTrabajo.displayInfo());
+        System.out.println(empresaTrabajo.getNombre());
     }
 
     private void listarVendedoresCaptados(){
@@ -83,7 +83,8 @@ public class Vendedor extends Usuario {
                 break;
             case 4:
                 System.out.println("Elija la empresa a la cual cambiar: ");
-                HashMap<Integer,Empresa> empresas = bd.listarEmpresas();
+                bd.listarEmpresas();
+                HashMap<Integer,Empresa> empresas = bd.obtenerEmpresas();
                 int keyEmpresa = 0;
                 do {
                     keyEmpresa = Consola.leerEntero();

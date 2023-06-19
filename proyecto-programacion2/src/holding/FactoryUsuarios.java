@@ -29,8 +29,9 @@ public class FactoryUsuarios {
         Vendedor v = new Vendedor();
         v.pedirDatosBasicos();
         System.out.println("Seleccione la empresa en la que trabaja: ");
-        HashMap<Integer, Empresa> empresas = bd.listarEmpresas();
-        Integer key = 0;
+        bd.listarEmpresas();
+        HashMap<Integer, Empresa> empresas = bd.obtenerEmpresas();
+        int key = 0;
         do {
             key = Consola.leerEntero();
         } while (key < 0 || key > empresas.size());
@@ -46,7 +47,8 @@ public class FactoryUsuarios {
         asesor.setTitulacion(titulacion);
 
         System.out.println("Elija el area de mercado que asesora");
-        HashMap <Integer,AreasMercado> areas = bd.listarAreasDeMercado();
+        bd.listarAreasDeMercado();
+        HashMap <Integer,AreasMercado> areas = bd.obtenerAreasDeMercado();
         Integer keyArea = 0;
         do {
             keyArea = Consola.leerEntero();
@@ -57,7 +59,8 @@ public class FactoryUsuarios {
 
         //se agrega la empresa para la que trabaja y se establece VinculacionAsesorEmpresa
         System.out.println("Seleccione la empresa que asesora: ");
-        HashMap<Integer, Empresa> empresas = bd.listarEmpresas();
+        bd.listarEmpresas();
+        HashMap<Integer, Empresa> empresas = bd.obtenerEmpresas();
         int keyEmpresa = 0;
         boolean compatible;
         do {

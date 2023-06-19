@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Empresa{
-
+    private static int CONTADOR = 0;
+    private int codigoEmpresa;
     private String nombre;
     private LocalDate fechaEntrada;
     private double facturacionAnual;
@@ -13,10 +14,11 @@ public class Empresa{
     private ArrayList<VinculacionEmpresaAsesor> asesores;
     private ArrayList<AreasMercado> areasMercado;
     private ArrayList<Vendedor> vendedores;
-    private int codigoEmpresa;
+
 
     public Empresa(String nombre, LocalDate fechaEntrada, double facturacionAnual) {
-        this.codigoEmpresa = codigoEmpresa;
+        CONTADOR++;
+        this.codigoEmpresa = CONTADOR;
         this.nombre = nombre;
         this.fechaEntrada = fechaEntrada;
         this.facturacionAnual = facturacionAnual;
@@ -26,11 +28,6 @@ public class Empresa{
         asesores = new ArrayList<>();
         vendedores = new ArrayList<>();
     }
-
-    public String displayInfo(){
-        return String.format("%s \n",nombre);
-    }
-
     @Override
     public String toString() {
         return "Empresa{" +

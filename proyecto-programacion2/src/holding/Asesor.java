@@ -36,8 +36,8 @@ public class Asesor extends Usuario{
         while(opcion<1 || opcion>9){
             opcion = Consola.leerEntero();
         }
-
-        HashMap<Integer,Empresa> empresas = bd.listarEmpresas();
+        bd.listarEmpresas();
+        HashMap<Integer,Empresa> empresas = bd.obtenerEmpresas();
         int keyEmpresa = 0;
 
         System.out.println("Ingrese el registro: ");
@@ -59,7 +59,8 @@ public class Asesor extends Usuario{
                 setTitulacion(titulacion);
                 break;
             case 5:
-                HashMap <Integer,AreasMercado> areas = bd.listarAreasDeMercado();
+                bd.listarAreasDeMercado();
+                HashMap <Integer,AreasMercado> areas = bd.obtenerAreasDeMercado();
                 int keyArea = 0;
                 do {
                     keyArea = Consola.leerEntero();
