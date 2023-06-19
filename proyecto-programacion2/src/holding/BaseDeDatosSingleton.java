@@ -2,15 +2,14 @@ package holding;
 
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Map;
 
 public class BaseDeDatosSingleton {
     private static BaseDeDatosSingleton INSTANCE;
-
     private static HashMap<Integer,Usuario> usuarios;
     private static HashMap<Integer,Empresa> empresas;
     private static HashMap<Integer,AreasMercado> areasDeMercado;
     private static HashMap<Integer,Ciudad> ciudades;
+    private static HashMap<Integer,Pais> paises;
 
     private BaseDeDatosSingleton(){
         INSTANCE = this;
@@ -56,7 +55,7 @@ public class BaseDeDatosSingleton {
         return usuarioEncontrado;
     }
     public static void listarUsuarios() {
-        for (int i = 0; i < usuarios.size(); i++) {
+        for (int i = 1; i <=usuarios.size(); i++) {
             Usuario usuario = usuarios.get(i);
             if(!usuario.estaBloqueado()){
                 System.out.println(i + " - " + usuario.toString());
@@ -69,18 +68,20 @@ public class BaseDeDatosSingleton {
     public static void eliminarUsuario(int key){
         usuarios.get(key).setBloqueo(true);
     }
-    public static HashMap<Integer,Empresa> listarEmpresas(){
-        for(int i=0;i<empresas.size();i++){
+    public static void listarEmpresas(){
+        for(int i=1;i<=empresas.size();i++){
             System.out.println(i+" - "+empresas.get(i).getNombre());
         }
+    }
+    public static HashMap<Integer,Empresa> obtenerEmpresas(){
         return empresas;
     }
-    public static HashMap<Integer,AreasMercado> listarAreasDeMercado(){
-        for (Map.Entry<Integer, AreasMercado> area : areasDeMercado.entrySet()) {
-            Integer key = area.getKey();
-            AreasMercado value = area.getValue();
-            System.out.println(key + " " + value + '\n');
+    public static void listarAreasDeMercado(){
+        for(int i=1;i<=areasDeMercado.size();i++){
+            System.out.println(i+" - "+areasDeMercado.get(i).toString());
         }
+    }
+    public static HashMap<Integer,AreasMercado> obtenerAreasDeMercado(){
         return areasDeMercado;
     }
     public static void agregarAsesorAEmpresa(Integer keyEmpresa, Asesor a, LocalDate fechaInicio){
@@ -96,7 +97,7 @@ public class BaseDeDatosSingleton {
         return e.esAsesoradoPor(a);
     }
     public static void listarVendedores(){
-        for (int i = 0; i < usuarios.size(); i++) {
+        for (int i = 1; i <= usuarios.size(); i++) {
             Usuario usuario = usuarios.get(i);
             if(!usuario.estaBloqueado() && usuario instanceof Vendedor){
                 System.out.println(i + " - " + usuario.toString());
@@ -105,12 +106,34 @@ public class BaseDeDatosSingleton {
     }
     public static HashMap<Integer,Vendedor> obtenerVendedores(){
         HashMap<Integer,Vendedor> vendedores = new HashMap<>();
-        for (int i = 0; i < usuarios.size(); i++) {
+        for (int i = 1; i <= usuarios.size(); i++) {
             Usuario usuario = usuarios.get(i);
             if(!usuario.estaBloqueado() && usuario instanceof Vendedor){
                 vendedores.put(i,(Vendedor) usuario);
             }
         }
         return vendedores;
+    }
+    public static void listarPaises(){
+        for(int i=1;i<=paises.size();i++){
+            System.out.println(i+" - "+paises.get(i).getNombre());
+        }
+    }
+    public static HashMap<Integer,Pais> obtenerPaises(){
+        return paises;
+    }
+    public static void agregarCiudad(Ciudad c){
+        ciudades.put(c.getCodigoCiudad(),c);
+    }
+    public static boolean ciudadYaExiste(Ciudad c){
+        boolean existe = false;
+        int i=1;
+        while(!existe && i<=ciudades.size()){
+            if(ciudades.get(i).esIgual(c)){
+                existe=true;
+            }
+            i++;
+        }
+        return existe;
     }
 }
