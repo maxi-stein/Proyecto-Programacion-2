@@ -1,6 +1,7 @@
 package holding;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -12,6 +13,10 @@ public class SistemaDeGestion implements Serializable {
     private static HashMap<Integer,Ciudad> ciudades;
     public SistemaDeGestion(){
         BaseDeDatosSingleton bd = BaseDeDatosSingleton.getInstance();
+        usuarios = new HashMap<>();
+        empresas = new HashMap<>();
+        empresas.put(1,new Empresa("Tenarix",LocalDate.now(),10));
+        usuarios.put(0,new Admin("admin1","Calle 123","1"));
         bd.cargarDatosSerializados(usuarios,empresas,areasDeMercado,ciudades);
     }
     public void run(){

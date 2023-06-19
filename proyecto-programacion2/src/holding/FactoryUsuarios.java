@@ -76,7 +76,7 @@ public class FactoryUsuarios {
         HashMap<Integer,Vendedor> vendedores = null;
         String nombre = null,direccion = null,pass = null;
         pedirDatosBasicos(nombre,direccion,pass);
-        System.out.println("Determine el vendedor captador: ");
+        System.out.println("Determine el vendedor maestro: ");
         bd.listarVendedores();
         vendedores = bd.obtenerVendedores();
         int opcion = Consola.leerEntero();
@@ -84,8 +84,10 @@ public class FactoryUsuarios {
             System.out.println("Ingrese una opcion correcta");
             opcion = Consola.leerEntero();
         }
-        Vendedor vendedorCaptador = vendedores.get(opcion);
-        vendedorCaptador.captarVendedor(new Vendedor(nombre,direccion,pass,LocalDate.now(),vendedorCaptador.getEmpresaTrabajo()));
+        Vendedor vendedorMaestro = vendedores.get(opcion);
+        Vendedor vendedorCaptado = new Vendedor(nombre,direccion,pass,LocalDate.now(),vendedorMaestro.getEmpresaTrabajo());
+        bd.agregarUsuario(vendedorCaptado);
+        vendedorMaestro.captarVendedor(vendedorCaptado);
     }
     private static void pedirDatosBasicos(String nombre,String direccion,String pass){
         System.out.println("Ingrese el nombre: ");
