@@ -90,7 +90,7 @@ public class SistemaDeGestion implements Serializable {
                 System.out.println("Error de E/S: " + e.getMessage());
                 System.out.println("~ BASE DE USUARIOS NO HALLADA ~");
                 Admin admin = new Admin("admin1", "Calle 123", "1");
-                usuarios.put(1, admin);
+                usuarios.put(usuarios.size()+1, admin);
                 System.out.println("Se ha creado el Admin Default");
             }
             ObjectInputStream objEmp = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Empresas.bin"))));

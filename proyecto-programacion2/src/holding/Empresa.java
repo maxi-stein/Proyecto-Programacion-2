@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Empresa implements CapazDeSerBloqueado, Serializable {
-    private static int CONTADOR = 0;
-    private int codigoEmpresa;
     private String nombre;
     private LocalDate fechaEntrada;
     private double facturacionAnual;
@@ -18,8 +16,6 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
     private ArrayList<Vendedor> vendedores;
     private boolean bloqueado;
     public Empresa(String nombre, LocalDate fechaEntrada, double facturacionAnual) {
-        CONTADOR++;
-        this.codigoEmpresa = CONTADOR;
         this.nombre = nombre;
         this.fechaEntrada = fechaEntrada;
         this.facturacionAnual = facturacionAnual;
@@ -172,9 +168,5 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
     }
     public void setSede(Ciudad sede) {
         this.sede = sede;
-    }
-
-    public int getCodigoEmpresa() {
-        return codigoEmpresa;
     }
 }

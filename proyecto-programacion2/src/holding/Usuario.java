@@ -3,23 +3,20 @@ package holding;
 import java.io.Serializable;
 
 public abstract class Usuario implements CapazDeSerBloqueado, Serializable {
-    private static int CONTADOR = 0;
     private int codigoUsuario;
     private String nombre;
     private String direccion;
     private String pass;
     private Boolean bloqueado;
     public Usuario( String nombre, String direccion, String pass) {
-        this.codigoUsuario = CONTADOR;
-        CONTADOR++;
+        this.codigoUsuario = BaseDeDatosSingleton.getInstance().obtenerCodigoMayor()+1;
         this.nombre = nombre;
         this.direccion = direccion;
         this.pass = pass;
         this.bloqueado = false;
     }
     public Usuario(){
-        codigoUsuario=CONTADOR;
-        CONTADOR++;
+        codigoUsuario=BaseDeDatosSingleton.getInstance().obtenerCodigoMayor()+1;
     }
     public abstract void proceder();
     public void setBloqueo(boolean valor){
@@ -63,8 +60,9 @@ public abstract class Usuario implements CapazDeSerBloqueado, Serializable {
     public void setPass(String pass) {
         this.pass = pass;
     }
-
-
+    public void setCodigoUsuario(int codigo){
+        this.codigoUsuario = codigo;
+    }
     @Override
     public String toString() {
         return String.format("%s - COD:%d - %s \n",nombre,codigoUsuario,direccion);

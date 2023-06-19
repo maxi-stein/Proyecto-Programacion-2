@@ -3,15 +3,11 @@ package holding;
 import java.io.Serializable;
 
 public class Pais implements CapazDeSerBloqueado, Serializable {
-    private static int CONTADOR = 0;
-    private int codigoPais;
     private String nombre;
     private double pbi;
     private double numHabitantes;
     private boolean bloqueado;
     public Pais(String nombre, double pbi, double numHabitantes){
-        CONTADOR++;
-        codigoPais=CONTADOR;
         this.nombre = nombre;
         this.pbi = pbi;
         this.numHabitantes = numHabitantes;
@@ -30,7 +26,7 @@ public class Pais implements CapazDeSerBloqueado, Serializable {
     @Override
     public String toString() {
         return nombre +
-                "(Codigo: "+codigoPais+" PBI:" + pbi +
+                "(PBI:" + pbi +
                 "- Habitantes=" + numHabitantes +")";
     }
     public String getNombre(){
@@ -38,9 +34,6 @@ public class Pais implements CapazDeSerBloqueado, Serializable {
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-    public int getCodigoPais() {
-        return codigoPais;
     }
     public void setPbi(double pbi) {
         this.pbi = pbi;

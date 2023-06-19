@@ -12,6 +12,11 @@ public class BaseDeDatosSingleton {
     private static HashMap<Integer,Pais> paises;
 
     private BaseDeDatosSingleton(){
+        usuarios = new HashMap<>();
+        empresas = new HashMap<>();
+        areasDeMercado = new HashMap<>();
+        ciudades = new HashMap<>();
+        paises = new HashMap<>();
         INSTANCE = this;
     }
     public static BaseDeDatosSingleton getInstance(){
@@ -145,7 +150,7 @@ public class BaseDeDatosSingleton {
         return existe;
     }
     public static void agregarCiudad(Ciudad c){
-        ciudades.put(c.getCodigoCiudad(),c);
+        ciudades.put(ciudades.size()+1,c);
     }
     public static boolean ciudadYaExiste(Ciudad c){
         boolean existe = false;
@@ -198,6 +203,9 @@ public class BaseDeDatosSingleton {
     }
 
     public static void agregarEmpresa(Empresa empresaNueva){
-        empresas.put(empresaNueva.getCodigoEmpresa(), empresaNueva);
+        empresas.put(empresas.size()+1, empresaNueva);
+    }
+    public static int obtenerCodigoMayor(){
+        return usuarios.size();
     }
 }

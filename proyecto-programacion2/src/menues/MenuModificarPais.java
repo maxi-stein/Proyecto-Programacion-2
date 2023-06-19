@@ -21,15 +21,15 @@ public class MenuModificarPais implements CapazDeEjecutarAccionMenu {
         System.out.print("1 - Nombre '\t'"+" 2- PBI \t"+"3 - Numero de habitantes\n"+
                 "4 - Salir");
         int opcion = 0;
-        while(opcion<1 || opcion>3){
+        while(opcion<1 || opcion>4){
             opcion = Consola.leerEntero();
         }
-        Pais paisSeleccionado = paises.get(opcion);
+        Pais paisSeleccionado = paises.get(keyPais);
         switch (opcion){
             case 1:
                 System.out.println("Determine el nuevo nombre:");
                 String nombre = Consola.leerString();
-                paisSeleccionado.setNombre(nombre);
+                paisSeleccionado.setNombre(nombre.toUpperCase());
                 System.out.println("Nombre modificado!"+paisSeleccionado);
                 break;
             case 2:
