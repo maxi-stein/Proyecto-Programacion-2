@@ -1,4 +1,6 @@
-package holding;
+package menues;
+
+import holding.FactoryUsuarios;
 
 public class MenuVendedorCaptado implements CapazDeEjecutarAccionMenu{
     @Override

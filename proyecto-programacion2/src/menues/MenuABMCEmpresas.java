@@ -1,13 +1,15 @@
-package holding;
+package menues;
+
+import holding.Consola;
 
 public class MenuABMCEmpresas extends MenuSuper{
 
-    public MenuABMCEmpresas(){
+    /*public MenuABMCEmpresas(){
         super();
-        agregarAccion(1,new MenuCrearUsuario());
-        agregarAccion(2,new MenuModificarUsuario());
-        agregarAccion(3,new MenuEliminarUsuario());
-    }
+        agregarAccion(1,new MenuCrearEmpresa());
+        agregarAccion(2,new MenuModificarEmpresa());
+        agregarAccion(3,new MenuEliminarEmpresa());
+    }*/
     @Override
     public void ejecutar() {
         int opcion = 0;

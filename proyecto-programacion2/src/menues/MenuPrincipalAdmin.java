@@ -1,4 +1,6 @@
-package holding;
+package menues;
+
+import holding.Consola;
 
 public class MenuPrincipalAdmin extends MenuSuper {
 

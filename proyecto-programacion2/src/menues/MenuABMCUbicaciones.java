@@ -1,4 +1,4 @@
-package holding;
+package menues;
 
 public class MenuABMCUbicaciones extends MenuSuper{
     @Override
