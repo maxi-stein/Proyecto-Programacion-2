@@ -30,7 +30,7 @@ public class Pais implements CapazDeSerBloqueado, Serializable {
     @Override
     public String toString() {
         return nombre +
-                "(PBI:" + pbi +
+                "(Codigo: "+codigoPais+" PBI:" + pbi +
                 "- Habitantes=" + numHabitantes +")";
     }
     public String getNombre(){

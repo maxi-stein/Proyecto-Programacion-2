@@ -23,7 +23,7 @@ public class MenuCrearPais implements CapazDeEjecutarAccionMenu{
         }
         else{
             bd.agregarPais(p);
-            System.out.println("Se agregó el pais: \n"+ p);
+            System.out.println("Se agregó el pais: \n"+ p.toString());
         }
     }
 }

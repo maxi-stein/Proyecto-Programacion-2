@@ -121,7 +121,7 @@ public class BaseDeDatosSingleton {
         return vendedores;
     }
     public static void agregarPais(Pais p){
-        paises.put(p.getCodigoPais(),p);
+        paises.put(paises.size()+1,p);
     }
     public static void listarPaises(){
         for(int i=1;i<=paises.size();i++){
