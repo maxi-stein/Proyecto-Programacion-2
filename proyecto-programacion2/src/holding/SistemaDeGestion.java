@@ -19,15 +19,6 @@ public class SistemaDeGestion implements Serializable {
         paises = new HashMap<>();
         areasDeMercado = new HashMap<>();
         deserializarBD();
-        cargarDatosDefault();
-        /*empresas.put(1,new Empresa("Tenarix",LocalDate.now(),10));
-        usuarios.put(0,new Admin("admin1","Calle 123","1"));
-        Pais p = new Pais("Uruguay", 1200, 1000000);
-        paises.put(1, p);
-        Ciudad c = new Ciudad("Monte", p);
-        ciudades.put(1,c);
-        AreasMercado am = new AreasMercado("Construccion", "Obras");
-        areasDeMercado.put(1,am);*/
         BaseDeDatosSingleton.cargarDatosSerializados(usuarios,empresas,areasDeMercado,ciudades, paises);
 
     }
@@ -92,6 +83,7 @@ public class SistemaDeGestion implements Serializable {
             }catch (FileNotFoundException e) {
                 System.out.println("Error de E/S: " + e.getMessage());
                 System.out.println("~ BASE DE USUARIOS NO HALLADA ~");
+                cargarDatosDefault();
             }
             ObjectInputStream objEmp = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Empresas.bin"))));
             ObjectInputStream objArea = new ObjectInputStream((new BufferedInputStream(new FileInputStream("AreasDeMercado.bin"))));
