@@ -1,48 +1,148 @@
 @startuml
 class SistemaDeGestion{
-+mostrarMenu() : Integer
-+run() : void
+    - {static} Hashmap<Integer, Usuario> : USUARIOS
+    - {static} Hashmap<Integer, Empresa> : EMPRESAS
+    - {static} Hashmap<Integer, AreasMercado> : AREASDEMERCADO
+    - {static} Hashmap<Integer, Ciudad> : CIUDADES
+    - {static} Hashmap<Integer, Pais> : PAISES
+
+    +mostrarMenu() : Integer
+    +run() : void
+    +serializarBD() : void
+    +deserializarBD() : void
 }
 
-class BaseDatosHolding{
--autenticarUsuario(Integer,String) : Usuario
-+iniciarSesion() : Usuario
+class BaseDeDatosSingleton{
+    - {static} Hashmap<Integer, Usuario> : USUARIOS
+    - {static} Hashmap<Integer, Empresa> : EMPRESAS
+    - {static} Hashmap<Integer, AreasMercado> : AREASDEMERCADO
+    - {static} Hashmap<Integer, Ciudad> : CIUDADES
+    - {static} Hashmap<Integer, Pais> : PAISES
+
+    + {static} agregaAreaDeMercado(AreaMercado) : void
+    + {static} agregarAsesorAEmpresa(Integer, Asesor) : void
+    + {static} agregarCiudad(Ciudad) : void
+    + {static} agregarEmpresa(Empresa) : void
+    + {static} agregarPais(Pais) : void
+    + {static} agregarUsuario(Usuario) : void
+    + {static} areaEnUso(AreaMercado) : Boolean
+    - {static} autenticarUsuario(Integer,String) : Usuario
+    + {static} cargarDatosSerializados(Hashmap<Integer, Usuario>, Hashmap<Integer, Empresa> , Hashmap<Integer, AreasDeMercado> , Hashmap<Integer, Ciudad> , Hashmap<Integer, Pais>) : void
+    + {static} ciudadEnUso(Ciudad) : Boolean
+    + {static} ciudadYaExiste(Ciudad) : Boolean
+    + {static} contieneUsuario(Usuario) : Boolean
+    + {static} eliminarAreaDeMercado(Integer) : void
+    + {static} eliminarCiudad(Integer)) : void
+    + {static} eliminarEmpresa(Integer)) : void
+    + {static} eliminarUsuario(Integer)) : void
+    + {static} getInstance() : BaseDeDatosSingleton
+    + {static} iniciarSesion() : Usuario
+    + {static} listarAreasDeMercado() : void
+    + {static} listarCiudades() : void
+    + {static} listarCiudadesDeEmpresa(Integer) : void
+    + {static} listarEmpresas() : void
+    + {static} listarEmpresasQueUtilizanAreaMercado(AreaMercado) : void
+    + {static} listarEmpresasQueUtilizanCiudad(Ciudad) : void
+    + {static} listarPaises() : void
+    + {static} listarUsuarios() : void
+    + {static} listarVenderores() : void
+    + {static} modificarUsuario(Integer) : void
+    + {static} obtenerAreasDeMercado() : HashMap<Integer, AreaMercado>
+    + {static} obtenerCiudad() : Hashmap<Integer, Ciudad>
+    + {static} obtenerCiudadDeEmpresa(Integer) : HashMap<Integer, Ciudad>
+    + {static} obtenerCodigoMayor() : Integer
+    + {static} obtenerEmpresas() : HashMap<Integer, Empresa>
+    + {static} obtenerPaises() : HashMap<Integer, Pais>
+    + {static} obtenerUsuarios() : HashMap<Integer, Usuario>
+    + {static} obtenerVendedores() : HashMap<Integer, Vendedor>
+    + {static} paisYaExiste(Pais) : Boolean
+    + {static} usuarioAsesoraAEmpresa(Asesor, Empresa) : Boolean
+    + {static} INSTANCE : BaseDeDatosSingleton
 }
 
 abstract Usuario{
--{static} CONTADOR
--codigoUsuario : Integer
--nombre : String
--direccion : String
--pass : String
+    -codigoUsuario : Integer
+    -nombre : String
+    -direccion : String
+    -pass : String
+    - bloqueado : Boolean
 
-+proceder() : void
-+validarNombre() : Boolean
-+validarPass() : Boolean
-+mostrarInformacionUsuario() : void
-+getCodigoUsuario() : Integer
+    + Usuario(String, String, String)
+    + estaBloqueado() : Boolean
+    + getCodigoUsuario() : Integer
+    + getNombre() : String
+    + modificar() : void
+    + mostrarCredenciales() : void
+    + pedirDatosBasicos() : void
+    + proceder() : void
+    + setBloqueo(Boolean) : void
+    + setCodigoUsuario(Integer) : void
+    + setDireccion(String) : void
+    + setNombre(String) : void
+    + setPass(String) : void
+    + toString() : String
+    + validarPass(String) : Boolean
+
+    +proceder() : void
+    +validarNombre() : Boolean
+    +validarPass() : Boolean
+    +mostrarInformacionUsuario() : void
+    +getCodigoUsuario() : Integer
 }
 
 class Vendedor extends Usuario{
     -nombre : String
     -direccion : String
     -fechaCaptado : Date
-    +Vendedor(String,String,String,Date)
-    +captarVendedor(Vendedor) : Void
-    +contadorVendedoresCapt() : Integer
-    +proceder() : void
-    +mostrarInformacionUsuario() : void
 
+    +Vendedor(String,String,String,Date,Empresa)
+    +captarVendedor(Vendedor) : Void
+    +getCantidadVendedoresCapt() : Integer
+    +getEmpresaTrabajo() : Empresa
+    -listarVendedoresCaptados() : void
+    +modificar() : void
+    +mostarInfo() : void
+    +setEmpresaTrabajo(Empresa) : void
+    +proceder() : void
 }
 
 class Empresa{
     -nombre : String
     -fechaEntrada : Date
     -facturacionAnual : Double
-    -contador : Integer
     -codigoEmpresa : Integer
+    -bloqueado() : Boolean
+    -ciudades : HashMap<Integer, Ciudad>
+    -areasMercado : HashMap<Integer, AreaMercado>
+    -asesores : ArrayList<VinculacionAsesorEmpresa>
+
     +Empresa(String,Date,Double)
-    +displayInfo() : String
+    +agregarAreaMercado(AreasMercado) : void
+    +agregarCiudad(Integer) : void
+    +agregarVendedor(Vendedor) : void
+    +areaCompatible(AreaMercado) : Boolean
+    +eliminarAreaDeMercado(AreaMercado) : void
+    +eliminarAsesor(Asesor) : void
+    +eliminarCiudad(Ciudad) : void
+    +eliminarRegistrosAreaDeMercado() : void
+    +eliminarVendedor(Vendedor) : void
+    +esAsesoradoPor(Asesor) : void
+    +estaBloqueado() : Boolean
+    +estaUbicadaEnCiudad(Ciudad) : Boolean
+    +getFacturacionAnual() : Double
+    +getNombre() : String
+    +getSede() : Ciudad
+    +listarAreasDeMercado() : void
+    +listarCiudades() : void
+    +mostrarFechaInicioAsesor(Asesor) : void
+    +obtenerAreasDeMercado() : HashMap<Integer, AreaMercado>
+    +obtenerCiudades() : HashMap<Integer, Ciudad>
+    +seleccionarSede(Ciudad) : void
+    +setBloqueo(Boolean) : void
+    +setFacturacionAnual(Double) : void
+    +setFechaEntrada(LocalDate) : void
+    +setNombre(String) : void
+    +tieneTrabajadores() : Boolean
 }
 
 class AreaMercado {
