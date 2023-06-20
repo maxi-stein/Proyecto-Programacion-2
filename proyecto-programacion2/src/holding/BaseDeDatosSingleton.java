@@ -152,6 +152,10 @@ public class BaseDeDatosSingleton {
     public static void agregarCiudad(Ciudad c){
         ciudades.put(ciudades.size()+1,c);
     }
+
+    public static void agregarAreaDeMercado(AreasMercado areaMercado){
+        areasDeMercado.put(areasDeMercado.size()+1,areaMercado);
+    }
     public static boolean ciudadYaExiste(Ciudad c){
         boolean existe = false;
         int i=1;

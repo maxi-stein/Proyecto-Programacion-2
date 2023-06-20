@@ -1,5 +1,7 @@
 package holding;
 
+import menues.MenuCrearEmpresa;
+
 import java.io.*;
 import java.util.HashMap;
 
@@ -26,9 +28,21 @@ public class SistemaDeGestion implements Serializable {
         ciudades.put(1,c);
         AreasMercado am = new AreasMercado("Construccion", "Obras");
         areasDeMercado.put(1,am);*/
-
         bd.cargarDatosSerializados(usuarios,empresas,areasDeMercado,ciudades, paises);
-
+        if(areasDeMercado.size()== 0){
+            AreasMercado area1 = new AreasMercado("CONSTRUCCION", "Obras Publicas");
+            AreasMercado area2 = new AreasMercado("METALURGICA", "Acero Industrial");
+            AreasMercado area3 = new AreasMercado("ASESORAMIENTO", "Servicio de Consultoria");
+            bd.agregarAreaDeMercado(area1);
+            bd.agregarAreaDeMercado(area2);
+            bd.agregarAreaDeMercado(area3);
+        }
+        if(empresas.size()==0)
+        {
+            System.out.println("NO HAY EMPRESAS REGISTRADAS - SE PROCEDERA A REGISTRAR");
+            MenuCrearEmpresa m = new MenuCrearEmpresa();
+            m.ejecutar();
+        }
     }
     public void run() throws IOException {
         int num;
@@ -41,9 +55,10 @@ public class SistemaDeGestion implements Serializable {
                 if(loggedInUsuario != null){
                     loggedInUsuario.proceder();
                 }
+                serializarBD(bd.obtenerUsuarios(), bd.obtenerEmpresas(),bd.obtenerAreasDeMercado(),bd.obtenerCiudades(), bd.obtenerPaises());
             }
         }while(num!=2);
-        serializarBD(bd.obtenerUsuarios(), bd.obtenerEmpresas(),bd.obtenerAreasDeMercado(),bd.obtenerCiudades(), bd.obtenerPaises());
+
 
     }
     public int mostrarMenu(){
