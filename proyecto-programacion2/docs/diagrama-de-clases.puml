@@ -148,25 +148,40 @@ class Empresa{
 class AreaMercado {
     -nombre : String
     -descripcion : String
+    -bloqueado : Boolean
 
-    +AreaMercado()
-    +mostrarInformacion() : Void
+    +AreaMercado(String, String)
+    +estaBloqueado() : Boolean
+    +getNombre() : String
+    +setBloqueo(Boolean) : void
+    +setDescripcion(String) : void
+    +toString() : String
 }
 
 class Asesor extends Usuario{
--nombre : String
--direccion : String
--titulacion : String
--fechasInicio : List
-+asesorarEmpresa(Empresa)
-+cubrirAreaMercado(AREAS_MERCADO) : void
-+mostrarInformacionUsuario() : void
+    -nombre : String
+    -direccion : String
+    -titulacion : String
+    -fechasInicio : LocalDate
+    -cantidadMercadoCubiertos : Integer
+    -mercadosCubiertos : HashMap<Integer, AreaMercado>
+
+    +agregaAreaMercadoCubierto(AreaMercado) : void
+    +asesoraArea(AreaMercado : Boolean
+    -eliminarAreaMercadoCubierto(Integer) : void
+    +listarMercadosCubiertos() : void
+    +modificar() : void
+    +mostrarInfo() : void
+    +proceder() : void
+    +setTitulacion(String) : void
+    +toString() : String
 }
 
 class VinculacionAsesorEmpresa{
     -fechaInicio : Date
 
-    +VinculacionAsesorEmpresa()
+    +VinculacionAsesorEmpresa(Asesor,LocalDate)
+    +contiene(Asesor) : Boolean
     +getAsesor() : Asesor
     +getFechaInicio() : Date
 }
@@ -175,29 +190,62 @@ class Admin extends Usuario{
 -nombre : String
 -direccion : String
 -fechaInicio : Date
-+crearVendedor() : void
-+crearAsesor() : void
-+crearEmpresa(): void
-+crearPais() : void
+
++modificar() : void
++mostrarInfo() : void
 +proceder() : void
-+mostrarMenu() : Integer
-+mostrarInformacionUsuario() : void
 }
 
 class Pais{
     -nombre : String
     -pbi : Double
     -numHabitantes : double
+    -bloqueado : Boolean
 
     +Pais(String,double,double)
-    +hacerSede(Empresa) : void
-    -eliminarSede(Empresa) : void
+    +esIgual(Pais) : Boolean
+    +estaBloqueado() : Boolean
+    +getNombre() : Boolean
+    +setBloqueado(Boolean) : void
+    +setNombre(String) : void
+    +setNumHabitantes(Double) : void
+    +setPbi(Double) : void
+    +toString() : String
+}
+
+class Consola{
+    - sc : Scanner
+
+    +leerDouble() : Double
+    +leerEntero() : Integer
+    +leerFecha() : String
 }
 
 class Ciudad{
     -nombre: String
+    -paisorigen : Pais
+    -bloqueado : Boolean
     +Ciudad(String,Pais);
     +esIgual(Ciudad) : Boolean
+    +estaBloqueado() : Boolean
+    +getNombre() : String
+    +getPaisOrigen() : Pais
+    +toString() : String
+}
+
+class FactoryUsuarios{
+ - bd : BaseDeDatosSingleton
+
+ -crearAdmin() : void
+ -crearAsesor() : void
+ +crearUsuario(Integer) : void
+ -crearVendedor() : void
+ -crearVendedorCaptado() : void
+}
+
+interface CapazDeSerBloqueado <<interface>>{
+    +{abstract} estaBloqueado() : Boolean
+    +{abstract} setBloqueo(Boolean) : void
 }
 
 interface CapazDeVisualizarMenu <<interface>>{
