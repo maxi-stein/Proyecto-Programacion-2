@@ -7,29 +7,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Vendedor extends Usuario {
-
     private LocalDate fechaCaptado;
     private ArrayList<Vendedor> vendedoresCaptados;
     private Empresa empresaTrabajo;
-
     public Vendedor(String nombre, String direccion, String pass, LocalDate fechaCaptado,Empresa empresaTrabajo) {
         super(nombre, direccion, pass);
         this.fechaCaptado = fechaCaptado;
         this.empresaTrabajo = empresaTrabajo;
         vendedoresCaptados = new ArrayList<>();
     }
-
     public Vendedor(){
         super();
         this.fechaCaptado = LocalDate.now();
         vendedoresCaptados = new ArrayList<>();
     }
-
     public void captarVendedor(Vendedor vendedor){
         vendedoresCaptados.add(vendedor);
     }
-    public int contadorVendedoresCapt(){
+    public int getCantidadVendedoresCapt(){
         return vendedoresCaptados.size();
+
     }
     @Override
     public void proceder() {
@@ -40,15 +37,18 @@ public class Vendedor extends Usuario {
     public void mostrarInfo() {
         mostrarCredenciales();
         System.out.println("Empresa de trabajo actual: ");
-        System.out.print(empresaTrabajo.getNombre()+ "(Captado: "+fechaCaptado+")");
+        System.out.print(empresaTrabajo.getNombre()+ "(Captado: "+fechaCaptado.getDayOfMonth()+"/"+fechaCaptado.getMonth()+"/"+fechaCaptado.getYear()+")");
+        System.out.println("El vendedor posee un total de "+getCantidadVendedoresCapt()+" vendedores captados");
+        listarVendedoresCaptados();
     }
     private void listarVendedoresCaptados(){
         if(vendedoresCaptados.size()==0){
             System.out.println("Aun no posee vendedores captados");
         }
         else {
+            System.out.println("Los empleados captados son:");
             for (Vendedor v : vendedoresCaptados) {
-                System.out.println(v.toString());
+                System.out.println(v.getNombre());
             }
         }
     }

@@ -13,13 +13,13 @@ public class SistemaDeGestion implements Serializable {
     private static HashMap<Integer,Ciudad> ciudades;
     private static HashMap<Integer,Pais> paises;
     public SistemaDeGestion() throws IOException {
-        BaseDeDatosSingleton bd = BaseDeDatosSingleton.getInstance();
         usuarios = new HashMap<>();
         empresas = new HashMap<>();
         ciudades = new HashMap<>();
         paises = new HashMap<>();
         areasDeMercado = new HashMap<>();
         deserializarBD();
+        cargarDatosDefault();
         /*empresas.put(1,new Empresa("Tenarix",LocalDate.now(),10));
         usuarios.put(0,new Admin("admin1","Calle 123","1"));
         Pais p = new Pais("Uruguay", 1200, 1000000);
@@ -28,21 +28,8 @@ public class SistemaDeGestion implements Serializable {
         ciudades.put(1,c);
         AreasMercado am = new AreasMercado("Construccion", "Obras");
         areasDeMercado.put(1,am);*/
-        bd.cargarDatosSerializados(usuarios,empresas,areasDeMercado,ciudades, paises);
-        if(areasDeMercado.size() == 0){
-            AreasMercado area1 = new AreasMercado("CONSTRUCCION", "Obras Publicas");
-            AreasMercado area2 = new AreasMercado("METALURGICA", "Acero Industrial");
-            AreasMercado area3 = new AreasMercado("ASESORAMIENTO", "Servicio de Consultoria");
-            bd.agregarAreaDeMercado(area1);
-            bd.agregarAreaDeMercado(area2);
-            bd.agregarAreaDeMercado(area3);
-        }
-        if(empresas.size()==0)
-        {
-            System.out.println("NO HAY EMPRESAS REGISTRADAS - SE PROCEDERA A REGISTRAR");
-            MenuCrearEmpresa m = new MenuCrearEmpresa();
-            m.ejecutar();
-        }
+        BaseDeDatosSingleton.cargarDatosSerializados(usuarios,empresas,areasDeMercado,ciudades, paises);
+
     }
     public void run() throws IOException {
         int num;
@@ -65,26 +52,28 @@ public class SistemaDeGestion implements Serializable {
         System.out.print("1-Iniciar Sesion \n2-Salir del Sistema\n");
         return Consola.leerEntero();
     }
-
     public static void serializarBD(HashMap<Integer,Usuario> usuarios2,
                              HashMap<Integer,Empresa> empresas2,
                              HashMap<Integer,AreasMercado> areasDeMercado2,
                              HashMap<Integer,Ciudad> ciudades2, HashMap<Integer,Pais> paises2) throws IOException {
 
         try{
-            ObjectOutputStream ObjUser =  new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("Usuarios.bin")));
-            ObjectOutputStream objEmp =  new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("Empresas.bin")));
-            ObjectOutputStream objArea =  new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("AreasDeMercado.bin")));
-            ObjectOutputStream objCiudad =  new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("Ciudades.bin")));
-            ObjectOutputStream objPais =  new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("Paises.bin")));
+            ObjectOutputStream objUser = crearObjectOutputStream("Usuarios.bin");
+            objUser.writeObject(usuarios2);
 
-            ObjUser.writeObject(usuarios2);
+            ObjectOutputStream objEmp = crearObjectOutputStream("Empresas.bin");
             objEmp.writeObject(empresas2);
+
+            ObjectOutputStream objArea = crearObjectOutputStream("AreasDeMercado.bin");
             objArea.writeObject(areasDeMercado2);
+
+            ObjectOutputStream objCiudad = crearObjectOutputStream("Ciudades.bin");
             objCiudad.writeObject(ciudades2);
+
+            ObjectOutputStream objPais = crearObjectOutputStream("Paises.bin");
             objPais.writeObject(paises2);
 
-            ObjUser.close();
+            objUser.close();
             objEmp.close();
             objArea.close();
             objCiudad.close();
@@ -94,19 +83,15 @@ public class SistemaDeGestion implements Serializable {
             System.out.println(e.getMessage());
         }
     }
-
     public static void deserializarBD() throws IOException, FileNotFoundException {
         try{
             try{
                 ObjectInputStream objUser = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Usuarios.bin"))));
-                usuarios = (HashMap<Integer, Usuario>)  objUser.readObject();
+                usuarios = (HashMap<Integer, Usuario>) objUser.readObject();
                 objUser.close();
             }catch (FileNotFoundException e) {
                 System.out.println("Error de E/S: " + e.getMessage());
                 System.out.println("~ BASE DE USUARIOS NO HALLADA ~");
-                Admin admin = new Admin("admin1", "Calle 123", "1");
-                usuarios.put(usuarios.size()+1, admin);
-                System.out.println("Se ha creado el Admin Default");
             }
             ObjectInputStream objEmp = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Empresas.bin"))));
             ObjectInputStream objArea = new ObjectInputStream((new BufferedInputStream(new FileInputStream("AreasDeMercado.bin"))));
@@ -126,6 +111,31 @@ public class SistemaDeGestion implements Serializable {
         } catch (FileNotFoundException | ClassNotFoundException e) {
             System.out.println("Error de E/S: " + e.getMessage());
             System.out.println("BASE NO RECUPERADA");
+        }
+    }
+    private static ObjectOutputStream crearObjectOutputStream(String nomArchivo) throws IOException {
+        return new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(nomArchivo)));
+    }
+    private static ObjectInputStream crearObjectInputStream(String nomArchivo) throws IOException {
+        return new ObjectInputStream(new BufferedInputStream(new FileInputStream(nomArchivo)));
+    }
+    private static void cargarDatosDefault(){
+        usuarios.put(usuarios.size()+1, new Admin("admin1", "Calle 123", "1"));
+        if(areasDeMercado.size() == 0){
+            BaseDeDatosSingleton.agregarAreaDeMercado(new AreasMercado("CONSTRUCCION", "Obras Publicas"));
+            BaseDeDatosSingleton.agregarAreaDeMercado(new AreasMercado("METALURGICA", "Acero Industrial"));
+            BaseDeDatosSingleton.agregarAreaDeMercado(new AreasMercado("ASESORAMIENTO", "Servicio de Consultoria"));
+        }
+        if(paises.size() == 0){
+            Pais paisDefault = new Pais("Argentina",487.2,50000000);
+            BaseDeDatosSingleton.agregarPais(paisDefault);
+            BaseDeDatosSingleton.agregarCiudad(new Ciudad("Buenos Aires",paisDefault));
+        }
+
+        if(empresas.size()==0) {
+            System.out.println("NO HAY EMPRESAS REGISTRADAS - SE PROCEDERA A REGISTRAR UNA EMPRESA");
+            MenuCrearEmpresa m = new MenuCrearEmpresa();
+            m.ejecutar();
         }
     }
 }
