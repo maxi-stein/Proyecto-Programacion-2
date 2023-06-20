@@ -10,6 +10,7 @@ public class BaseDeDatosSingleton {
     private static HashMap<Integer,AreasMercado> areasDeMercado;
     private static HashMap<Integer,Ciudad> ciudades;
     private static HashMap<Integer,Pais> paises;
+    private static Usuario usuarioLogueado;
 
     private BaseDeDatosSingleton(){
         usuarios = new HashMap<>();
@@ -38,21 +39,20 @@ public class BaseDeDatosSingleton {
 
     }
     public static Usuario iniciarSesion(){
-        Usuario usuarioIN = null;
         int intentos = 0;
-        while(usuarioIN == null && intentos < 3 ) {
+        while(usuarioLogueado == null && intentos < 3 ) {
             intentos ++;
             System.out.println("Codigo de Usuario:");
             int user = Consola.leerEntero();
             System.out.println("Contraseña:");
             String pass = Consola.leerString();
             try{
-                usuarioIN =  autenticarUsuario(user,pass);
+                usuarioLogueado =  autenticarUsuario(user,pass);
             }catch (NullPointerException e) {
                 System.out.println("Usuario o contraseña incorrecta");
             }
         }
-        return usuarioIN;
+        return usuarioLogueado;
     }
     private static Usuario autenticarUsuario(int userCod, String pass){
         Usuario usuarioEncontrado = null;
@@ -211,5 +211,12 @@ public class BaseDeDatosSingleton {
     }
     public static int obtenerCodigoMayor(){
         return usuarios.size();
+    }
+    public static void desloguearUsuario(){
+        usuarioLogueado = null;
+    }
+
+    public static Usuario getUsuarioLogueado() {
+        return usuarioLogueado;
     }
 }

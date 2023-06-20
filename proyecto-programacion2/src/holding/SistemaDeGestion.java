@@ -46,20 +46,20 @@ public class SistemaDeGestion implements Serializable {
     }
     public void run() throws IOException {
         int num;
-        BaseDeDatosSingleton bd = BaseDeDatosSingleton.getInstance();
         do{
             num=mostrarMenu();
             if (num == 1) {
 
-                Usuario loggedInUsuario = bd.iniciarSesion();
+                Usuario loggedInUsuario = BaseDeDatosSingleton.iniciarSesion();
                 if(loggedInUsuario != null){
                     loggedInUsuario.proceder();
                 }
-                serializarBD(bd.obtenerUsuarios(), bd.obtenerEmpresas(),bd.obtenerAreasDeMercado(),bd.obtenerCiudades(), bd.obtenerPaises());
+                BaseDeDatosSingleton.desloguearUsuario();
+                serializarBD(BaseDeDatosSingleton.obtenerUsuarios(), BaseDeDatosSingleton.obtenerEmpresas(),
+                        BaseDeDatosSingleton.obtenerAreasDeMercado(), BaseDeDatosSingleton.obtenerCiudades(),
+                        BaseDeDatosSingleton.obtenerPaises());
             }
         }while(num!=2);
-
-
     }
     public int mostrarMenu(){
         System.out.print("1-Iniciar Sesion \n2-Salir del Sistema\n");

@@ -1,8 +1,22 @@
 package menues;
 
+import holding.Consola;
+
 public class MenuPrincipalVendedor extends Menu {
+
     @Override
     public void ejecutar() {
-        System.out.println("Menu Vendedor No Implementado");
+        agregarAccion(1,new MenuMostrarInformacion());
+        System.out.print("1- Mostrar Informacion \t2- Salir\n");
+        int opcion = 0;
+        while (opcion<1 || opcion>2){
+            opcion = Consola.leerEntero();
+        }
+        if(opcion==1){
+            ejecutarAccion(opcion);
+        }
+    }
+    public void ejecutarAccion(int key){
+        getAccion(key).ejecutar();
     }
 }
