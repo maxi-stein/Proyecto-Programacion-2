@@ -25,7 +25,6 @@ public class Asesor extends Usuario{
         MenuPrincipalAsesor mpa = new MenuPrincipalAsesor();
         mpa.ejecutar();
     }
-
     @Override
     public void mostrarInfo() {
         super.mostrarCredenciales();
@@ -34,9 +33,8 @@ public class Asesor extends Usuario{
         listarMercadosCubiertos();
         System.out.println();
         System.out.println("Empresas asesoradas:");
-        listarEmpresasDeAsesor();
+        BaseDeDatosSingleton.listarEmpresasDeAsesor(this);
     }
-
     @Override
     public void modificar() {
         super.modificar();
@@ -118,11 +116,7 @@ public class Asesor extends Usuario{
                 break;
         }
     }
-    public void listarEmpresasDeAsesor(){
-        System.out.println("Implementar codigo de listado de empresas. Se debe acceder al hashmap de empresas de basededatos, luego al arraylist de VinculacionEmpresa asesor" +
-                "y verificar si dicho asesor esta dentro o no. Si nolo esta, se avanza a la siguiente empresa y asi sucesivamente...");
 
-    }
     public void listarMercadosCubiertos(){
         for(var merc : mercadosCubiertos.entrySet()){
             System.out.println("-"+merc.getValue());

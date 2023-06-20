@@ -219,4 +219,11 @@ public class BaseDeDatosSingleton {
     public static Usuario getUsuarioLogueado() {
         return usuarioLogueado;
     }
+    public static void listarEmpresasDeAsesor(Asesor a){
+        for(var empresa : empresas.entrySet()){
+            if(empresa.getValue().esAsesoradoPor(a)){
+                System.out.println(empresa.getValue().getNombre());
+            }
+        }
+    }
 }
