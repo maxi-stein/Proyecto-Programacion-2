@@ -7,24 +7,20 @@ import holding.Pais;
 import java.util.HashMap;
 
 public class MenuCrearCiudad implements CapazDeEjecutarAccionMenu{
-    private static BaseDeDatosSingleton bd;
-    public MenuCrearCiudad(){
-        bd = BaseDeDatosSingleton.getInstance();
-    }
     @Override
     public void ejecutar() {
         System.out.println("Seleccione el pais origen de la ciudad a crear:");
-        bd.listarPaises();
-        HashMap<Integer, Pais> paises = bd.obtenerPaises();
+        BaseDeDatosSingleton.listarPaises();
+        HashMap<Integer, Pais> paises = BaseDeDatosSingleton.obtenerPaises();
         Pais p = seleccionarPais(paises);
         System.out.println("Determine el nombre de la ciudad: ");
         String nombre = Consola.leerString().toUpperCase();
         Ciudad ciudad = new Ciudad(nombre,p);
-        if(bd.ciudadYaExiste(ciudad)){
+        if(BaseDeDatosSingleton.ciudadYaExiste(ciudad)){
             System.out.println("La ciudad "+ciudad.getNombre()+" asociada al pais "+ciudad.getPaisOrigen()+ " ya existe!");
         }
         else{
-            bd.agregarCiudad(ciudad);
+            BaseDeDatosSingleton.agregarCiudad(ciudad);
             System.out.println("Se agrego la ciudad: \n"+ ciudad);
         }
     }

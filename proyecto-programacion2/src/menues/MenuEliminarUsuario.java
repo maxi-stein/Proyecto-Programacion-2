@@ -7,10 +7,10 @@ public class MenuEliminarUsuario implements CapazDeEjecutarAccionMenu{
     @Override
     public void ejecutar() {
         BaseDeDatosSingleton.listarUsuarios();
-        int key = elegirUsuario();
+        int key = seleccionarUsuario();
         BaseDeDatosSingleton.eliminarUsuario(key);
     }
-    private int elegirUsuario(){
+    private int seleccionarUsuario(){
         int key;
         do{
             key = Consola.leerEntero();

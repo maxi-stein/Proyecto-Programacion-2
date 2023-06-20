@@ -8,15 +8,16 @@ import holding.Pais;
 import java.util.HashMap;
 
 public class MenuModificarCiudad implements CapazDeEjecutarAccionMenu{
-    private static BaseDeDatosSingleton bd;
+    private HashMap<Integer, Ciudad> ciudades;
+    private HashMap<Integer, Pais> paises;
     public MenuModificarCiudad(){
-        bd = BaseDeDatosSingleton.getInstance();
+        ciudades = BaseDeDatosSingleton.obtenerCiudades();
+        paises = BaseDeDatosSingleton.obtenerPaises();
     }
     @Override
     public void ejecutar() {
         System.out.println("Seleccione la ciudad a modificar:");
-        bd.listarCiudades();
-        HashMap<Integer, Ciudad> ciudades = bd.obtenerCiudades();
+        BaseDeDatosSingleton.listarCiudades();
         int keyCiudad = seleccionarCiudad(ciudades);
         System.out.println("Determine que atributo modificar:");
         System.out.print("1 - Nombre '\t'"+" 2- Pais Origen \n"+
@@ -35,8 +36,7 @@ public class MenuModificarCiudad implements CapazDeEjecutarAccionMenu{
                 break;
             case 2:
                 System.out.println("Seleccione el pais:");
-                bd.listarPaises();
-                HashMap<Integer, Pais> paises = bd.obtenerPaises();
+                BaseDeDatosSingleton.listarPaises();
                 int keyPais = 0;
                 while(keyPais<1 || keyPais>paises.size()){
                     keyPais=Consola.leerEntero();

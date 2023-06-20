@@ -7,15 +7,14 @@ import holding.Pais;
 import java.util.HashMap;
 
 public class MenuModificarPais implements CapazDeEjecutarAccionMenu {
-    private static BaseDeDatosSingleton bd;
+    private HashMap<Integer, Pais> paises;
     public MenuModificarPais(){
-        bd = BaseDeDatosSingleton.getInstance();
+       paises = BaseDeDatosSingleton.obtenerPaises();
     }
     @Override
     public void ejecutar() {
         System.out.println("Seleccione el pais a modificar:");
-        bd.listarPaises();
-        HashMap<Integer, Pais> paises = bd.obtenerPaises();
+        BaseDeDatosSingleton.listarPaises();
         int keyPais = seleccionarPais(paises);
         System.out.println("Determine que atributo modificar:");
         System.out.print("1 - Nombre '\t'"+" 2- PBI \t"+"3 - Numero de habitantes\n"+

@@ -1,17 +1,11 @@
 package menues;
 
-import holding.BaseDeDatosSingleton;
 import holding.Consola;
 import holding.FactoryUsuarios;
-import holding.Usuario;
-
-import java.util.HashMap;
 
 public class MenuCrearUsuario implements CapazDeEjecutarAccionMenu{
-    private HashMap<Integer, Usuario> usuarios;
     @Override
     public void ejecutar() {
-        BaseDeDatosSingleton bd = BaseDeDatosSingleton.getInstance();
         int opcion = elegirOpcion();
         FactoryUsuarios.crearUsuario(opcion);
     }

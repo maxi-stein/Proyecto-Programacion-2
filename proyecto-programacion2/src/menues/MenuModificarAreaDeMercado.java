@@ -7,16 +7,14 @@ import holding.Consola;
 import java.util.HashMap;
 
 public class MenuModificarAreaDeMercado implements CapazDeEjecutarAccionMenu {
-
-    private BaseDeDatosSingleton bd;
+    private HashMap<Integer, AreasMercado> areas;
     public MenuModificarAreaDeMercado(){
-        bd = BaseDeDatosSingleton.getInstance();
+        areas = BaseDeDatosSingleton.obtenerAreasDeMercado();
     }
     @Override
     public void ejecutar() {
         System.out.println("Seleccione el pais a modificar:");
-        bd.listarEmpresas();
-        HashMap<Integer, AreasMercado> areas = bd.obtenerAreasDeMercado();
+        BaseDeDatosSingleton.listarEmpresas();
         int keyAreaMercado = seleccionarAreaMercado(areas);
         System.out.println("Determine que atributo modificar:");
         System.out.print("1 - Nombre '\t'"+" 2- Descripción"+"\n"+
@@ -26,7 +24,6 @@ public class MenuModificarAreaDeMercado implements CapazDeEjecutarAccionMenu {
             opcion = Consola.leerEntero();
         }
         AreasMercado areaSeleccionada = areas.get(keyAreaMercado);
-
         switch (opcion){
             case 1:
                 System.out.println("Ingrese el nuevo nombre:");
@@ -45,7 +42,6 @@ public class MenuModificarAreaDeMercado implements CapazDeEjecutarAccionMenu {
         }
 
     }
-
     private int seleccionarAreaMercado(HashMap<Integer, AreasMercado> areaMercado){
         int opcion = 0;
         while (opcion<1 || opcion>areaMercado.size()){

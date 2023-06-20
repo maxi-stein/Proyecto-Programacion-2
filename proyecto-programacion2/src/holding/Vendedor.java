@@ -1,6 +1,6 @@
 package holding;
 
-import menues.MenuPrincipalVendedor;
+import menues.MenuPrincipalNoAdmin;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class Vendedor extends Usuario {
     }
     @Override
     public void proceder() {
-        MenuPrincipalVendedor mp = new MenuPrincipalVendedor();
+        MenuPrincipalNoAdmin mp = new MenuPrincipalNoAdmin();
         mp.ejecutar();
     }
     @Override
