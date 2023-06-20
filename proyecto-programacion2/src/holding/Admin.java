@@ -14,7 +14,10 @@ public class Admin extends Usuario {
         MenuPrincipalAdmin mp = new MenuPrincipalAdmin();
         mp.ejecutar();
     }
-
+    @Override
+    public void mostrarInfo() {
+        super.mostrarCredenciales();
+    }
     @Override
     public void modificar() {
         super.modificar();

@@ -19,6 +19,7 @@ public abstract class Usuario implements CapazDeSerBloqueado, Serializable {
         codigoUsuario=BaseDeDatosSingleton.getInstance().obtenerCodigoMayor()+1;
     }
     public abstract void proceder();
+    public abstract void mostrarInfo();
     public void setBloqueo(boolean valor){
         this.bloqueado = valor;
     }

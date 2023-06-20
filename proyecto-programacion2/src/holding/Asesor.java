@@ -27,8 +27,18 @@ public class Asesor extends Usuario{
     }
 
     @Override
+    public void mostrarInfo() {
+        super.mostrarCredenciales();
+        System.out.println("Titulacion: "+titulacion);
+        System.out.println("Mercados cubiertos:");
+        listarMercadosCubiertos();
+        System.out.println();
+        System.out.println("Empresas asesoradas:");
+        listarEmpresasDeAsesor();
+    }
+
+    @Override
     public void modificar() {
-        BaseDeDatosSingleton bd = BaseDeDatosSingleton.getInstance();
         super.modificar();
         System.out.println("4 - Titulacion");
         System.out.println("5 - Agregar Area de Mercado Cubierto"+'\t'+"6 - Eliminar Area de Mercado Cubierto");
@@ -38,8 +48,8 @@ public class Asesor extends Usuario{
         while(opcion<1 || opcion>9){
             opcion = Consola.leerEntero();
         }
-        bd.listarEmpresas();
-        HashMap<Integer,Empresa> empresas = bd.obtenerEmpresas();
+        BaseDeDatosSingleton.listarEmpresas();
+        HashMap<Integer,Empresa> empresas = BaseDeDatosSingleton.obtenerEmpresas();
         int keyEmpresa = 0;
 
         switch (opcion){
@@ -60,8 +70,8 @@ public class Asesor extends Usuario{
                 setTitulacion(titulacion);
                 break;
             case 5:
-                bd.listarAreasDeMercado();
-                HashMap <Integer,AreasMercado> areas = bd.obtenerAreasDeMercado();
+                BaseDeDatosSingleton.listarAreasDeMercado();
+                HashMap <Integer,AreasMercado> areas = BaseDeDatosSingleton.obtenerAreasDeMercado();
                 int keyArea = 0;
                 do {
                     keyArea = Consola.leerEntero();
@@ -87,7 +97,7 @@ public class Asesor extends Usuario{
                 do {
                     keyEmpresa = Consola.leerEntero();
                 } while (keyEmpresa < 0 || keyEmpresa > empresas.size());
-                if(bd.usuarioAsesoraAEmpresa(this,empresas.get(keyEmpresa))){
+                if(BaseDeDatosSingleton.usuarioAsesoraAEmpresa(this,empresas.get(keyEmpresa))){
                     System.out.println("El usuario ya asesora dicha empresa!");
                 }
                 else{
@@ -99,7 +109,7 @@ public class Asesor extends Usuario{
                 do {
                     keyEmpresa = Consola.leerEntero();
                 } while (keyEmpresa < 0 || keyEmpresa > empresas.size());
-                if(!bd.usuarioAsesoraAEmpresa(this,empresas.get(keyEmpresa))){
+                if(!BaseDeDatosSingleton.usuarioAsesoraAEmpresa(this,empresas.get(keyEmpresa))){
                     empresas.get(keyEmpresa).eliminarAsesor(this);
                     System.out.println("El asesor " + getNombre() + " se desvinculo exitosamente de la empresa " +
                             empresas.get(keyEmpresa).getNombre());
@@ -111,6 +121,12 @@ public class Asesor extends Usuario{
     public void listarEmpresasDeAsesor(){
         System.out.println("Implementar codigo de listado de empresas. Se debe acceder al hashmap de empresas de basededatos, luego al arraylist de VinculacionEmpresa asesor" +
                 "y verificar si dicho asesor esta dentro o no. Si nolo esta, se avanza a la siguiente empresa y asi sucesivamente...");
+
+    }
+    public void listarMercadosCubiertos(){
+        for(var merc : mercadosCubiertos.entrySet()){
+            System.out.println("-"+merc.getValue());
+        }
     }
     public void agregarAreaMercadoCubierto(AreasMercado area){
         mercadosCubiertos.put(cantidadMercadosCubiertos+1,area);
