@@ -1,0 +1,116 @@
+@startuml
+
+abstract class Menu implements CapazDeEjecutarAccionMenu{
+    -acciones : Hashmap<Integer, CapazDeEjecutarAccionMenu>
+    +agregarAccion(Integer,  CapazDeEjecutarAccionMenu) : Void
+    +getAccion(Integer) : CapazDeEjecutarAccionMenu
+    +Menu()
+}
+
+class MenuABMCAreasMercado extends Menu{
+    +MenuABMCAreasMercado()
+    +ejecutar() : Void
+    +ejecutarAccion() : Void
+}
+class MenuABMCEmpresas extends Menu{
+    +MenuABMCEmpresas();
+    +ejecutar() : Void
+    +ejecutarAccion() : Void
+}
+class MenuABMCUbicaciones extends Menu{
+    +MenuABMCUbicaciones();
+    +ejecutar() : Void
+    +ejecutarAccion() : Void
+}
+class MenuABMCUsuarios extends Menu{
+    +MenuABMCUsuarios();
+    +ejecutar() : Void
+    +ejecutarAccion() : Void
+}
+class MenuCrearAreaDeMercado implements CapazDeEjecutarAccionMenu{
+    +ejecutar() : Void
+}
+class MenuCrearCiudad implements CapazDeEjecutarAccionMenu{
+    +ejecutar() : Void
+}
+class MenuCrearEmpresa implements CapazDeEjecutarAccionMenu{
+    -HashMap<Integer, Ciudad> : ciudades
+    +ejecutar() : Void
+}
+class MenuCrearPais implements CapazDeEjecutarAccionMenu{
+    +ejecutar() : Void
+}
+class MenuCrearUsuario implements CapazDeEjecutarAccionMenu{
+    +ejecutar() : Void
+    +elegirOpcion() : Integer
+}
+class MenuEliminarAreaDeMercado implements CapazDeEjecutarAccionMenu{
+    -HashMap<Integer, AreasMercado> : areas
+    +MenuEliminarAreaDeMercado()
+    +ejecutar() : Void
+    +elegirOpcion() : Integer
+}
+class MenuEliminarCiudad implements CapazDeEjecutarAccionMenu{
+    -HashMap<Integer, Ciudad> : ciudades
+    +MenuEliminarCiudad()
+    +ejecutar() : Void
+}
+class MenuEliminarEmpresa implements CapazDeEjecutarAccionMenu{
+    -HashMap<Integer, Empresa> : empresas
+    +MenuEliminarEmpresa()
+    +ejecutar() : Void
+}
+class MenuEliminarUsuario implements CapazDeEjecutarAccionMenu{
+    +ejecutar() : Void
+    +elegirUsuario() : Void
+}
+class MenuModificarAreaDeMercado implements CapazDeEjecutarAccionMenu{
+    -HashMap<Integer, AreasMercado> : areas
+    +MenuModificarAreaDeMercado()
+    +ejecutar() : Void
+    +seleccionarAreaMercado(HashMap<Integer, AreasMercado> areaMercado) : Integer
+}
+class MenuModificarCiudad implements CapazDeEjecutarAccionMenu{
+    -HashMap<Integer, Ciudad> : ciudades
+    -HashMap<Integer, Pais> : paises
+    +MenuModificarCiudad()
+    +ejecutar() : Void
+}
+class MenuModificarEmpresa implements CapazDeEjecutarAccionMenu{
+    -HashMap<Integer, Ciudad> : ciudades
+    -HashMap<Integer, Pais> : paises
+    -HashMap<Integer,Ciudad> : ciudadesDeEmpresa
+    -HashMap<Integer, AreasMercado> : areas
+    +MenuModificarEmpresa()
+    +ejecutar() : Void
+}
+class MenuModificarPais implements CapazDeEjecutarAccionMenu{
+    -HashMap<Integer, Pais> : paises
+    +MenuModificarPais()
+    +ejecutar() : Void
+    +seleccionarPais() : Void
+}
+class MenuModificarUsuario implements CapazDeEjecutarAccionMenu{
+    +MenuModificarUsuario()
+    +ejecutar() : Void
+    +elegirUsuario() : Integer
+}
+class MenuPrincipalAdmin implements CapazDeEjecutarAccionMenu{
+    +MenuPrincipalAdmin()
+    +ejecutar() : Void
+    +ejecutarAccion(Integer) : Void
+}
+class MenuPrincipalNoAdmin implements CapazDeEjecutarAccionMenu{
+    +MenuPrincipalNoAdmin()
+    +ejecutar() : Void
+    +ejecutarAccion(Integer) : Void
+}
+class MenuVendedorCaptado implements CapazDeEjecutarAccionMenu{
+    +ejecutar() : Void
+}
+
+interface CapazDeEjecutarAccionMenu <<interface>>{
+    +ejecutar() : Void
+}
+
+@enduml
