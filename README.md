@@ -1,7 +1,10 @@
-## Primer Parcial - Proyecto Programacion 2 
+### Tecnicatura Superior en Informática Aplicada
+`maximiliano.stein@alu.inspt.utn.edu.ar; matias.dilella@alu.inspt.utn.edu.ar`
 
-# Holding de Empresas
-* Desarrolle un sistema para gestionar la información que un holding de empresas desea tener referente
+*Universidad Tecnológica Nacional - Instituto del Profesorado Técnico, Buenos Aires, Argentina*
+
+#### Holding de Empresas
+* El presente sistema permite gestionar la información que un holding de empresas desea tener referente
 a las empresas que posee, sus vendedores, así como los asesores que trabajan en el holding, teniendo en
 cuenta que la información está organizada de la siguiente forma:
 * Los vendedores se organizan en una jerarquía de pirámide, es decir, cada vendedor puede captar
@@ -25,13 +28,13 @@ interés de los asesores son el código de asesor, nombre, dirección y la titul
 * Al sistema podrán acceder tres tipos de usuarios: vendedores (que sólo podrán consultar sus datos),
 asesores (que sólo podrán consultar sus datos) y administradores (que administrarán todo).
 
- **Para ello:**
+**Para ello:**
 * Analice los requerimientos anteriores
 * Determine los objetos requeridos para implementar ese sistema
 * Establezca los atributos que deben tener estos objetos
 * Fije los comportamientos que exhibirán estos objetos
 * Especifique la forma en que los objetos deben interactuar entre sí para cumplir con los
-requerimientos del sistema
+  requerimientos del sistema
 
 El sistema deberá utilizar abstracción, encapsulamiento, herencia, polimorfismo y persistencia (no BD).
 
