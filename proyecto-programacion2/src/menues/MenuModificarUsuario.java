@@ -2,26 +2,20 @@ package menues;
 
 import holding.BaseDeDatosSingleton;
 import holding.Consola;
-import holding.Usuario;
-
-import java.util.HashMap;
 
 public class MenuModificarUsuario implements CapazDeEjecutarAccionMenu{
-    private HashMap<Integer, Usuario> usuarios;
     @Override
     public void ejecutar() {
-        BaseDeDatosSingleton bd = BaseDeDatosSingleton.getInstance();
         System.out.println("Elija el usuario a modificar");
-        bd.listarUsuarios();
+        BaseDeDatosSingleton.listarUsuarios();
         int key = elegirUsuario();
-        bd.modificarUsuario(key);
+        BaseDeDatosSingleton.modificarUsuario(key);
     }
     private int elegirUsuario(){
-        BaseDeDatosSingleton bd = BaseDeDatosSingleton.getInstance();
         int key;
         do{
             key = Consola.leerEntero();
-        }while(!bd.contieneUsuario(key));
+        }while(!BaseDeDatosSingleton.contieneUsuario(key));
         return key;
     }
 }

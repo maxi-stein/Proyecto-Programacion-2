@@ -1,6 +1,6 @@
 package holding;
 
-import menues.MenuPrincipalAsesor;
+import menues.MenuPrincipalNoAdmin;
 
 import java.util.HashMap;
 
@@ -22,7 +22,7 @@ public class Asesor extends Usuario{
     }
     @Override
     public void proceder() {
-        MenuPrincipalAsesor mpa = new MenuPrincipalAsesor();
+        MenuPrincipalNoAdmin mpa = new MenuPrincipalNoAdmin();
         mpa.ejecutar();
     }
     @Override

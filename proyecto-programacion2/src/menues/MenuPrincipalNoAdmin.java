@@ -2,8 +2,7 @@ package menues;
 
 import holding.Consola;
 
-public class MenuPrincipalVendedor extends Menu {
-
+public class MenuPrincipalNoAdmin extends Menu {
     @Override
     public void ejecutar() {
         agregarAccion(1,new MenuMostrarInformacion());

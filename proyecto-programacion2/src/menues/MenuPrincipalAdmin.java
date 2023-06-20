@@ -3,8 +3,6 @@ package menues;
 import holding.Consola;
 
 public class MenuPrincipalAdmin extends Menu {
-
-
     public MenuPrincipalAdmin() {
         super();
         agregarAccion(1,new MenuMostrarInformacion());
@@ -28,7 +26,6 @@ public class MenuPrincipalAdmin extends Menu {
             }
         }
     }
-
     public void ejecutarAccion(int key){
         getAccion(key).ejecutar();
     }

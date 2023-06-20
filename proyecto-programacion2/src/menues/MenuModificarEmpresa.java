@@ -5,18 +5,19 @@ import holding.*;
 import java.util.HashMap;
 
 public class MenuModificarEmpresa implements CapazDeEjecutarAccionMenu{
-    private BaseDeDatosSingleton bd;
     private HashMap<Integer, Ciudad> ciudades;
     private  HashMap<Integer, Empresa> empresas;
+    private HashMap<Integer,Ciudad> ciudadesDeEmpresa;
+    private HashMap<Integer, AreasMercado> areas;
     public MenuModificarEmpresa(){
-        bd = BaseDeDatosSingleton.getInstance();
-        ciudades = bd.obtenerCiudades();
-        empresas = bd.obtenerEmpresas();
+        ciudades = BaseDeDatosSingleton.obtenerCiudades();
+        empresas = BaseDeDatosSingleton.obtenerEmpresas();
+        areas = BaseDeDatosSingleton.obtenerAreasDeMercado();
     }
     @Override
     public void ejecutar() {
         System.out.println("Seleccione la empresa a modificar");
-        bd.listarEmpresas();
+        BaseDeDatosSingleton.listarEmpresas();
         int keyEmpresa = 0;
         while (keyEmpresa < 1 || keyEmpresa>empresas.size()){
             keyEmpresa = Consola.leerEntero();
@@ -47,7 +48,7 @@ public class MenuModificarEmpresa implements CapazDeEjecutarAccionMenu{
                 break;
             case 4:
                 System.out.println("Seleccione la ciudad para convertirla en Sede:");
-                bd.listarCiudades();
+                BaseDeDatosSingleton.listarCiudades();
                 int keyCiudad = 0;
                 while(keyCiudad<1 || keyCiudad>ciudades.size()){
                     keyCiudad = Consola.leerEntero();
@@ -56,8 +57,7 @@ public class MenuModificarEmpresa implements CapazDeEjecutarAccionMenu{
                 break;
             case 5:
                 System.out.println("Seleccione la Ciudad a agregar");
-                bd.listarCiudades();
-                HashMap<Integer,Ciudad> ciudades = bd.obtenerCiudades();
+                BaseDeDatosSingleton.listarCiudades();
                 int opcionCiudad = 0;
                 while (opcionCiudad<1 || opcionCiudad>ciudades.size()){
                     opcionCiudad = Consola.leerEntero();
@@ -70,26 +70,25 @@ public class MenuModificarEmpresa implements CapazDeEjecutarAccionMenu{
                     System.out.println("Ciudad agregada exitosamente");
                 }
             case 6:
-                bd.listarCiudadesDeEmpresa(keyEmpresa);
-                HashMap<Integer,Ciudad> ciudadesDeEmpresa = bd.obtenerCiudadesDeEmpresa(keyEmpresa);
+                BaseDeDatosSingleton.listarCiudadesDeEmpresa(keyEmpresa);
                 int opcionEmpresa = 0;
+                ciudadesDeEmpresa = BaseDeDatosSingleton.obtenerCiudadesDeEmpresa(keyEmpresa);
                 while (opcionEmpresa<1 || opcionEmpresa>ciudadesDeEmpresa.size()){
                     opcionEmpresa = Consola.leerEntero();
                 }
                 empresaSeleccionada.eliminarCiudad(ciudadesDeEmpresa.get(opcionEmpresa));
             case 7:
                 System.out.println("Seleccione el area de mercado a agregar");
-                bd.listarAreasDeMercado();
-                HashMap<Integer, AreasMercado> areasMercado = bd.obtenerAreasDeMercado();
+                BaseDeDatosSingleton.listarAreasDeMercado();
                 int opcionAreaMercado = 0;
-                while (opcionAreaMercado<1 || opcionAreaMercado>areasMercado.size()){
+                while (opcionAreaMercado<1 || opcionAreaMercado>areas.size()){
                     opcionAreaMercado = Consola.leerEntero();
                 }
-                if(empresaSeleccionada.contieneAreaDeMercado(areasMercado.get(opcionAreaMercado))){
-                    System.out.println("El area de mercado "+areasMercado.get(opcionAreaMercado).getNombre()+" ya se encuentra registrada en la empresa");
+                if(empresaSeleccionada.contieneAreaDeMercado(areas.get(opcionAreaMercado))){
+                    System.out.println("El area de mercado "+areas.get(opcionAreaMercado).getNombre()+" ya se encuentra registrada en la empresa");
                 }
                 else{
-                    empresaSeleccionada.agregarAreaMercado(areasMercado.get(opcionAreaMercado));
+                    empresaSeleccionada.agregarAreaMercado(areas.get(opcionAreaMercado));
                     System.out.println("Area de mercado agregada exitosamente");
                 }
                 break;

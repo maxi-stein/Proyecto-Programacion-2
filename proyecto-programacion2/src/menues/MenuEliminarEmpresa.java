@@ -7,16 +7,15 @@ import holding.Empresa;
 import java.util.HashMap;
 
 public class MenuEliminarEmpresa implements CapazDeEjecutarAccionMenu{
-    private static BaseDeDatosSingleton bd;
+    private HashMap<Integer, Empresa> empresas;
     public MenuEliminarEmpresa() {
-        bd = BaseDeDatosSingleton.getInstance();
+        empresas = BaseDeDatosSingleton.obtenerEmpresas();
     }
     @Override
     public void ejecutar() {
         System.out.println("Seleccione la Empresa a Eliminar");
         System.out.println("**No se podran eliminar Empresas con registros de Usuarios**");
-        bd.listarEmpresas();
-        HashMap<Integer, Empresa> empresas = bd.obtenerEmpresas();
+        BaseDeDatosSingleton.listarEmpresas();
         int opcion = 0;
         while(opcion<1 || opcion>empresas.size()){
             opcion = Consola.leerEntero();
@@ -24,7 +23,7 @@ public class MenuEliminarEmpresa implements CapazDeEjecutarAccionMenu{
         Empresa empresaSeleccionada = empresas.get(opcion);
         if(!empresaSeleccionada.tieneTrabajadores()){
             empresaSeleccionada.eliminarRegistrosAreaDeMercado(); //eliminamos los registros para que la empresa bloqueada no obstruye la eliminación de un AreaDeMercado
-            bd.eliminarEmpresa(opcion);
+            BaseDeDatosSingleton.eliminarEmpresa(opcion);
             System.out.println("Empresa "+empresaSeleccionada.getNombre()+ " eliminada!");
         }
         else{
