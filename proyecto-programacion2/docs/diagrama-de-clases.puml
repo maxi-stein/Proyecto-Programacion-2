@@ -1,0 +1,281 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam backgroundColor transparent
+skinparam monochrome true
+skinparam shadowing false
+
+abstract Usuario{
+    -codigoUsuario : Integer
+    -nombre : String
+    -direccion : String
+    -pass : String
+    - bloqueado : Boolean
+
+    + Usuario(String, String, String)
+    + estaBloqueado() : Boolean
+    + getCodigoUsuario() : Integer
+    + getNombre() : String
+    + modificar() : void
+    + mostrarCredenciales() : void
+    + pedirDatosBasicos() : void
+    + proceder() : void
+    + setBloqueo(Boolean) : void
+    + setCodigoUsuario(Integer) : void
+    + setDireccion(String) : void
+    + setNombre(String) : void
+    + setPass(String) : void
+    + toString() : String
+    + validarPass(String) : Boolean
+
+    +proceder() : void
+    +validarNombre() : Boolean
+    +validarPass() : Boolean
+    +mostrarInformacionUsuario() : void
+    +getCodigoUsuario() : Integer
+}
+
+class Vendedor extends Usuario{
+    -nombre : String
+    -direccion : String
+    -fechaCaptado : Date
+
+    +Vendedor(String,String,String,Date,Empresa)
+    +captarVendedor(Vendedor) : Void
+    +getCantidadVendedoresCapt() : Integer
+    +getEmpresaTrabajo() : Empresa
+    -listarVendedoresCaptados() : void
+    +modificar() : void
+    +mostarInfo() : void
+    +setEmpresaTrabajo(Empresa) : void
+    +proceder() : void
+}
+
+class Empresa{
+    -nombre : String
+    -fechaEntrada : Date
+    -facturacionAnual : Double
+    -codigoEmpresa : Integer
+    -bloqueado() : Boolean
+    -ciudades : HashMap<Integer, Ciudad>
+    -areasMercado : HashMap<Integer, AreaMercado>
+    -asesores : ArrayList<VinculacionAsesorEmpresa>
+
+    +Empresa(String,Date,Double)
+    +agregarAreaMercado(AreasMercado) : void
+    +agregarCiudad(Integer) : void
+    +agregarVendedor(Vendedor) : void
+    +areaCompatible(AreaMercado) : Boolean
+    +eliminarAreaDeMercado(AreaMercado) : void
+    +eliminarAsesor(Asesor) : void
+    +eliminarCiudad(Ciudad) : void
+    +eliminarRegistrosAreaDeMercado() : void
+    +eliminarVendedor(Vendedor) : void
+    +esAsesoradoPor(Asesor) : void
+    +estaBloqueado() : Boolean
+    +estaUbicadaEnCiudad(Ciudad) : Boolean
+    +getFacturacionAnual() : Double
+    +getNombre() : String
+    +getSede() : Ciudad
+    +listarAreasDeMercado() : void
+    +listarCiudades() : void
+    +mostrarFechaInicioAsesor(Asesor) : void
+    +obtenerAreasDeMercado() : HashMap<Integer, AreaMercado>
+    +obtenerCiudades() : HashMap<Integer, Ciudad>
+    +seleccionarSede(Ciudad) : void
+    +setBloqueo(Boolean) : void
+    +setFacturacionAnual(Double) : void
+    +setFechaEntrada(LocalDate) : void
+    +setNombre(String) : void
+    +tieneTrabajadores() : Boolean
+}
+
+class AreaMercado {
+    -nombre : String
+    -descripcion : String
+    -bloqueado : Boolean
+
+    +AreaMercado(String, String)
+    +estaBloqueado() : Boolean
+    +getNombre() : String
+    +setBloqueo(Boolean) : void
+    +setDescripcion(String) : void
+    +toString() : String
+}
+
+class Asesor extends Usuario{
+    -nombre : String
+    -direccion : String
+    -titulacion : String
+    -fechasInicio : LocalDate
+    -cantidadMercadoCubiertos : Integer
+    -mercadosCubiertos : HashMap<Integer, AreaMercado>
+
+    +agregaAreaMercadoCubierto(AreaMercado) : void
+    +asesoraArea(AreaMercado : Boolean
+    -eliminarAreaMercadoCubierto(Integer) : void
+    +listarMercadosCubiertos() : void
+    +modificar() : void
+    +mostrarInfo() : void
+    +proceder() : void
+    +setTitulacion(String) : void
+    +toString() : String
+}
+
+class VinculacionAsesorEmpresa{
+    -fechaInicio : Date
+
+    +VinculacionAsesorEmpresa(Asesor,LocalDate)
+    +contiene(Asesor) : Boolean
+    +getAsesor() : Asesor
+    +getFechaInicio() : Date
+}
+
+class Admin extends Usuario{
+-nombre : String
+-direccion : String
+-fechaInicio : Date
+
++modificar() : void
++mostrarInfo() : void
++proceder() : void
+}
+
+class Pais{
+    -nombre : String
+    -pbi : Double
+    -numHabitantes : double
+    -bloqueado : Boolean
+
+    +Pais(String,double,double)
+    +esIgual(Pais) : Boolean
+    +estaBloqueado() : Boolean
+    +getNombre() : Boolean
+    +setBloqueado(Boolean) : void
+    +setNombre(String) : void
+    +setNumHabitantes(Double) : void
+    +setPbi(Double) : void
+    +toString() : String
+}
+class FactoryUsuarios{
+ - bd : BaseDeDatosSingleton
+
+ -crearAdmin() : void
+ -crearAsesor() : void
+ +crearUsuario(Integer) : void
+ -crearVendedor() : void
+ -crearVendedorCaptado() : void
+}
+class Consola{
+    - sc : Scanner
+
+    +leerDouble() : Double
+    +leerEntero() : Integer
+    +leerFecha() : String
+}
+
+class SistemaDeGestion{
+    - {static} Hashmap<Integer, Usuario> : USUARIOS
+    - {static} Hashmap<Integer, Empresa> : EMPRESAS
+    - {static} Hashmap<Integer, AreasMercado> : AREASDEMERCADO
+    - {static} Hashmap<Integer, Ciudad> : CIUDADES
+    - {static} Hashmap<Integer, Pais> : PAISES
+
+    +mostrarMenu() : Integer
+    +run() : void
+    +serializarBD() : void
+    +deserializarBD() : void
+}
+
+class Ciudad{
+    -nombre: String
+    -paisorigen : Pais
+    -bloqueado : Boolean
+    +Ciudad(String,Pais);
+    +esIgual(Ciudad) : Boolean
+    +estaBloqueado() : Boolean
+    +getNombre() : String
+    +getPaisOrigen() : Pais
+    +toString() : String
+}
+
+
+class BaseDeDatosSingleton{
+    - {static} Hashmap<Integer, Usuario> : USUARIOS
+    - {static} Hashmap<Integer, Empresa> : EMPRESAS
+    - {static} Hashmap<Integer, AreasMercado> : AREASDEMERCADO
+    - {static} Hashmap<Integer, Ciudad> : CIUDADES
+    - {static} Hashmap<Integer, Pais> : PAISES
+
+    + {static} agregaAreaDeMercado(AreaMercado) : void
+    + {static} agregarAsesorAEmpresa(Integer, Asesor) : void
+    + {static} agregarCiudad(Ciudad) : void
+    + {static} agregarEmpresa(Empresa) : void
+    + {static} agregarPais(Pais) : void
+    + {static} agregarUsuario(Usuario) : void
+    + {static} areaEnUso(AreaMercado) : Boolean
+    - {static} autenticarUsuario(Integer,String) : Usuario
+    + {static} cargarDatosSerializados(Hashmap<Integer, Usuario>, Hashmap<Integer, Empresa> , Hashmap<Integer, AreasDeMercado> , Hashmap<Integer, Ciudad> ,
+    Hashmap<Integer, Pais>) : void
+    + {static} ciudadEnUso(Ciudad) : Boolean
+    + {static} ciudadYaExiste(Ciudad) : Boolean
+    + {static} contieneUsuario(Usuario) : Boolean
+    + {static} eliminarAreaDeMercado(Integer) : void
+    + {static} eliminarCiudad(Integer)) : void
+    + {static} eliminarEmpresa(Integer)) : void
+    + {static} eliminarUsuario(Integer)) : void
+    + {static} getInstance() : BaseDeDatosSingleton
+    + {static} iniciarSesion() : Usuario
+    + {static} listarAreasDeMercado() : void
+    + {static} listarCiudades() : void
+    + {static} listarCiudadesDeEmpresa(Integer) : void
+    + {static} listarEmpresas() : void
+    + {static} listarEmpresasQueUtilizanAreaMercado(AreaMercado) : void
+    + {static} listarEmpresasQueUtilizanCiudad(Ciudad) : void
+    + {static} listarPaises() : void
+    + {static} listarUsuarios() : void
+    + {static} listarVenderores() : void
+    + {static} modificarUsuario(Integer) : void
+    + {static} obtenerAreasDeMercado() : HashMap<Integer, AreaMercado>
+    + {static} obtenerCiudad() : Hashmap<Integer, Ciudad>
+    + {static} obtenerCiudadDeEmpresa(Integer) : HashMap<Integer, Ciudad>
+    + {static} obtenerCodigoMayor() : Integer
+    + {static} obtenerEmpresas() : HashMap<Integer, Empresa>
+    + {static} obtenerPaises() : HashMap<Integer, Pais>
+    + {static} obtenerUsuarios() : HashMap<Integer, Usuario>
+    + {static} obtenerVendedores() : HashMap<Integer, Vendedor>
+    + {static} paisYaExiste(Pais) : Boolean
+    + {static} usuarioAsesoraAEmpresa(Asesor, Empresa) : Boolean
+    + {static} INSTANCE : BaseDeDatosSingleton
+}
+
+interface CapazDeSerBloqueado <<interface>>{
+    +{abstract} estaBloqueado() : Boolean
+    +{abstract} setBloqueo(Boolean) : void
+}
+
+Vendedor "*" o--> Empresa : vendedores
+Vendedor -> "*" Vendedor : vendedoresCaptados
+
+Empresa "1"--> "*" AreaMercado : areasMercado
+
+VinculacionAsesorEmpresa "*" <- Empresa: asesores
+Ciudad <-o Pais : paisOrigen
+Ciudad -> "*" Empresa : ciudades
+Empresa <- Ciudad : sede
+Asesor "*" ---> "*" AreaMercado : mercadosCubiertos
+Asesor <-o VinculacionAsesorEmpresa : asesor
+
+Usuario -.|> CapazDeSerBloqueado
+Empresa -.|> CapazDeSerBloqueado
+AreaMercado -.|> CapazDeSerBloqueado
+Ciudad -.|> CapazDeSerBloqueado
+Pais -.|> CapazDeSerBloqueado
+
+BaseDeDatosSingleton -.|> Usuario
+BaseDeDatosSingleton -.|> Empresa
+BaseDeDatosSingleton -.|> AreaMercado
+BaseDeDatosSingleton -.|> Pais
+BaseDeDatosSingleton -.|> Ciudad
+
+@enduml
