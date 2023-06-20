@@ -197,6 +197,9 @@ public class BaseDeDatosSingleton {
     public static void eliminarCiudad(int key){
         ciudades.get(key).setBloqueo(true);
     }
+    public static void eliminarAreaDeMercado(int key){
+        areasDeMercado.get(key).setBloqueo(true);
+    }
     public static void listarEmpresasQueUtilizanCiudad(Ciudad c){
         for(int i=1;i<=empresas.size();i++){
             if(empresas.get(i).estaUbicadaEnCiudad(c) && !empresas.get(i).estaBloqueado()){
@@ -225,5 +228,26 @@ public class BaseDeDatosSingleton {
                 System.out.println();
             }
         }
+    }
+
+    public static boolean areaEnUso(AreasMercado a){
+        boolean enUso = false;
+        for(int i=1;i<=empresas.size();i++){
+            if(empresas.get(i).contieneAreaDeMercado(a) && !empresas.get(i).estaBloqueado()){
+                enUso = true;
+            }
+        }
+        return enUso;
+    }
+
+    public static void listarEmpresasQueUtilizanAreaMercado(AreasMercado a){
+        for(int i=1;i<=empresas.size();i++){
+            if(empresas.get(i).contieneAreaDeMercado(a) && !empresas.get(i).estaBloqueado()){
+                System.out.println(empresas.get(i).getNombre());
+            }
+        }
+    }
+    public static void eliminarEmpresa(int key){
+        empresas.get(key).setBloqueo(true);
     }
 }

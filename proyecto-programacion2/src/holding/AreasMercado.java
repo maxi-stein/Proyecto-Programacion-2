@@ -27,4 +27,12 @@ public class AreasMercado implements CapazDeSerBloqueado, Serializable {
     public String getNombre() {
         return nombre;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 }

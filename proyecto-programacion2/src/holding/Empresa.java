@@ -158,4 +158,26 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
             }
         }
     }
+    public boolean tieneTrabajadores(){
+        boolean valor = false;
+        if(asesores.size()>0 || vendedores.size()>0)
+        {
+            System.out.println("La empresa registra empleados activos!");
+            System.out.println("Empleados:");
+            for(int i = 0; i<asesores.size(); i++){
+                System.out.println(asesores.get(i).toString());
+            }
+            for(int i = 0; i<vendedores.size(); i++){
+                System.out.println(vendedores.get(i).toString());
+            }
+            valor = true;
+        }
+        return valor;
+    }
+
+    public void eliminarRegistrosAreaDeMercado(){
+        areasMercado.clear();
+    }
+
+
 }
