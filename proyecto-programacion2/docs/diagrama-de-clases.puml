@@ -267,4 +267,10 @@ AreaMercado -.|> CapazDeSerBloqueado
 Ciudad -.|> CapazDeSerBloqueado
 Pais -.|> CapazDeSerBloqueado
 
+BaseDeDatosSingleton -.|> Usuario
+BaseDeDatosSingleton -.|> Empresa
+BaseDeDatosSingleton -.|> AreaMercado
+BaseDeDatosSingleton -.|> Pais
+BaseDeDatosSingleton -.|> Ciudad
+
 @enduml
