@@ -29,7 +29,7 @@ public class MenuPrincipalAdmin extends Menu {
             }
         }
     }
-    public void ejecutarAccion(int key){
+    private void ejecutarAccion(int key){
         getAccion(key).ejecutar();
     }
 }

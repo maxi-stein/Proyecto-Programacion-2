@@ -15,7 +15,7 @@ public class MenuPrincipalNoAdmin extends Menu {
         ejecutarAccion(opcion);
 
     }
-    public void ejecutarAccion(int key){
+    private void ejecutarAccion(int key){
         getAccion(key).ejecutar();
     }
 }
