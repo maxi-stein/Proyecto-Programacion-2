@@ -3,14 +3,11 @@ package holding;
 import java.io.Serializable;
 
 public class AreasMercado implements CapazDeSerBloqueado, Serializable {
-    private static int CONTADOR = 0;
-    private int codArea;
     private String nombre;
     private String descripcion;
     private boolean bloqueado;
     public AreasMercado(String nombre, String descripcion) {
-        CONTADOR++;
-        codArea = CONTADOR;
+
         this.nombre = nombre;
         this.descripcion = descripcion;
     }

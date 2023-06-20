@@ -29,7 +29,7 @@ public class SistemaDeGestion implements Serializable {
         AreasMercado am = new AreasMercado("Construccion", "Obras");
         areasDeMercado.put(1,am);*/
         bd.cargarDatosSerializados(usuarios,empresas,areasDeMercado,ciudades, paises);
-        if(areasDeMercado.size()== 0){
+        if(areasDeMercado.size() == 0){
             AreasMercado area1 = new AreasMercado("CONSTRUCCION", "Obras Publicas");
             AreasMercado area2 = new AreasMercado("METALURGICA", "Acero Industrial");
             AreasMercado area3 = new AreasMercado("ASESORAMIENTO", "Servicio de Consultoria");
