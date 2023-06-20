@@ -86,6 +86,7 @@ public class Vendedor extends Usuario {
                 empresaTrabajo.eliminarVendedor(this); //retiro el vendedor de la empresa vieja
                 empresas.get(keyEmpresa).agregarVendedor(this); //ingreso el vendedor a la empresa nueva
                 empresaTrabajo = empresas.get(keyEmpresa); //actualizo el atributo de la empresa de trabajo del vendedor
+                fechaCaptado = LocalDate.now();
                 break;
             default:
                 break;
