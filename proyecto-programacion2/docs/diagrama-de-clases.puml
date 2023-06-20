@@ -1,0 +1,299 @@
+@startuml
+class SistemaDeGestion{
+    - {static} Hashmap<Integer, Usuario> : USUARIOS
+    - {static} Hashmap<Integer, Empresa> : EMPRESAS
+    - {static} Hashmap<Integer, AreasMercado> : AREASDEMERCADO
+    - {static} Hashmap<Integer, Ciudad> : CIUDADES
+    - {static} Hashmap<Integer, Pais> : PAISES
+
+    +mostrarMenu() : Integer
+    +run() : void
+    +serializarBD() : void
+    +deserializarBD() : void
+}
+
+class BaseDeDatosSingleton{
+    - {static} Hashmap<Integer, Usuario> : USUARIOS
+    - {static} Hashmap<Integer, Empresa> : EMPRESAS
+    - {static} Hashmap<Integer, AreasMercado> : AREASDEMERCADO
+    - {static} Hashmap<Integer, Ciudad> : CIUDADES
+    - {static} Hashmap<Integer, Pais> : PAISES
+
+    + {static} agregaAreaDeMercado(AreaMercado) : void
+    + {static} agregarAsesorAEmpresa(Integer, Asesor) : void
+    + {static} agregarCiudad(Ciudad) : void
+    + {static} agregarEmpresa(Empresa) : void
+    + {static} agregarPais(Pais) : void
+    + {static} agregarUsuario(Usuario) : void
+    + {static} areaEnUso(AreaMercado) : Boolean
+    - {static} autenticarUsuario(Integer,String) : Usuario
+    + {static} cargarDatosSerializados(Hashmap<Integer, Usuario>, Hashmap<Integer, Empresa> , Hashmap<Integer, AreasDeMercado> , Hashmap<Integer, Ciudad> , Hashmap<Integer, Pais>) : void
+    + {static} ciudadEnUso(Ciudad) : Boolean
+    + {static} ciudadYaExiste(Ciudad) : Boolean
+    + {static} contieneUsuario(Usuario) : Boolean
+    + {static} eliminarAreaDeMercado(Integer) : void
+    + {static} eliminarCiudad(Integer)) : void
+    + {static} eliminarEmpresa(Integer)) : void
+    + {static} eliminarUsuario(Integer)) : void
+    + {static} getInstance() : BaseDeDatosSingleton
+    + {static} iniciarSesion() : Usuario
+    + {static} listarAreasDeMercado() : void
+    + {static} listarCiudades() : void
+    + {static} listarCiudadesDeEmpresa(Integer) : void
+    + {static} listarEmpresas() : void
+    + {static} listarEmpresasQueUtilizanAreaMercado(AreaMercado) : void
+    + {static} listarEmpresasQueUtilizanCiudad(Ciudad) : void
+    + {static} listarPaises() : void
+    + {static} listarUsuarios() : void
+    + {static} listarVenderores() : void
+    + {static} modificarUsuario(Integer) : void
+    + {static} obtenerAreasDeMercado() : HashMap<Integer, AreaMercado>
+    + {static} obtenerCiudad() : Hashmap<Integer, Ciudad>
+    + {static} obtenerCiudadDeEmpresa(Integer) : HashMap<Integer, Ciudad>
+    + {static} obtenerCodigoMayor() : Integer
+    + {static} obtenerEmpresas() : HashMap<Integer, Empresa>
+    + {static} obtenerPaises() : HashMap<Integer, Pais>
+    + {static} obtenerUsuarios() : HashMap<Integer, Usuario>
+    + {static} obtenerVendedores() : HashMap<Integer, Vendedor>
+    + {static} paisYaExiste(Pais) : Boolean
+    + {static} usuarioAsesoraAEmpresa(Asesor, Empresa) : Boolean
+    + {static} INSTANCE : BaseDeDatosSingleton
+}
+
+abstract Usuario{
+    -codigoUsuario : Integer
+    -nombre : String
+    -direccion : String
+    -pass : String
+    - bloqueado : Boolean
+
+    + Usuario(String, String, String)
+    + estaBloqueado() : Boolean
+    + getCodigoUsuario() : Integer
+    + getNombre() : String
+    + modificar() : void
+    + mostrarCredenciales() : void
+    + pedirDatosBasicos() : void
+    + proceder() : void
+    + setBloqueo(Boolean) : void
+    + setCodigoUsuario(Integer) : void
+    + setDireccion(String) : void
+    + setNombre(String) : void
+    + setPass(String) : void
+    + toString() : String
+    + validarPass(String) : Boolean
+
+    +proceder() : void
+    +validarNombre() : Boolean
+    +validarPass() : Boolean
+    +mostrarInformacionUsuario() : void
+    +getCodigoUsuario() : Integer
+}
+
+class Vendedor extends Usuario{
+    -nombre : String
+    -direccion : String
+    -fechaCaptado : Date
+
+    +Vendedor(String,String,String,Date,Empresa)
+    +captarVendedor(Vendedor) : Void
+    +getCantidadVendedoresCapt() : Integer
+    +getEmpresaTrabajo() : Empresa
+    -listarVendedoresCaptados() : void
+    +modificar() : void
+    +mostarInfo() : void
+    +setEmpresaTrabajo(Empresa) : void
+    +proceder() : void
+}
+
+class Empresa{
+    -nombre : String
+    -fechaEntrada : Date
+    -facturacionAnual : Double
+    -codigoEmpresa : Integer
+    -bloqueado() : Boolean
+    -ciudades : HashMap<Integer, Ciudad>
+    -areasMercado : HashMap<Integer, AreaMercado>
+    -asesores : ArrayList<VinculacionAsesorEmpresa>
+
+    +Empresa(String,Date,Double)
+    +agregarAreaMercado(AreasMercado) : void
+    +agregarCiudad(Integer) : void
+    +agregarVendedor(Vendedor) : void
+    +areaCompatible(AreaMercado) : Boolean
+    +eliminarAreaDeMercado(AreaMercado) : void
+    +eliminarAsesor(Asesor) : void
+    +eliminarCiudad(Ciudad) : void
+    +eliminarRegistrosAreaDeMercado() : void
+    +eliminarVendedor(Vendedor) : void
+    +esAsesoradoPor(Asesor) : void
+    +estaBloqueado() : Boolean
+    +estaUbicadaEnCiudad(Ciudad) : Boolean
+    +getFacturacionAnual() : Double
+    +getNombre() : String
+    +getSede() : Ciudad
+    +listarAreasDeMercado() : void
+    +listarCiudades() : void
+    +mostrarFechaInicioAsesor(Asesor) : void
+    +obtenerAreasDeMercado() : HashMap<Integer, AreaMercado>
+    +obtenerCiudades() : HashMap<Integer, Ciudad>
+    +seleccionarSede(Ciudad) : void
+    +setBloqueo(Boolean) : void
+    +setFacturacionAnual(Double) : void
+    +setFechaEntrada(LocalDate) : void
+    +setNombre(String) : void
+    +tieneTrabajadores() : Boolean
+}
+
+class AreaMercado {
+    -nombre : String
+    -descripcion : String
+
+    +AreaMercado()
+    +mostrarInformacion() : Void
+}
+
+class Asesor extends Usuario{
+-nombre : String
+-direccion : String
+-titulacion : String
+-fechasInicio : List
++asesorarEmpresa(Empresa)
++cubrirAreaMercado(AREAS_MERCADO) : void
++mostrarInformacionUsuario() : void
+}
+
+class VinculacionAsesorEmpresa{
+    -fechaInicio : Date
+
+    +VinculacionAsesorEmpresa()
+    +getAsesor() : Asesor
+    +getFechaInicio() : Date
+}
+
+class Admin extends Usuario{
+-nombre : String
+-direccion : String
+-fechaInicio : Date
++crearVendedor() : void
++crearAsesor() : void
++crearEmpresa(): void
++crearPais() : void
++proceder() : void
++mostrarMenu() : Integer
++mostrarInformacionUsuario() : void
+}
+
+class Pais{
+    -nombre : String
+    -pbi : Double
+    -numHabitantes : double
+
+    +Pais(String,double,double)
+    +hacerSede(Empresa) : void
+    -eliminarSede(Empresa) : void
+}
+
+class Ciudad{
+    -nombre: String
+    +Ciudad(String,Pais);
+    +esIgual(Ciudad) : Boolean
+}
+
+interface CapazDeVisualizarMenu <<interface>>{
+    +{abstract} mostrarMenu() : void
+}
+
+interface CapazDeMostrarSuInformacion <<interface>>{
+    +{abstract} mostrarInformacion() : void
+}
+
+interface CapazDeEjecutarAccionMenu <<interface>>{
+    +ejecutar() : void
+}
+
+abstract class MenuSuper{
+    -acciones : Hashmap<Integer, CapazDeEjecutarAccionMenu>
+    +agregarAccion(Integer,  CapazDeEjecutarAccionMenu) : void
+    +getAccion(Integer) : CapazDeEjecutarAccionMenu
+    }
+
+
+class MenuABMCAreasMercado extends MenuSuper{
+    +ejecutar() : void
+}
+
+class MenuABMCUsuarios extends MenuSuper{
+    +ejecutar() : void
+    +ejecutarAccion(Integer) : void
+}
+
+class MenuABMCEmpresas extends MenuSuper{
+    +ejecutar() : void
+    +ejecutarAccion(Integer) : void
+}
+
+class MenuABMCUbicaciones extends MenuSuper{
+    +ejecutar() : void
+}
+
+
+class MenuPrincipalAdmin extends MenuSuper{
+    +ejecutar() : void
+    +ejecutarAccion(Integer) : void
+}
+
+class MenuPrincipalAsesor extends MenuSuper{
+    +ejecutar() : void
+    +ejecutarAccion(Integer) : void
+}
+
+class MenuPrincipalVendedor extends MenuSuper{
+    +ejecutar() : void
+    +ejecutarAccion(Integer) : void
+}
+
+
+class MenuCrearUsuario extends CapazDeEjecutarAccionMenu{
+    +ejecutar() : void
+}
+
+class MenuVendedorCaptado extends CapazDeEjecutarAccionMenu{
+      +ejecutar() : void
+}
+
+class MenuEliminarUsuario extends CapazDeEjecutarAccionMenu{
+    +ejecutar() : void
+}
+
+class MenuModificarUsuario extends CapazDeEjecutarAccionMenu{
+    +ejecutar() : void
+}
+
+
+SistemaDeGestion -> BaseDatosHolding : "baseDeDatos"
+SistemaDeGestion -.|> CapazDeVisualizarMenu
+BaseDatosHolding -> "*" Usuario : usuarios
+BaseDatosHolding -> "*" Empresa : empresas
+Usuario -.|> CapazDeVisualizarMenu
+Usuario -.|> CapazDeMostrarSuInformacion
+Vendedor "*" o--> Empresa : vendedores
+Vendedor -> "*" Vendedor : vendedoresCaptados
+
+Empresa "1"--> "*" AreaMercado : areasMercado
+Empresa -.|> CapazDeMostrarSuInformacion
+Empresa <- Ciudad : sede
+VinculacionAsesorEmpresa "*" <- Empresa: asesores
+Ciudad <-o Pais : paisOrigen
+Ciudad -> "*" Empresa : ciudades
+
+Asesor "*"-> "*" AreaMercado : mercadosCubiertos
+Asesor <-o VinculacionAsesorEmpresa : asesor
+
+Admin -.|> MenuPrincipalAdmin
+MenuSuper -.|> CapazDeEjecutarAccionMenu
+Asesor -.|> MenuPrincipalAsesor
+Vendedor -.|> MenuPrincipalVendedor
+
+
+@enduml
