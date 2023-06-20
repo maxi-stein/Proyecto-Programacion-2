@@ -223,6 +223,9 @@ public class BaseDeDatosSingleton {
         for(var empresa : empresas.entrySet()){
             if(empresa.getValue().esAsesoradoPor(a)){
                 System.out.println(empresa.getValue().getNombre());
+                System.out.print("Fecha de inicio: ");
+                empresa.getValue().mostrarFechaInicioAsesor(a);
+                System.out.println();
             }
         }
     }

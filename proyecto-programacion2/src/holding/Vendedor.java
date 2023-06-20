@@ -36,6 +36,12 @@ public class Vendedor extends Usuario {
         MenuPrincipalVendedor mp = new MenuPrincipalVendedor();
         mp.ejecutar();
     }
+
+    @Override
+    public void mostrarInfo() {
+
+    }
+
     /*@Override
     public String toString() {
         return "Vendedor{" +

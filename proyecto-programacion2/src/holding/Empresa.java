@@ -133,21 +133,6 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
         }
         return contiene;
     }
-
-
-   /* @Override
-    public String toString() {
-        return "Empresa{" +
-                "nombre='" + nombre + '\'' +
-                ", fechaEntrada=" + fechaEntrada +
-                ", facturacionAnual=" + facturacionAnual +
-                ", ciudades=" + ciudades +
-                ", sede=" + sede +
-                ", asesores=" + asesores +
-                ", areasMercado=" + areasMercado +
-                ", vendedores=" + vendedores +
-                '}';
-    }*/
     public String getNombre(){
         return nombre;
     }
@@ -166,7 +151,11 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
     public Ciudad getSede() {
         return sede;
     }
-    public void setSede(Ciudad sede) {
-        this.sede = sede;
+    public void mostrarFechaInicioAsesor(Asesor a){
+        for(VinculacionEmpresaAsesor vinc : asesores){
+            if(vinc.contiene(a)){
+                System.out.println(vinc.getFechaInicio());
+            }
+        }
     }
 }
