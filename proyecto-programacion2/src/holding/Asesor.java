@@ -84,7 +84,7 @@ public class Asesor extends Usuario{
                 }
                 break;
             case 6:
-                listarAreasMercadoCubiertas();
+                listarMercadosCubiertos();
                 int keyAreaCubierta = 0;
                 do {
                     keyArea = Consola.leerEntero();
@@ -132,11 +132,7 @@ public class Asesor extends Usuario{
     public boolean asesoraElArea(AreasMercado area){
         return mercadosCubiertos.entrySet().contains(area);
     }
-    public void listarAreasMercadoCubiertas(){
-        for(var parClaveValor : mercadosCubiertos.entrySet()){
-            System.out.println(parClaveValor.getKey()+" - "+parClaveValor.getValue());
-        }
-    }
+
     @Override
     public String toString() {
         return "Asesor{" +
