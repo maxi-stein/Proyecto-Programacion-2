@@ -152,7 +152,6 @@ public class BaseDeDatosSingleton {
     public static void agregarCiudad(Ciudad c){
         ciudades.put(ciudades.size()+1,c);
     }
-
     public static void agregarAreaDeMercado(AreasMercado areaMercado){
         areasDeMercado.put(areasDeMercado.size()+1,areaMercado);
     }
@@ -205,7 +204,6 @@ public class BaseDeDatosSingleton {
             }
         }
     }
-
     public static void agregarEmpresa(Empresa empresaNueva){
         empresas.put(empresas.size()+1, empresaNueva);
     }
@@ -215,7 +213,6 @@ public class BaseDeDatosSingleton {
     public static void desloguearUsuario(){
         usuarioLogueado = null;
     }
-
     public static Usuario getUsuarioLogueado() {
         return usuarioLogueado;
     }

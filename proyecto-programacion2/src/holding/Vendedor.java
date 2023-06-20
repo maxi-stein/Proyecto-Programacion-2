@@ -36,20 +36,12 @@ public class Vendedor extends Usuario {
         MenuPrincipalVendedor mp = new MenuPrincipalVendedor();
         mp.ejecutar();
     }
-
     @Override
     public void mostrarInfo() {
-
+        mostrarCredenciales();
+        System.out.println("Empresa de trabajo actual: ");
+        System.out.print(empresaTrabajo.getNombre()+ "(Captado: "+fechaCaptado+")");
     }
-
-    /*@Override
-    public String toString() {
-        return "Vendedor{" +
-                "fechaCaptado=" + fechaCaptado +
-                ", vendedoresCaptados=" + vendedoresCaptados +
-                ", empresaTrabajo=" + empresaTrabajo +
-                '}';
-    }*/
     private void listarVendedoresCaptados(){
         if(vendedoresCaptados.size()==0){
             System.out.println("Aun no posee vendedores captados");
