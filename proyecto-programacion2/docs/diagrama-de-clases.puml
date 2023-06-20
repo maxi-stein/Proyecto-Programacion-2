@@ -1,4 +1,9 @@
 @startuml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam backgroundColor transparent
+skinparam monochrome true
+skinparam shadowing false
 
 abstract Usuario{
     -codigoUsuario : Integer
