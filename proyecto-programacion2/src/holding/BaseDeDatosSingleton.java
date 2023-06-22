@@ -62,7 +62,7 @@ public class BaseDeDatosSingleton {
     }
     public static void listarUsuarios() {
         for(var parClaveValor : usuarios.entrySet()){
-            System.out.println(parClaveValor.getKey()+" - "+parClaveValor.getValue());
+            System.out.println(parClaveValor.getKey()+" - "+parClaveValor.getValue().toString());
         }
     }
     public static void agregarUsuario(Usuario u){

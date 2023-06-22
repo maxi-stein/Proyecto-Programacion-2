@@ -20,8 +20,8 @@ public class MenuModificarCiudad implements CapazDeEjecutarAccionMenu{
         BaseDeDatosSingleton.listarCiudades();
         int keyCiudad = seleccionarCiudad(ciudades);
         System.out.println("Determine que atributo modificar:");
-        System.out.print("1 - Nombre '\t'"+" 2- Pais Origen \n"+
-                "3 - Salir");
+        System.out.print("1 - Nombre "+"\t2- Pais Origen \n"+
+                "3 - Salir\n");
         int opcion = 0;
         while(opcion<1 || opcion>3){
             opcion = Consola.leerEntero();

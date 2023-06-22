@@ -9,7 +9,7 @@ public abstract class Usuario implements CapazDeSerBloqueado, Serializable {
     private String pass;
     private Boolean bloqueado;
     public Usuario( String nombre, String direccion, String pass) {
-        this.codigoUsuario = BaseDeDatosSingleton.getInstance().obtenerCodigoMayor()+1;
+        this.codigoUsuario = BaseDeDatosSingleton.obtenerCodigoMayor()+1;
         this.nombre = nombre;
         this.direccion = direccion;
         this.pass = pass;

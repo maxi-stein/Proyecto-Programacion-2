@@ -153,7 +153,7 @@ public class SistemaDeGestion implements Serializable {
     }
     private  static void cargarUsuarioDefault(){
         if(usuarios.size() == 0){
-            usuarios.put(1, new Admin("adminDefault", " ", "1"));
+            usuarios.put(1, new Admin("adminDefault", "Direccion default ", "1"));
             BaseDeDatosSingleton.agregarUsuario(usuarios.get(1));
             System.out.println("Usuario Admin Default creado");
         }
@@ -178,10 +178,11 @@ public class SistemaDeGestion implements Serializable {
         }
     }
     private static void cargarEmpresaDefault(){
-        System.out.println("Se procede a crear una primer empresa:");
         if(empresas.size()==0) {
+            System.out.println("Se procede a crear una primer empresa:");
             MenuCrearEmpresa m = new MenuCrearEmpresa();
             m.ejecutar();
+            empresas = BaseDeDatosSingleton.obtenerEmpresas();
         }
 
     }
