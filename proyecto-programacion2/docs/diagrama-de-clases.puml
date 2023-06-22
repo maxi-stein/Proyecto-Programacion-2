@@ -182,9 +182,14 @@ class SistemaDeGestion{
     - {static} Hashmap<Integer, Pais> : PAISES
 
     +mostrarMenu() : Integer
-    +run() : void
-    +serializarBD() : void
-    +deserializarBD() : void
+    +run() : Void
+    +serializarBD() : Void
+    +deserializarBD() : Void
+    -cargarDatosDefault(): Void
+    -cargarUsuarioDefault() : Void
+    -cargarAreaDeMercadoDefault() : Void
+    -cargarPaisYCiudadDefault() : Void
+    -cargarEmpresaDefault() : Void
 }
 
 class Ciudad{

@@ -17,6 +17,7 @@ public class Admin extends Usuario {
     @Override
     public void mostrarInfo() {
         super.mostrarCredenciales();
+        System.out.println(BaseDeDatosSingleton.obtenerEmpresas().toString());
     }
     @Override
     public void modificar() {

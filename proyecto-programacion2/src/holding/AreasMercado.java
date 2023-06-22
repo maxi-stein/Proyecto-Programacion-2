@@ -13,7 +13,7 @@ public class AreasMercado implements CapazDeSerBloqueado, Serializable {
     }
     @Override
     public String toString() {
-        return nombre + "-" +  descripcion + '\n' + "*".repeat(25) + '\n';
+        return nombre + "-" +  descripcion + '\n' + "*".repeat(25);
     }
     @Override
     public void setBloqueo(boolean valor) {

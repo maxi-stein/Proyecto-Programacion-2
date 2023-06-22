@@ -18,98 +18,124 @@ public class SistemaDeGestion implements Serializable {
         ciudades = new HashMap<>();
         paises = new HashMap<>();
         areasDeMercado = new HashMap<>();
+        BaseDeDatosSingleton.getInstance();
         deserializarBD();
         BaseDeDatosSingleton.cargarDatosSerializados(usuarios,empresas,areasDeMercado,ciudades, paises);
-
     }
     public void run() throws IOException {
         int num;
         do{
             num=mostrarMenu();
-            if (num == 1) {
-
-                Usuario loggedInUsuario = BaseDeDatosSingleton.iniciarSesion();
-                if(loggedInUsuario != null){
-                    loggedInUsuario.proceder();
-                }
-                BaseDeDatosSingleton.desloguearUsuario();
-                serializarBD(BaseDeDatosSingleton.obtenerUsuarios(), BaseDeDatosSingleton.obtenerEmpresas(),
+            switch (num) {
+                case 1:
+                    Usuario loggedInUsuario = BaseDeDatosSingleton.iniciarSesion();
+                    if(loggedInUsuario != null){
+                        loggedInUsuario.proceder();
+                    }
+                    break;
+                case 2:
+                    BaseDeDatosSingleton.desloguearUsuario();
+                    break;
+            }
+            serializarBD(BaseDeDatosSingleton.obtenerUsuarios(), BaseDeDatosSingleton.obtenerEmpresas(),
                         BaseDeDatosSingleton.obtenerAreasDeMercado(), BaseDeDatosSingleton.obtenerCiudades(),
                         BaseDeDatosSingleton.obtenerPaises());
-            }
         }while(num!=2);
     }
     public int mostrarMenu(){
+        int opcion=0;
         System.out.print("1-Iniciar Sesion \n2-Salir del Sistema\n");
-        return Consola.leerEntero();
+        while (opcion<1 || opcion>2){
+            opcion = Consola.leerEntero();
+        }
+        return opcion;
     }
-    public static void serializarBD(HashMap<Integer,Usuario> usuarios2,
-                             HashMap<Integer,Empresa> empresas2,
-                             HashMap<Integer,AreasMercado> areasDeMercado2,
+    private static void serializarBD(HashMap<Integer,Usuario> usuarios2, HashMap<Integer,Empresa> empresas2, HashMap<Integer,AreasMercado> areasDeMercado2,
                              HashMap<Integer,Ciudad> ciudades2, HashMap<Integer,Pais> paises2) throws IOException {
 
-        try{
+        try {
             ObjectOutputStream objUser = crearObjectOutputStream("Usuarios.bin");
             objUser.writeObject(usuarios2);
-
-            ObjectOutputStream objEmp = crearObjectOutputStream("Empresas.bin");
-            objEmp.writeObject(empresas2);
-
+            objUser.close();
+        }
+        catch(IOException e){
+                System.out.println("Error al serializar Usuarios");
+        }
+        try {
             ObjectOutputStream objArea = crearObjectOutputStream("AreasDeMercado.bin");
             objArea.writeObject(areasDeMercado2);
-
+            objArea.close();
+        }
+        catch (IOException e) {
+            System.out.println("Error al serializar areas de mercado");
+        }
+        try {
             ObjectOutputStream objCiudad = crearObjectOutputStream("Ciudades.bin");
             objCiudad.writeObject(ciudades2);
-
+            objCiudad.close();
+        }
+        catch (IOException e) {
+            System.out.println("Error al serializar ciudades");
+        }
+        try {
             ObjectOutputStream objPais = crearObjectOutputStream("Paises.bin");
             objPais.writeObject(paises2);
-
-            objUser.close();
-            objEmp.close();
-            objArea.close();
-            objCiudad.close();
             objPais.close();
-
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        }
+        catch (IOException e) {
+            System.out.println("Error al serializar pasies");
+        }
+        try {
+            ObjectOutputStream objEmp = crearObjectOutputStream("Empresas.bin");
+            objEmp.writeObject(empresas2);
+            objEmp.close();
+        }
+        catch (IOException e) {
+            System.out.println("Error al serializar Empresas");
         }
     }
-    public static void deserializarBD() throws IOException, FileNotFoundException {
+    private static void deserializarBD() throws IOException {
             try{
-                ObjectInputStream objUser = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Usuarios.bin"))));
+                ObjectInputStream objUser = crearObjectInputStream("Usuarios.bin");
                 usuarios = (HashMap<Integer, Usuario>) objUser.readObject();
+                System.out.println("Lectura de usuarios exitosa");
                 objUser.close();
             }catch (FileNotFoundException | ClassNotFoundException e) {
                 System.out.println("Primer inicio de sesion. Se creará el usuario Admin con credenciales de acceso:" +
                         "Num de Usuario=1 - Contraseña=1");
             } 
             try {
-                ObjectInputStream objArea = new ObjectInputStream((new BufferedInputStream(new FileInputStream("AreasDeMercado.bin"))));
+                ObjectInputStream objArea = crearObjectInputStream("AreasDeMercado.bin");
                 areasDeMercado = (HashMap<Integer, AreasMercado>) objArea.readObject();
+                System.out.println("Cantidad de areas de mercado leidas en la deserializacion: "+areasDeMercado.size());
+                System.out.println("Lectura de area de mercado exitosa");
                 objArea.close();
             }catch (FileNotFoundException | ClassNotFoundException e){
-                System.out.println("No hay areas de mercado registradas. Se cargaran las areas default.");
+                System.out.println("No hay areas de mercado registradas");
             }
             try {
-                ObjectInputStream objCiudad = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Ciudades.bin"))));
+                ObjectInputStream objCiudad = crearObjectInputStream("Ciudades.bin");
                 ciudades = (HashMap<Integer, Ciudad>)  objCiudad.readObject();
+                System.out.println("Lectura de Ciudades exitosa");
                 objCiudad.close();
             }catch (FileNotFoundException | ClassNotFoundException e){
-                System.out.println("No hay Ciudades registradas. Se cargaran valores default.");
+                System.out.println("No hay Ciudades registradas");
             }
             try{
-                ObjectInputStream objPais = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Paises.bin"))));
+                ObjectInputStream objPais = crearObjectInputStream("Paises.bin");
                 paises = (HashMap<Integer, Pais>)  objPais.readObject();
+                System.out.println("Lectura de Paises exitosa");
                 objPais.close();
             }catch (FileNotFoundException | ClassNotFoundException e){
-                System.out.println("No hay Paises registrados. Se cargaran valores default.");
+                System.out.println("No hay Paises registrados");
             }
             try{
-                ObjectInputStream objEmp = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Empresas.bin"))));
+                ObjectInputStream objEmp = crearObjectInputStream("Empresas.bin");
                 empresas = (HashMap<Integer, Empresa>) objEmp.readObject();
+                System.out.println("Lectura de Empresas exitosa");
                 objEmp.close();
             }catch (FileNotFoundException | ClassNotFoundException e){
-                System.out.println("No hay empresas registradas. Se procede a crear una primera empresa");
+                System.out.println("No hay empresas registradas");
             }
         cargarDatosDefault();
     }
@@ -126,13 +152,19 @@ public class SistemaDeGestion implements Serializable {
         cargarEmpresaDefault();
     }
     private  static void cargarUsuarioDefault(){
-        usuarios.put(usuarios.size()+1, new Admin("adminDefault", " ", "1"));
+        if(usuarios.size() == 0){
+            usuarios.put(1, new Admin("adminDefault", " ", "1"));
+            BaseDeDatosSingleton.agregarUsuario(usuarios.get(1));
+            System.out.println("Usuario Admin Default creado");
+        }
     }
     private  static void cargarAreaDeMercadoDefault(){
         if(areasDeMercado.size() == 0){
             BaseDeDatosSingleton.agregarAreaDeMercado(new AreasMercado("CONSTRUCCION", "Obras Publicas"));
             BaseDeDatosSingleton.agregarAreaDeMercado(new AreasMercado("METALURGICA", "Acero Industrial"));
             BaseDeDatosSingleton.agregarAreaDeMercado(new AreasMercado("ASESORAMIENTO", "Servicio de Consultoria"));
+            areasDeMercado = BaseDeDatosSingleton.obtenerAreasDeMercado();
+            System.out.println("Areas de Mercado default creadas");
         }
     }
     private static void cargarPaisYCiudadDefault(){
@@ -140,12 +172,17 @@ public class SistemaDeGestion implements Serializable {
             Pais paisDefault = new Pais("Argentina",487.2,50000000);
             BaseDeDatosSingleton.agregarPais(paisDefault);
             BaseDeDatosSingleton.agregarCiudad(new Ciudad("Buenos Aires",paisDefault));
+            paises = BaseDeDatosSingleton.obtenerPaises();
+            ciudades = BaseDeDatosSingleton.obtenerCiudades();
+            System.out.println("Paises y Ciudades default creadas");
         }
     }
     private static void cargarEmpresaDefault(){
+        System.out.println("Se procede a crear una primer empresa:");
         if(empresas.size()==0) {
             MenuCrearEmpresa m = new MenuCrearEmpresa();
             m.ejecutar();
         }
+
     }
 }

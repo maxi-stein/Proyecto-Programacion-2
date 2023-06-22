@@ -9,30 +9,26 @@ import java.util.Scanner;
 
 public class Consola {
     private static Scanner sc = new Scanner(System.in);
-
     private Consola(){}
-
     public static String leerString(){
         return sc.nextLine();
     }
-
     public static int leerEntero(){
-        String lectura = null;
-        int entero = 0;
+        Integer lectura = null;
         while (lectura == null){
             try{
-                lectura = sc.nextLine();
-                entero = Integer.parseInt(lectura);
+                lectura = sc.nextInt();
+                sc.nextLine();
             }
             catch (NumberFormatException nfe){
                 System.out.println("Ingrese un valor correcto!");
             }
         }
-        return entero;
+        return lectura;
     }
 
     public static LocalDate leerFecha() {
-        String dateString = sc.nextLine();
+        String dateString = sc.next();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = null;
 
@@ -47,17 +43,16 @@ public class Consola {
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
     public static double leerDouble(){
-        String lectura = null;
-        double entero = 0;
+        Double lectura = null;
         while (lectura == null){
             try{
-                lectura = sc.nextLine();
-                entero = Double.parseDouble(lectura);
+                lectura = sc.nextDouble();
+                sc.nextLine();
             }
             catch (NumberFormatException nfe){
                 System.out.println("Ingrese un valor correcto!");
             }
         }
-        return entero;
+        return lectura;
     }
 }

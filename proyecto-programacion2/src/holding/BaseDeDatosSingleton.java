@@ -36,7 +36,6 @@ public class BaseDeDatosSingleton {
         areasDeMercado = areasDeMercado2;
         ciudades = ciudades2;
         paises = paises2;
-
     }
     public static Usuario iniciarSesion(){
         int intentos = 0;
