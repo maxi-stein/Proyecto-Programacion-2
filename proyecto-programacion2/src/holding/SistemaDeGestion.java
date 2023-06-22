@@ -75,35 +75,43 @@ public class SistemaDeGestion implements Serializable {
         }
     }
     public static void deserializarBD() throws IOException, FileNotFoundException {
-        try{
             try{
                 ObjectInputStream objUser = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Usuarios.bin"))));
                 usuarios = (HashMap<Integer, Usuario>) objUser.readObject();
                 objUser.close();
             }catch (FileNotFoundException e) {
-                System.out.println("Error de E/S: " + e.getMessage());
-                System.out.println("~ BASE DE USUARIOS NO HALLADA ~");
-                cargarDatosDefault();
+                System.out.println("Primer inicio de sesion. Se creará el usuario Admin con credenciales de acceso:" +
+                        "Num de Usuario=1 - Contraseña=1");
             }
-            ObjectInputStream objEmp = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Empresas.bin"))));
-            ObjectInputStream objArea = new ObjectInputStream((new BufferedInputStream(new FileInputStream("AreasDeMercado.bin"))));
-            ObjectInputStream objCiudad = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Ciudades.bin"))));
-            ObjectInputStream objPais = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Paises.bin"))));
-
-            empresas = (HashMap<Integer, Empresa>) objEmp.readObject();
-            areasDeMercado = (HashMap<Integer, AreasMercado>) objArea.readObject();
-            ciudades = (HashMap<Integer, Ciudad>)  objCiudad.readObject();
-            paises = (HashMap<Integer, Pais>)  objPais.readObject();
-
-            objEmp.close();
-            objArea.close();
-            objCiudad.close();
-            objPais.close();
-
-        } catch (FileNotFoundException | ClassNotFoundException e) {
-            System.out.println("Error de E/S: " + e.getMessage());
-            System.out.println("BASE NO RECUPERADA");
-        }
+            try {
+                ObjectInputStream objArea = new ObjectInputStream((new BufferedInputStream(new FileInputStream("AreasDeMercado.bin"))));
+                areasDeMercado = (HashMap<Integer, AreasMercado>) objArea.readObject();
+                objArea.close();
+            }catch (FileNotFoundException | ClassNotFoundException e){
+                System.out.println("No hay areas de mercado registradas. Se cargaran las areas default.");
+            }
+            try {
+                ObjectInputStream objCiudad = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Ciudades.bin"))));
+                ciudades = (HashMap<Integer, Ciudad>)  objCiudad.readObject();
+                objCiudad.close();
+            }catch (FileNotFoundException | ClassNotFoundException e){
+                System.out.println("No hay Ciudades registradas. Se cargaran valores default.");
+            }
+            try{
+                ObjectInputStream objPais = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Paises.bin"))));
+                paises = (HashMap<Integer, Pais>)  objPais.readObject();
+                objPais.close();
+            }catch (FileNotFoundException | ClassNotFoundException e){
+                System.out.println("No hay Paises registrados. Se cargaran valores default.");
+            }
+            try{
+                ObjectInputStream objEmp = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Empresas.bin"))));
+                empresas = (HashMap<Integer, Empresa>) objEmp.readObject();
+                objEmp.close();
+            }catch (FileNotFoundException | ClassNotFoundException e){
+                System.out.println("No hay empresas registradas. Se procede a crear una primera empresa");
+            }
+        cargarDatosDefault();
     }
     private static ObjectOutputStream crearObjectOutputStream(String nomArchivo) throws IOException {
         return new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(nomArchivo)));
@@ -112,20 +120,30 @@ public class SistemaDeGestion implements Serializable {
         return new ObjectInputStream(new BufferedInputStream(new FileInputStream(nomArchivo)));
     }
     private static void cargarDatosDefault(){
-        usuarios.put(usuarios.size()+1, new Admin("admin1", "Calle 123", "1"));
+        cargarUsuarioDefault();
+        cargarAreaDeMercadoDefault();
+        cargarPaisYCiudadDefault();
+        cargarEmpresaDefault();
+    }
+    private  static void cargarUsuarioDefault(){
+        usuarios.put(usuarios.size()+1, new Admin("adminDefault", " ", "1"));
+    }
+    private  static void cargarAreaDeMercadoDefault(){
         if(areasDeMercado.size() == 0){
             BaseDeDatosSingleton.agregarAreaDeMercado(new AreasMercado("CONSTRUCCION", "Obras Publicas"));
             BaseDeDatosSingleton.agregarAreaDeMercado(new AreasMercado("METALURGICA", "Acero Industrial"));
             BaseDeDatosSingleton.agregarAreaDeMercado(new AreasMercado("ASESORAMIENTO", "Servicio de Consultoria"));
         }
+    }
+    private static void cargarPaisYCiudadDefault(){
         if(paises.size() == 0){
             Pais paisDefault = new Pais("Argentina",487.2,50000000);
             BaseDeDatosSingleton.agregarPais(paisDefault);
             BaseDeDatosSingleton.agregarCiudad(new Ciudad("Buenos Aires",paisDefault));
         }
-
+    }
+    private static void cargarEmpresaDefault(){
         if(empresas.size()==0) {
-            System.out.println("NO HAY EMPRESAS REGISTRADAS - SE PROCEDERA A REGISTRAR UNA EMPRESA");
             MenuCrearEmpresa m = new MenuCrearEmpresa();
             m.ejecutar();
         }
