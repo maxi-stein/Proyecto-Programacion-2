@@ -53,90 +53,19 @@ public class SistemaDeGestion implements Serializable {
     private static void serializarBD(HashMap<Integer,Usuario> usuarios2, HashMap<Integer,Empresa> empresas2, HashMap<Integer,AreasMercado> areasDeMercado2,
                              HashMap<Integer,Ciudad> ciudades2, HashMap<Integer,Pais> paises2) throws IOException {
 
-        try {
-            ObjectOutputStream objUser = crearObjectOutputStream("Usuarios.bin");
-            objUser.writeObject(usuarios2);
-            objUser.close();
-        }
-        catch(IOException e){
-                System.out.println("Error al serializar Usuarios");
-        }
-        try {
-            ObjectOutputStream objArea = crearObjectOutputStream("AreasDeMercado.bin");
-            objArea.writeObject(areasDeMercado2);
-            objArea.close();
-        }
-        catch (IOException e) {
-            System.out.println("Error al serializar areas de mercado");
-        }
-        try {
-            ObjectOutputStream objCiudad = crearObjectOutputStream("Ciudades.bin");
-            objCiudad.writeObject(ciudades2);
-            objCiudad.close();
-        }
-        catch (IOException e) {
-            System.out.println("Error al serializar ciudades");
-        }
-        try {
-            ObjectOutputStream objPais = crearObjectOutputStream("Paises.bin");
-            objPais.writeObject(paises2);
-            objPais.close();
-        }
-        catch (IOException e) {
-            System.out.println("Error al serializar pasies");
-        }
-        try {
-            ObjectOutputStream objEmp = crearObjectOutputStream("Empresas.bin");
-            objEmp.writeObject(empresas2);
-            objEmp.close();
-        }
-        catch (IOException e) {
-            System.out.println("Error al serializar Empresas");
-        }
+        writeObject(usuarios2,"usuarios.dat");
+        writeObject(areasDeMercado2,"areasMercado.bin");
+        writeObject(ciudades2,"ciudades.bin");
+        writeObject(paises2,"paises.bin");
+        writeObject(empresas2,"empresas.bin");
     }
     private static void deserializarBD() throws IOException {
-            try{
-                ObjectInputStream objUser = crearObjectInputStream("Usuarios.bin");
-                usuarios = (HashMap<Integer, Usuario>) objUser.readObject();
-                System.out.println("Lectura de usuarios exitosa");
-                objUser.close();
-            }catch (FileNotFoundException | ClassNotFoundException e) {
-                System.out.println("Primer inicio de sesion. Se creará el usuario Admin con credenciales de acceso:" +
-                        "Num de Usuario=1 - Contraseña=1");
-            } 
-            try {
-                ObjectInputStream objArea = crearObjectInputStream("AreasDeMercado.bin");
-                areasDeMercado = (HashMap<Integer, AreasMercado>) objArea.readObject();
-                System.out.println("Cantidad de areas de mercado leidas en la deserializacion: "+areasDeMercado.size());
-                System.out.println("Lectura de area de mercado exitosa");
-                objArea.close();
-            }catch (FileNotFoundException | ClassNotFoundException e){
-                System.out.println("No hay areas de mercado registradas");
-            }
-            try {
-                ObjectInputStream objCiudad = crearObjectInputStream("Ciudades.bin");
-                ciudades = (HashMap<Integer, Ciudad>)  objCiudad.readObject();
-                System.out.println("Lectura de Ciudades exitosa");
-                objCiudad.close();
-            }catch (FileNotFoundException | ClassNotFoundException e){
-                System.out.println("No hay Ciudades registradas");
-            }
-            try{
-                ObjectInputStream objPais = crearObjectInputStream("Paises.bin");
-                paises = (HashMap<Integer, Pais>)  objPais.readObject();
-                System.out.println("Lectura de Paises exitosa");
-                objPais.close();
-            }catch (FileNotFoundException | ClassNotFoundException e){
-                System.out.println("No hay Paises registrados");
-            }
-            try{
-                ObjectInputStream objEmp = crearObjectInputStream("Empresas.bin");
-                empresas = (HashMap<Integer, Empresa>) objEmp.readObject();
-                System.out.println("Lectura de Empresas exitosa");
-                objEmp.close();
-            }catch (FileNotFoundException | ClassNotFoundException e){
-                System.out.println("No hay empresas registradas");
-            }
+        readObject(usuarios,"usuarios.dat");
+        readObject(areasDeMercado,"areasDeMercado.dat");
+        readObject(ciudades,"ciudades.dat");
+        readObject(paises,"paises.dat");
+        readObject(empresas,"empresas.dat");
+        
         cargarDatosDefault();
     }
     private static ObjectOutputStream crearObjectOutputStream(String nomArchivo) throws IOException {
@@ -144,6 +73,25 @@ public class SistemaDeGestion implements Serializable {
     }
     private static ObjectInputStream crearObjectInputStream(String nomArchivo) throws IOException {
         return new ObjectInputStream(new BufferedInputStream(new FileInputStream(nomArchivo)));
+    }
+    private static <T> void writeObject(T objetoAEscribir,String nombreArchivo) throws IOException {
+        try{
+            ObjectOutputStream oos = crearObjectOutputStream(nombreArchivo);
+            oos.writeObject(objetoAEscribir);
+            oos.close();
+        }catch (IOException e){
+            System.out.println("Error al serializar "+nombreArchivo);
+        }
+    }
+    private static <T> void readObject(T objetoALeer,String nombreArchivo) throws IOException {
+        try{
+            ObjectInputStream ois = crearObjectInputStream(nombreArchivo);
+            objetoALeer =  (T) ois.readObject();
+            System.out.println("Lectura de "+nombreArchivo+" exitosa");
+            ois.close();
+        }catch (IOException | ClassNotFoundException e){
+            System.out.println("No se encontró "+nombreArchivo);
+        }
     }
     private static void cargarDatosDefault(){
         cargarUsuarioDefault();
