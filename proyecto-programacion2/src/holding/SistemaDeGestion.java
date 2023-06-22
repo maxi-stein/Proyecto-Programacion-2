@@ -13,11 +13,6 @@ public class SistemaDeGestion implements Serializable {
     private static HashMap<Integer,Ciudad> ciudades;
     private static HashMap<Integer,Pais> paises;
     public SistemaDeGestion() throws IOException {
-        usuarios = new HashMap<>();
-        empresas = new HashMap<>();
-        ciudades = new HashMap<>();
-        paises = new HashMap<>();
-        areasDeMercado = new HashMap<>();
         BaseDeDatosSingleton.getInstance();
         deserializarBD();
         BaseDeDatosSingleton.cargarDatosSerializados(usuarios,empresas,areasDeMercado,ciudades, paises);
@@ -54,18 +49,18 @@ public class SistemaDeGestion implements Serializable {
                              HashMap<Integer,Ciudad> ciudades2, HashMap<Integer,Pais> paises2) throws IOException {
 
         writeObject(usuarios2,"usuarios.dat");
-        writeObject(areasDeMercado2,"areasMercado.bin");
-        writeObject(ciudades2,"ciudades.bin");
-        writeObject(paises2,"paises.bin");
-        writeObject(empresas2,"empresas.bin");
+        writeObject(areasDeMercado2,"areasDeMercado.dat");
+        writeObject(ciudades2,"ciudades.dat");
+        writeObject(paises2,"paises.dat");
+        writeObject(empresas2,"empresas.dat");
     }
     private static void deserializarBD() throws IOException {
-        readObject(usuarios,"usuarios.dat");
-        readObject(areasDeMercado,"areasDeMercado.dat");
-        readObject(ciudades,"ciudades.dat");
-        readObject(paises,"paises.dat");
-        readObject(empresas,"empresas.dat");
-        
+        usuarios = readObject(usuarios,"usuarios.dat");
+        areasDeMercado = readObject(areasDeMercado,"areasDeMercado.dat");
+        ciudades = readObject(ciudades,"ciudades.dat");
+        paises = readObject(paises,"paises.dat");
+        empresas = readObject(empresas,"empresas.dat");
+
         cargarDatosDefault();
     }
     private static ObjectOutputStream crearObjectOutputStream(String nomArchivo) throws IOException {
@@ -83,14 +78,16 @@ public class SistemaDeGestion implements Serializable {
             System.out.println("Error al serializar "+nombreArchivo);
         }
     }
-    private static <T> void readObject(T objetoALeer,String nombreArchivo) throws IOException {
+    private static <T> T readObject(T objetoALeer,String nombreArchivo) throws IOException {
         try{
             ObjectInputStream ois = crearObjectInputStream(nombreArchivo);
             objetoALeer =  (T) ois.readObject();
             System.out.println("Lectura de "+nombreArchivo+" exitosa");
             ois.close();
+            return objetoALeer;
         }catch (IOException | ClassNotFoundException e){
             System.out.println("No se encontró "+nombreArchivo);
+            return null;
         }
     }
     private static void cargarDatosDefault(){
@@ -100,14 +97,16 @@ public class SistemaDeGestion implements Serializable {
         cargarEmpresaDefault();
     }
     private  static void cargarUsuarioDefault(){
-        if(usuarios.size() == 0){
+        if(usuarios == null){
+            usuarios = new HashMap<>();
             usuarios.put(1, new Admin("adminDefault", "Direccion default ", "1"));
             BaseDeDatosSingleton.agregarUsuario(usuarios.get(1));
-            System.out.println("Usuario Admin Default creado");
+            System.out.println("Usuario Admin Default creado con Numero de Usuario = 1 y contraseña = 1");
         }
     }
     private  static void cargarAreaDeMercadoDefault(){
-        if(areasDeMercado.size() == 0){
+        if(areasDeMercado == null){
+            areasDeMercado = new HashMap<>();
             BaseDeDatosSingleton.agregarAreaDeMercado(new AreasMercado("CONSTRUCCION", "Obras Publicas"));
             BaseDeDatosSingleton.agregarAreaDeMercado(new AreasMercado("METALURGICA", "Acero Industrial"));
             BaseDeDatosSingleton.agregarAreaDeMercado(new AreasMercado("ASESORAMIENTO", "Servicio de Consultoria"));
@@ -116,7 +115,9 @@ public class SistemaDeGestion implements Serializable {
         }
     }
     private static void cargarPaisYCiudadDefault(){
-        if(paises.size() == 0){
+        if(paises == null){
+            ciudades = new HashMap<>();
+            paises = new HashMap<>();
             Pais paisDefault = new Pais("Argentina",487.2,50000000);
             BaseDeDatosSingleton.agregarPais(paisDefault);
             BaseDeDatosSingleton.agregarCiudad(new Ciudad("Buenos Aires",paisDefault));
@@ -126,12 +127,12 @@ public class SistemaDeGestion implements Serializable {
         }
     }
     private static void cargarEmpresaDefault(){
-        if(empresas.size()==0) {
+        if(empresas == null) {
+            empresas = new HashMap<>();
             System.out.println("Se procede a crear una primer empresa:");
             MenuCrearEmpresa m = new MenuCrearEmpresa();
             m.ejecutar();
             empresas = BaseDeDatosSingleton.obtenerEmpresas();
         }
-
     }
 }

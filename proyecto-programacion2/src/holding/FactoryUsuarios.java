@@ -46,8 +46,7 @@ public class FactoryUsuarios {
         System.out.println("Ingrese la titulacion");
         String titulacion = Consola.leerString();
         asesor.setTitulacion(titulacion);
-
-        System.out.println("Elija el area de mercado que asesora");
+        System.out.println("Seleccione el area de mercado que asesora");
         BaseDeDatosSingleton.listarAreasDeMercado();
         HashMap <Integer,AreasMercado> areas = BaseDeDatosSingleton.obtenerAreasDeMercado();
         Integer keyArea = 0;
@@ -59,23 +58,30 @@ public class FactoryUsuarios {
         asesor.agregarAreaMercadoCubierto(areas.get(keyArea));
 
         //se agrega la empresa para la que trabaja y se establece VinculacionAsesorEmpresa
-        System.out.println("Seleccione la empresa que asesora: ");
+        System.out.println("Seleccione la empresa que asesora (0 para salir): ");
         BaseDeDatosSingleton.listarEmpresas();
         HashMap<Integer, Empresa> empresas = BaseDeDatosSingleton.obtenerEmpresas();
         int keyEmpresa = 0;
         boolean compatible;
         do {
             keyEmpresa = Consola.leerEntero();
-            compatible = empresas.get(keyEmpresa).areaCompatible(areas.get(keyArea));
-            if(!compatible) {
-                System.out.println("El area de mercado no es compatible con la Empresa");
+            if(keyEmpresa==0){
+                compatible=true;
+            } else {
+                compatible = empresas.get(keyEmpresa).areaCompatible(areas.get(keyArea));
+                if(!compatible) {
+                    System.out.println("El area de mercado no es compatible con la Empresa.");
+                    System.out.println("Ingrese otra empresa o 0 para salir.");
+                }
             }
         } while (keyEmpresa < 0 || keyEmpresa > empresas.size() || !compatible);
-        System.out.println("Ingresa la fecha de inicio (dd/mm/aaaa): ");
-        LocalDate fechaInicio = Consola.leerFecha();
-        asesor.mostrarCredenciales();
-        BaseDeDatosSingleton.agregarAsesorAEmpresa(keyEmpresa,asesor,fechaInicio);//se agrega el asesor a la empresa
-        BaseDeDatosSingleton.agregarUsuario(asesor);//se agrega el asesor a la base de datos de usuarios
+        if(keyEmpresa!=0) {
+            System.out.println("Ingresa la fecha de inicio (dd/mm/aaaa): ");
+            LocalDate fechaInicio = Consola.leerFecha();
+            asesor.mostrarCredenciales();
+            BaseDeDatosSingleton.agregarAsesorAEmpresa(keyEmpresa, asesor, fechaInicio);//se agrega el asesor a la empresa
+            BaseDeDatosSingleton.agregarUsuario(asesor);//se agrega el asesor a la base de datos de usuarios
+        }
     }
 
     private static void crearVendedorCaptado(){
