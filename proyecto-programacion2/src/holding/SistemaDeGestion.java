@@ -79,10 +79,10 @@ public class SistemaDeGestion implements Serializable {
                 ObjectInputStream objUser = new ObjectInputStream((new BufferedInputStream(new FileInputStream("Usuarios.bin"))));
                 usuarios = (HashMap<Integer, Usuario>) objUser.readObject();
                 objUser.close();
-            }catch (FileNotFoundException e) {
+            }catch (FileNotFoundException | ClassNotFoundException e) {
                 System.out.println("Primer inicio de sesion. Se creará el usuario Admin con credenciales de acceso:" +
                         "Num de Usuario=1 - Contraseña=1");
-            }
+            } 
             try {
                 ObjectInputStream objArea = new ObjectInputStream((new BufferedInputStream(new FileInputStream("AreasDeMercado.bin"))));
                 areasDeMercado = (HashMap<Integer, AreasMercado>) objArea.readObject();
