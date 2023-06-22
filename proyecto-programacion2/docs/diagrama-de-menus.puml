@@ -1,10 +1,19 @@
 @startuml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam backgroundColor transparent
+skinparam monochrome true
+skinparam shadowing false
 
 abstract class Menu {
     -acciones : Hashmap<Integer, CapazDeEjecutarAccionMenu>
     +agregarAccion(Integer,  CapazDeEjecutarAccionMenu) : Void
     +getAccion(Integer) : CapazDeEjecutarAccionMenu
     +Menu()
+}
+
+class MenuSalir{
+  -ejecutar() : Void
 }
 
 class MenuABMCAreasMercado extends Menu{
@@ -130,4 +139,5 @@ MenuModificarUsuario --.|> CapazDeEjecutarAccionMenu
 MenuPrincipalAdmin -.|> CapazDeEjecutarAccionMenu
 MenuPrincipalNoAdmin -.|> CapazDeEjecutarAccionMenu
 MenuVendedorCaptado -.|> CapazDeEjecutarAccionMenu
+MenuSalir -.|> CapazDeEjecutarAccionMenu
 @enduml

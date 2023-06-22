@@ -183,8 +183,12 @@ class SistemaDeGestion{
 
     +mostrarMenu() : Integer
     +run() : Void
-    +serializarBD() : Void
-    +deserializarBD() : Void
+    -serializarBD() : Void
+    -deserializarBD() : Void
+    -crearObjectOutputStream(String) : ObjectOutputStream
+    -crearObjectInputStream(String) : ObjectInputStream
+    -writeObject<T>(T,String) : void
+    -readObject<T>(T,String) : T
     -cargarDatosDefault(): Void
     -cargarUsuarioDefault() : Void
     -cargarAreaDeMercadoDefault() : Void
