@@ -107,11 +107,15 @@ public class BaseDeDatosSingleton {
         return e.esAsesoradoPor(a);
     }
     public static void listarVendedores(){
-        for (int i = 1; i <= usuarios.size(); i++) {
-            Usuario usuario = usuarios.get(i);
-            if(usuario.noEstaBloqueado() && usuario instanceof Vendedor){
-                System.out.println(i + " - " + usuario.toString());
+        try{
+            for (int i = 1; i <= usuarios.size(); i++) {
+                Usuario usuario = usuarios.get(i);
+                if(usuario.noEstaBloqueado() && usuario instanceof Vendedor){
+                    System.out.println(i + " - " + usuario.toString());
+                }
             }
+        }catch (NullPointerException e){
+            System.out.println("Sin registros de Vendedores!");
         }
     }
     public static HashMap<Integer,Vendedor> obtenerVendedores(){

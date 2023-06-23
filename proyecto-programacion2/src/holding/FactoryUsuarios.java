@@ -88,20 +88,30 @@ public class FactoryUsuarios {
         HashMap<Integer,Vendedor> vendedores = null;
         Vendedor vendedorCaptado = new Vendedor();
         vendedorCaptado.pedirDatosBasicos();
-        System.out.println("Determine el vendedor maestro: ");
+        System.out.println("Determine el vendedor maestro - 0 para Cancelar -: ");
         BaseDeDatosSingleton.listarVendedores();
         vendedores = BaseDeDatosSingleton.obtenerVendedores();
-        int opcion = Consola.leerEntero();
-        while (!vendedores.containsValue(opcion)){
-            System.out.println("Ingrese una opcion correcta");
-            opcion = Consola.leerEntero();
+        if(!vendedores.isEmpty())
+        {
+            int opcion = Consola.leerEntero();
+            while (!vendedores.containsKey(opcion) && opcion != 0){
+                System.out.println("Ingrese una opcion correcta");
+                opcion = Consola.leerEntero();
+            }
+            if(opcion!= 0){
+                Vendedor vendedorMaestro = vendedores.get(opcion);
+                vendedorMaestro.getEmpresaTrabajo().agregarVendedor(vendedorCaptado); //agrego el vendedor captado al arraylist de vendedores de la empresa
+                vendedorCaptado.setEmpresaTrabajo(vendedorMaestro.getEmpresaTrabajo());//le asigno la empresa de trabajo al nuevo vendedor
+                vendedorMaestro.captarVendedor(vendedorCaptado); //se asocia el vendedor captado con su vendedor maestro
+                vendedorCaptado.mostrarCredenciales();
+                BaseDeDatosSingleton.agregarUsuario(vendedorCaptado); //se agrega el vendedor a la base de datos
+            }else{
+                System.out.println("- Proceso Cancelado - ");
+            }
+
+        }else{
+            System.out.println("Sin registros de Vendedores!");
         }
-        Vendedor vendedorMaestro = vendedores.get(opcion);
-        vendedorMaestro.getEmpresaTrabajo().agregarVendedor(vendedorCaptado); //agrego el vendedor captado al arraylist de vendedores de la empresa
-        vendedorCaptado.setEmpresaTrabajo(vendedorMaestro.getEmpresaTrabajo());//le asigno la empresa de trabajo al nuevo vendedor
-        vendedorMaestro.captarVendedor(vendedorCaptado); //se asocia el vendedor captado con su vendedor maestro
-        vendedorCaptado.mostrarCredenciales();
-        BaseDeDatosSingleton.agregarUsuario(vendedorCaptado); //se agrega el vendedor a la base de datos
 
     }
 

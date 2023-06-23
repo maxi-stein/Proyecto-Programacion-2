@@ -37,13 +37,14 @@ public abstract class Usuario implements CapazDeSerBloqueado, Serializable {
         this.direccion = Consola.leerString();
         System.out.println("Ingrese la contrasenia: ");
         this.pass = Consola.leerString();
+        this.bloqueado = false;
     }
     public boolean validarPass(String pass){
         return this.pass.equals(pass);
     }
     public void mostrarCredenciales(){
         System.out.println("Código Usuario: "+ codigoUsuario);
-        System.out.println("Nombre y direc: " +nombre + direccion );
+        System.out.println("Nombre y direc: " +nombre + " - " +direccion );
         System.out.println("Contraseña: "+ pass);
     }
     public int getCodigoUsuario() {
