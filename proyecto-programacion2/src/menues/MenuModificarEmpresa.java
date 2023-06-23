@@ -62,13 +62,7 @@ public class MenuModificarEmpresa implements CapazDeEjecutarAccionMenu{
                 while (opcionCiudad<1 || opcionCiudad>ciudades.size()){
                     opcionCiudad = Consola.leerEntero();
                 }
-                if(empresaSeleccionada.contieneCiudad(ciudades.get(opcionCiudad))){
-                    System.out.println("Ciudad "+ciudades.get(opcionCiudad).getNombre()+" ya registrada en la empresa!");
-                }
-                else{
-                    empresaSeleccionada.agregarCiudad(opcionCiudad);
-                    System.out.println("Ciudad agregada exitosamente");
-                }
+                empresaSeleccionada.agregarCiudad(opcionCiudad);
             case 6:
                 BaseDeDatosSingleton.listarCiudadesDeEmpresa(keyEmpresa);
                 int opcionEmpresa = 0;
@@ -84,13 +78,7 @@ public class MenuModificarEmpresa implements CapazDeEjecutarAccionMenu{
                 while (opcionAreaMercado<1 || opcionAreaMercado>areas.size()){
                     opcionAreaMercado = Consola.leerEntero();
                 }
-                if(empresaSeleccionada.contieneAreaDeMercado(areas.get(opcionAreaMercado))){
-                    System.out.println("El area de mercado "+areas.get(opcionAreaMercado).getNombre()+" ya se encuentra registrada en la empresa");
-                }
-                else{
-                    empresaSeleccionada.agregarAreaMercado(areas.get(opcionAreaMercado));
-                    System.out.println("Area de mercado agregada exitosamente");
-                }
+                empresaSeleccionada.agregarAreaMercado(areas.get(opcionAreaMercado));
                 break;
             case 8:
                 System.out.println("Seleccione el area de mercado a eliminar");
@@ -101,7 +89,6 @@ public class MenuModificarEmpresa implements CapazDeEjecutarAccionMenu{
                     opcionAreaMercadoAEliminar = Consola.leerEntero();
                 }
                 empresaSeleccionada.eliminarAreaMercado(areasMercadoAEliminar.get(opcionAreaMercadoAEliminar));
-                System.out.println("Area de mercado eliminada exitosamente");
                 break;
             default:
                 break;

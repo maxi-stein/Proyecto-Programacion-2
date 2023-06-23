@@ -23,8 +23,8 @@ public abstract class Usuario implements CapazDeSerBloqueado, Serializable {
     public void setBloqueo(boolean valor){
         this.bloqueado = valor;
     }
-    public boolean estaBloqueado(){
-        return bloqueado;
+    public boolean noEstaBloqueado(){
+        return !bloqueado;
     }
     public void modificar(){
         System.out.println("Seleccione la opcion a modificar: ");

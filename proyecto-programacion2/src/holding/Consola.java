@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Consola {
@@ -20,7 +21,7 @@ public class Consola {
                 lectura = sc.nextInt();
                 sc.nextLine();
             }
-            catch (NumberFormatException nfe){
+            catch (NumberFormatException  | InputMismatchException e){
                 System.out.println("Ingrese un valor correcto!");
             }
         }
@@ -49,7 +50,7 @@ public class Consola {
                 lectura = sc.nextDouble();
                 sc.nextLine();
             }
-            catch (NumberFormatException nfe){
+            catch (NumberFormatException | InputMismatchException e){
                 System.out.println("Ingrese un valor correcto!");
             }
         }

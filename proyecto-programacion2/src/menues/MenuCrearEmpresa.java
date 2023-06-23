@@ -38,7 +38,7 @@ public class MenuCrearEmpresa implements CapazDeEjecutarAccionMenu{
         while(opcAreaMercado<1 || opcAreaMercado>areasMercado.size()){
             opcAreaMercado = Consola.leerEntero();
         }
-         emp.agregarCiudad(opcAreaMercado);
+         emp.agregarAreaMercado(areasMercado.get(opcAreaMercado));
         BaseDeDatosSingleton.agregarEmpresa(emp);
         System.out.println("Empresa Registrada Correctamente");
     }

@@ -73,7 +73,7 @@ public class BaseDeDatosSingleton {
     }
     public static void listarEmpresas(){
         for(int i=1;i<=empresas.size();i++){
-            if(!empresas.get(i).estaBloqueado()){
+            if(empresas.get(i).noEstaBloqueado()){
                 System.out.println(i+" - "+empresas.get(i).getNombre());
             }
         }
@@ -83,7 +83,7 @@ public class BaseDeDatosSingleton {
     }
     public static void listarAreasDeMercado(){
         for(int i=1;i<=areasDeMercado.size();i++){
-            if(!areasDeMercado.get(i).estaBloqueado()){
+            if(areasDeMercado.get(i).noEstaBloqueado()){
                 System.out.println(i+" - "+areasDeMercado.get(i).toString());
             }
         }
@@ -109,7 +109,7 @@ public class BaseDeDatosSingleton {
     public static void listarVendedores(){
         for (int i = 1; i <= usuarios.size(); i++) {
             Usuario usuario = usuarios.get(i);
-            if(!usuario.estaBloqueado() && usuario instanceof Vendedor){
+            if(usuario.noEstaBloqueado() && usuario instanceof Vendedor){
                 System.out.println(i + " - " + usuario.toString());
             }
         }
@@ -118,7 +118,7 @@ public class BaseDeDatosSingleton {
         HashMap<Integer,Vendedor> vendedores = new HashMap<>();
         for (int i = 1; i <= usuarios.size(); i++) {
             Usuario usuario = usuarios.get(i);
-            if(!usuario.estaBloqueado() && usuario instanceof Vendedor){
+            if(usuario.noEstaBloqueado() && usuario instanceof Vendedor){
                 vendedores.put(i,(Vendedor) usuario);
             }
         }
@@ -129,7 +129,7 @@ public class BaseDeDatosSingleton {
     }
     public static void listarPaises(){
         for(int i=1;i<=paises.size();i++){
-            if(!paises.get(i).estaBloqueado()){
+            if(paises.get(i).noEstaBloqueado()){
                 System.out.println(i+" - "+paises.get(i).getNombre());
             }
         }
@@ -169,7 +169,7 @@ public class BaseDeDatosSingleton {
     }
     public static void listarCiudades(){
         for(int i=1;i<=ciudades.size();i++){
-            if(!ciudades.get(i).estaBloqueado()){
+            if(ciudades.get(i).noEstaBloqueado()){
                 System.out.println(i+" - "+ciudades.get(i));
             }
         }
@@ -187,7 +187,7 @@ public class BaseDeDatosSingleton {
     public static boolean ciudadEnUso(Ciudad c){
         boolean enUso = false;
         for(int i=1;i<=empresas.size();i++){
-            if(empresas.get(i).estaUbicadaEnCiudad(c) && !empresas.get(i).estaBloqueado()){
+            if(empresas.get(i).estaUbicadaEnCiudad(c) && empresas.get(i).noEstaBloqueado()){
                 enUso = true;
             }
         }
@@ -201,7 +201,7 @@ public class BaseDeDatosSingleton {
     }
     public static void listarEmpresasQueUtilizanCiudad(Ciudad c){
         for(int i=1;i<=empresas.size();i++){
-            if(empresas.get(i).estaUbicadaEnCiudad(c) && !empresas.get(i).estaBloqueado()){
+            if(empresas.get(i).estaUbicadaEnCiudad(c) && empresas.get(i).noEstaBloqueado()){
                 System.out.println(empresas.get(i).getNombre());
             }
         }
@@ -232,7 +232,7 @@ public class BaseDeDatosSingleton {
     public static boolean areaEnUso(AreasMercado a){
         boolean enUso = false;
         for(int i=1;i<=empresas.size();i++){
-            if(empresas.get(i).contieneAreaDeMercado(a) && !empresas.get(i).estaBloqueado()){
+            if(empresas.get(i).contieneAreaDeMercado(a) && empresas.get(i).noEstaBloqueado()){
                 enUso = true;
             }
         }
@@ -241,7 +241,7 @@ public class BaseDeDatosSingleton {
 
     public static void listarEmpresasQueUtilizanAreaMercado(AreasMercado a){
         for(int i=1;i<=empresas.size();i++){
-            if(empresas.get(i).contieneAreaDeMercado(a) && !empresas.get(i).estaBloqueado()){
+            if(empresas.get(i).contieneAreaDeMercado(a) && empresas.get(i).noEstaBloqueado()){
                 System.out.println(empresas.get(i).getNombre());
             }
         }

@@ -15,8 +15,8 @@ public class Ciudad implements CapazDeSerBloqueado, Serializable {
         bloqueado = valor;
     }
     @Override
-    public boolean estaBloqueado() {
-        return bloqueado;
+    public boolean noEstaBloqueado() {
+        return !bloqueado;
     }
     public boolean esIgual(Ciudad c){
         return (nombre.equals(c.nombre)) && paisOrigen==c.paisOrigen;

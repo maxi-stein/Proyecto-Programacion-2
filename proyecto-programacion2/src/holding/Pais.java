@@ -17,8 +17,8 @@ public class Pais implements CapazDeSerBloqueado, Serializable {
         bloqueado = valor;
     }
     @Override
-    public boolean estaBloqueado() {
-        return bloqueado;
+    public boolean noEstaBloqueado() {
+        return !bloqueado;
     }
     public boolean esIgual(Pais p){
         return nombre.equals(p.nombre);

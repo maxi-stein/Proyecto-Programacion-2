@@ -29,15 +29,17 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
     public void setBloqueo(boolean valor){
         this.bloqueado = valor;
     }
-    public boolean estaBloqueado(){
-        return bloqueado;
+    public boolean noEstaBloqueado(){
+        return !bloqueado;
     }
     public void agregarCiudad(int keyCiudad){
-        Ciudad ciudadSeleccionada = BaseDeDatosSingleton.getInstance().obtenerCiudades().get(keyCiudad);
-        if(ciudades.entrySet().contains(ciudadSeleccionada)){
-            throw new RuntimeException("La ciudad ya se encuentra ingresada!");
+        Ciudad ciudadSeleccionada = BaseDeDatosSingleton.obtenerCiudades().get(keyCiudad);
+        if(!ciudades.containsValue(ciudadSeleccionada)){
+            ciudades.put(ciudades.size()+1,ciudadSeleccionada);
         }
-        ciudades.put(ciudades.size()+1,ciudadSeleccionada);
+        else {
+            System.out.println("No se admiten repetidos!");
+        }
     }
     public void eliminarCiudad(Ciudad c){
             ciudades.entrySet().remove(c);
@@ -61,7 +63,7 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
         System.out.println("Sede modificada exitosamente");
     }
     public boolean estaUbicadaEnCiudad(Ciudad c){
-        return ciudades.entrySet().contains(c);
+        return ciudades.containsValue(c);
     }
     public void agregarAsesor(Asesor a,LocalDate fechaInicio){
         for(int i=0;i<asesores.size();i++){
@@ -81,11 +83,8 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
             i++;
         }
     }
-    public boolean contieneCiudad(Ciudad c){
-        return ciudades.entrySet().contains(c);
-    }
     public boolean contieneAreaDeMercado(AreasMercado a){
-        return areasMercado.entrySet().contains(a);
+        return areasMercado.containsValue(a);
     }
     public void listarAreasDeMercado(){
         for(var parClaveValor : areasMercado.entrySet()){
@@ -93,16 +92,21 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
         }
     }
     public void agregarAreaMercado(AreasMercado a){
-        if(areasMercado.entrySet().contains(a)) {
-            throw new RuntimeException("El área ya se encuentra ingresada.");
+        if(!areasMercado.containsValue(a)){
+            areasMercado.put(areasMercado.size() + 1, a);
+            System.out.println("Area de mercado agregada exitosamente!");
         }
-        areasMercado.put(areasMercado.size()+1,a);
+        else{
+            System.out.println("No se pueden agregar repetidos!");
+        }
     }
     public void eliminarAreaMercado(AreasMercado a) {
-        if(!areasMercado.entrySet().contains(a)) {
-          throw new RuntimeException("Area no encontrada.");
+        try{
+            areasMercado.remove(a);
         }
-        areasMercado.remove(a);
+        catch(NullPointerException e){
+            System.out.println("No se encontró registro del Area de Mercado en "+nombre);
+        }
     }
     public HashMap<Integer,AreasMercado> obtenerAreasDeMercado(){
         return areasMercado;
@@ -174,10 +178,7 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
         }
         return valor;
     }
-
     public void eliminarRegistrosAreaDeMercado(){
         areasMercado.clear();
     }
-
-
 }
