@@ -163,7 +163,20 @@ public class BaseDeDatosSingleton {
         ciudades.put(ciudades.size()+1,c);
     }
     public static void agregarAreaDeMercado(AreasMercado areaMercado){
-        areasDeMercado.put(areasDeMercado.size()+1,areaMercado);
+        boolean contiene=false;
+        for(int i=1;i<=areasDeMercado.size();i++){
+            if(areasDeMercado.get(i).esIgual(areaMercado)){
+                contiene=true;
+            }
+        }
+        if(!contiene){
+            areasDeMercado.put(areasDeMercado.size()+1,areaMercado);
+            System.out.println("Area agregada exitosamente");
+        }
+        else{
+            System.out.println("El area ya existe! No se admiten duplicados");
+        }
+
     }
     public static boolean ciudadYaExiste(Ciudad c){
         boolean existe = false;

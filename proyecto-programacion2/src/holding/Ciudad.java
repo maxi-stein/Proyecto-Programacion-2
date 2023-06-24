@@ -19,7 +19,10 @@ public class Ciudad implements CapazDeSerBloqueado, Serializable {
         return !bloqueado;
     }
     public boolean esIgual(Ciudad c){
-        return (nombre.equals(c.nombre)) && paisOrigen==c.paisOrigen;
+        return (nombre.equals(c.nombre)) && paisOrigen.getNombre().equalsIgnoreCase(c.paisOrigen.getNombre());
+    }
+    public boolean tieneAlPais(Pais p){
+        return paisOrigen.esIgual(p);
     }
     @Override
     public String toString() {

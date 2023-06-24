@@ -29,9 +29,20 @@ public class MenuModificarCiudad implements CapazDeEjecutarAccionMenu{
         Ciudad ciudadSeleccionada = ciudades.get(opcion);
         switch (opcion){
             case 1:
-                System.out.println("Determine el nuevo nombre:");
-                String nombre = Consola.leerString();
-                ciudadSeleccionada.setNombre(nombre);
+                boolean yaExiste = false;
+                while(!yaExiste){
+                    System.out.println("Determine el nuevo nombre:");
+                    String nombre = Consola.leerString();
+                    ciudadSeleccionada.setNombre(nombre);
+                    for(int i=1;i<=ciudades.size();i++){
+                        //evaluo si la ciudad es igual a otra ciudad dentro del mismo pais
+                        if(ciudadSeleccionada.esIgual(ciudades.get(i)) && ciudadSeleccionada.tieneAlPais(ciudades.get(i).getPaisOrigen()) ){
+                            System.out.println("Ese nombre ya le pertenece a otra ciudad del pais"+ciudadSeleccionada.getPaisOrigen().getNombre());
+                            System.out.println("Intente de nuevo.");
+                        }
+                    }
+                }
+
                 System.out.println("Nombre modificado!"+ciudades.get(keyCiudad));
                 break;
             case 2:
