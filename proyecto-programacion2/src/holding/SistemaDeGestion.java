@@ -21,6 +21,7 @@ public class SistemaDeGestion implements Serializable {
         int num;
         do{
             num=mostrarMenu();
+            BaseDeDatosSingleton.desloguearUsuario();
             switch (num) {
                 case 1:
                     Usuario loggedInUsuario = BaseDeDatosSingleton.iniciarSesion();
