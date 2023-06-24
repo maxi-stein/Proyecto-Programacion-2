@@ -92,7 +92,13 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
         }
     }
     public void agregarAreaMercado(AreasMercado a){
-        if(!areasMercado.containsValue(a)){
+        boolean contiene = false;
+        for(int i=1;i<=areasMercado.size();i++){
+            if(areasMercado.get(i).esIgual(a)){
+                contiene = true;
+            }
+        }
+        if(!contiene){
             areasMercado.put(areasMercado.size() + 1, a);
             System.out.println("Area de mercado agregada exitosamente!");
         }
@@ -124,9 +130,6 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
         }
         vendedores.remove(v);
         System.out.println("Vendedor eliminado.");
-    }
-    public boolean areaCompatible(AreasMercado a){
-        return areasMercado.entrySet().contains(a);
     }
     public boolean esAsesoradoPor(Asesor a){
         boolean contiene = false;
@@ -166,19 +169,20 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
     }
     public boolean tieneTrabajadores(){
         boolean valor = false;
-        if(asesores.size()>0 || vendedores.size()>0)
-        {
+        if(asesores.size()>0 || vendedores.size()>0) {
             System.out.println("La empresa registra empleados activos!");
-            System.out.println("Empleados:");
-            for(int i = 0; i<asesores.size(); i++){
-                System.out.println(asesores.get(i).getAsesor().getNombre()+" - Usuario N: "+asesores.get(i).getAsesor().getCodigoUsuario());
-            }
-            for(int i = 0; i<vendedores.size(); i++){
-                System.out.println(vendedores.get(i).toString());
-            }
             valor = true;
         }
         return valor;
+    }
+    public void listarTrabajadores(){
+        System.out.println("Empleados:");
+        for(int i = 0; i<asesores.size(); i++){
+            System.out.println(asesores.get(i).getAsesor().getNombre()+" - Usuario N: "+asesores.get(i).getAsesor().getCodigoUsuario());
+        }
+        for(int i = 0; i<vendedores.size(); i++){
+            System.out.println(vendedores.get(i).toString());
+        }
     }
     public void eliminarRegistrosAreaDeMercado(){
         areasMercado.clear();

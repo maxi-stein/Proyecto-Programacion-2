@@ -7,13 +7,12 @@ public class AreasMercado implements CapazDeSerBloqueado, Serializable {
     private String descripcion;
     private boolean bloqueado;
     public AreasMercado(String nombre, String descripcion) {
-
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
     @Override
     public String toString() {
-        return nombre + "-" +  descripcion + '\n' + "*".repeat(25);
+        return nombre + "-" +  descripcion;
     }
     @Override
     public void setBloqueo(boolean valor) {
@@ -34,5 +33,9 @@ public class AreasMercado implements CapazDeSerBloqueado, Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public boolean esIgual(AreasMercado a){
+        return nombre.equalsIgnoreCase(a.getNombre());
     }
 }

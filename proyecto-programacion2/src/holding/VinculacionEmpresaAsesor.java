@@ -22,7 +22,7 @@ public class VinculacionEmpresaAsesor implements Serializable {
     }
 
     public boolean contiene(Asesor a){
-        return a == asesor;
+        return a.getCodigoUsuario() == asesor.getCodigoUsuario();
     }
 
 }
