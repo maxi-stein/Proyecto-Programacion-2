@@ -1,8 +1,9 @@
 package holding;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class VinculacionEmpresaAsesor {
+public class VinculacionEmpresaAsesor implements Serializable {
 
     private Asesor asesor;
     private LocalDate fechaInicio;

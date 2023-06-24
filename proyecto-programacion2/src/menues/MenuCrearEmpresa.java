@@ -36,6 +36,7 @@ public class MenuCrearEmpresa implements CapazDeEjecutarAccionMenu{
 
         System.out.println("Seleccione Área de Mercado:");
         BaseDeDatosSingleton.listarAreasDeMercado();
+
         int opcAreaMercado=0;
         opcAreaMercado = Consola.leerEntero();
         while(opcAreaMercado<1 || opcAreaMercado>areasMercado.size()){

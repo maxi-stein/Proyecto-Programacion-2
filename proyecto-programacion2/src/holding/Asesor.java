@@ -2,6 +2,7 @@ package holding;
 
 import menues.MenuPrincipalNoAdmin;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 
 public class Asesor extends Usuario{
@@ -46,7 +47,7 @@ public class Asesor extends Usuario{
         while(opcion<1 || opcion>9){
             opcion = Consola.leerEntero();
         }
-        BaseDeDatosSingleton.listarEmpresas();
+
         HashMap<Integer,Empresa> empresas = BaseDeDatosSingleton.obtenerEmpresas();
         int keyEmpresa = 0;
 
@@ -64,6 +65,7 @@ public class Asesor extends Usuario{
                 setDireccion(direccion);
                 break;
             case 4:
+                System.out.println("Ingrese Titulación: ");
                 String titulacion = Consola.leerString();
                 setTitulacion(titulacion);
                 break;
@@ -92,18 +94,25 @@ public class Asesor extends Usuario{
                 eliminarAreaMercadoCubierto(keyAreaCubierta);
                 break;
             case 7:
+                BaseDeDatosSingleton.listarEmpresas();
                 do {
                     keyEmpresa = Consola.leerEntero();
                 } while (keyEmpresa < 0 || keyEmpresa > empresas.size());
-                if(BaseDeDatosSingleton.usuarioAsesoraAEmpresa(this,empresas.get(keyEmpresa))){
+                //if(BaseDeDatosSingleton.usuarioAsesoraAEmpresa(this,empresas.get(keyEmpresa))){
+                if(empresas.get(keyEmpresa).esAsesoradoPor(this)){
                     System.out.println("El usuario ya asesora dicha empresa!");
                 }
                 else{
                     System.out.println("Ingrese la fecha de inicio dd/mm/aaaa:");
-                    empresas.get(keyEmpresa).agregarAsesor(this,Consola.leerFecha());
+                    LocalDate fechaInicioModif = Consola.leerFecha();
+                    Asesor asesorModif = this;
+                    BaseDeDatosSingleton.agregarAsesorAEmpresa(keyEmpresa, asesorModif, fechaInicioModif);
+                    //empresas.get(keyEmpresa).agregarAsesor(this,Consola.leerFecha());
                 }
                 break;
             case 8:
+                //IMPLEMENTAR EMPRESAS QUE SE VINCULAN CON EL ASESOR
+                System.out.println("FALTA IMPRIMIR LA VINCULACION DE LAS EMPRESAS CON EL ASESOR");
                 do {
                     keyEmpresa = Consola.leerEntero();
                 } while (keyEmpresa < 0 || keyEmpresa > empresas.size());

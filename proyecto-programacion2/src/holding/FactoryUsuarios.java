@@ -46,16 +46,18 @@ public class FactoryUsuarios {
         System.out.println("Ingrese la titulacion");
         String titulacion = Consola.leerString();
         asesor.setTitulacion(titulacion);
-        System.out.println("Seleccione el area de mercado que asesora");
+        System.out.println("Seleccione el area de mercado que asesora - 0 para Cancelar - :");
         BaseDeDatosSingleton.listarAreasDeMercado();
         HashMap <Integer,AreasMercado> areas = BaseDeDatosSingleton.obtenerAreasDeMercado();
         Integer keyArea = 0;
         do {
             keyArea = Consola.leerEntero();
-        } while (keyArea < 0 || keyArea > areas.size());
+        } while (keyArea < 0 || !areas.containsKey(keyArea));
 
         //se agrega el area de mercado cubierta
         asesor.agregarAreaMercadoCubierto(areas.get(keyArea));
+        System.out.println("Asesora: ");
+        asesor.listarMercadosCubiertos();
 
         //se agrega la empresa para la que trabaja y se establece VinculacionAsesorEmpresa
         System.out.println("Seleccione la empresa que asesora (0 para salir): ");
@@ -68,7 +70,9 @@ public class FactoryUsuarios {
             if(keyEmpresa==0){
                 compatible=true;
             } else {
-                compatible = empresas.get(keyEmpresa).areaCompatible(areas.get(keyArea));
+              //  compatible = empresas.get(keyEmpresa).areaCompatible(areas.get(keyArea));
+                compatible = empresas.get(keyEmpresa).contieneAreaDeMercado(areas.get(keyArea));
+
                 if(!compatible) {
                     System.out.println("El area de mercado no es compatible con la Empresa.");
                     System.out.println("Ingrese otra empresa o 0 para salir.");

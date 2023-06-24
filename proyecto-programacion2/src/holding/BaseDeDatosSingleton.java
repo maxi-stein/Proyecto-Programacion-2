@@ -94,8 +94,10 @@ public class BaseDeDatosSingleton {
     public static HashMap<Integer, Usuario> obtenerUsuarios(){
         return usuarios;
     }
-    public static void agregarAsesorAEmpresa(Integer keyEmpresa, Asesor a, LocalDate fechaInicio){
+    public static void agregarAsesorAEmpresa(int keyEmpresa, Asesor a, LocalDate fechaInicio){ //cambie Integer por int
+        System.out.println("Empresa modificada: "+empresas.get(keyEmpresa).getNombre());
         empresas.get(keyEmpresa).agregarAsesor(a,fechaInicio);
+        System.out.println("Nuevo Asesor: "+empresas.get(keyEmpresa).esAsesoradoPor(a));
     }
     public static void modificarUsuario(int key){
         usuarios.get(key).modificar();

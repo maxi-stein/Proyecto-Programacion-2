@@ -76,6 +76,7 @@ public class SistemaDeGestion implements Serializable {
             oos.close();
         }catch (IOException e){
             System.out.println("Error al serializar "+nombreArchivo);
+            System.out.println("Error: "+e.getMessage());
         }
     }
     private static <T> T readObject(T objetoALeer,String nombreArchivo) throws IOException {
@@ -115,7 +116,7 @@ public class SistemaDeGestion implements Serializable {
         }
     }
     private static void cargarPaisYCiudadDefault(){
-        if(paises == null){
+        if(paises == null || ciudades == null){
             ciudades = new HashMap<>();
             paises = new HashMap<>();
             Pais paisDefault = new Pais("Argentina",487.2,50000000);
