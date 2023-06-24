@@ -117,11 +117,13 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
         }
         vendedores.add(v);
     }
+
     public void eliminarVendedor(Vendedor v){
         if(!vendedores.contains(v)){
             throw new RuntimeException("Vendedor no encontrado.");
         }
         vendedores.remove(v);
+        System.out.println("Vendedor eliminado.");
     }
     public boolean areaCompatible(AreasMercado a){
         return areasMercado.entrySet().contains(a);
@@ -181,4 +183,6 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
     public void eliminarRegistrosAreaDeMercado(){
         areasMercado.clear();
     }
+
+
 }

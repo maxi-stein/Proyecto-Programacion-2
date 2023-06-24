@@ -112,12 +112,15 @@ public class Asesor extends Usuario{
                 break;
             case 8:
                 //IMPLEMENTAR EMPRESAS QUE SE VINCULAN CON EL ASESOR
-                System.out.println("FALTA IMPRIMIR LA VINCULACION DE LAS EMPRESAS CON EL ASESOR");
+                System.out.println("SELECCIONE EMPRESA A DESVINCULAR - 0 para salir -:");
+                BaseDeDatosSingleton.listarEmpresasDeAsesor(this);
                 do {
                     keyEmpresa = Consola.leerEntero();
-                } while (keyEmpresa < 0 || keyEmpresa > empresas.size());
-                if(!BaseDeDatosSingleton.usuarioAsesoraAEmpresa(this,empresas.get(keyEmpresa))){
-                    empresas.get(keyEmpresa).eliminarAsesor(this);
+                } while (keyEmpresa < 0 || !empresas.containsKey(keyEmpresa));
+
+                if(BaseDeDatosSingleton.usuarioAsesoraAEmpresa(this,empresas.get(keyEmpresa))){
+                   // empresas.get(keyEmpresa).eliminarAsesor(this);
+                    BaseDeDatosSingleton.eliminarAsesorDeEmpresa(keyEmpresa, this);
                     System.out.println("El asesor " + getNombre() + " se desvinculo exitosamente de la empresa " +
                             empresas.get(keyEmpresa).getNombre());
                 }

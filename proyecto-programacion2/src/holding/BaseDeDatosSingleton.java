@@ -99,6 +99,11 @@ public class BaseDeDatosSingleton {
         empresas.get(keyEmpresa).agregarAsesor(a,fechaInicio);
         System.out.println("Nuevo Asesor: "+empresas.get(keyEmpresa).esAsesoradoPor(a));
     }
+    public static void eliminarAsesorDeEmpresa(int keyEmpresa, Asesor a){
+        System.out.println("Empresa modificada: "+empresas.get(keyEmpresa).getNombre());
+        empresas.get(keyEmpresa).eliminarAsesor(a);
+        System.out.println("Vinculo del Asesor-Empresa: "+empresas.get(keyEmpresa).esAsesoradoPor(a));
+    }
     public static void modificarUsuario(int key){
         usuarios.get(key).modificar();
     }
@@ -254,5 +259,9 @@ public class BaseDeDatosSingleton {
     }
     public static void eliminarEmpresa(int key){
         empresas.get(key).setBloqueo(true);
+    }
+
+    public static void agregarAreaMercadoAEmpresa(int keyEmpresa, AreasMercado a){
+        empresas.get(keyEmpresa).agregarAreaMercado(a);
     }
 }

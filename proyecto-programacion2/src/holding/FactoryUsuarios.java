@@ -83,8 +83,8 @@ public class FactoryUsuarios {
             System.out.println("Ingresa la fecha de inicio (dd/mm/aaaa): ");
             LocalDate fechaInicio = Consola.leerFecha();
             asesor.mostrarCredenciales();
-            BaseDeDatosSingleton.agregarAsesorAEmpresa(keyEmpresa, asesor, fechaInicio);//se agrega el asesor a la empresa
             BaseDeDatosSingleton.agregarUsuario(asesor);//se agrega el asesor a la base de datos de usuarios
+            BaseDeDatosSingleton.agregarAsesorAEmpresa(keyEmpresa, asesor, fechaInicio);//se agrega el asesor a la empresa
         }
     }
 

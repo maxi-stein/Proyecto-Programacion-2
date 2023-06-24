@@ -78,7 +78,8 @@ public class MenuModificarEmpresa implements CapazDeEjecutarAccionMenu{
                 while (opcionAreaMercado<1 || opcionAreaMercado>areas.size()){
                     opcionAreaMercado = Consola.leerEntero();
                 }
-                empresaSeleccionada.agregarAreaMercado(areas.get(opcionAreaMercado));
+                //empresaSeleccionada.agregarAreaMercado(areas.get(opcionAreaMercado));
+                BaseDeDatosSingleton.agregarAreaMercadoAEmpresa(keyEmpresa, areas.get(opcionAreaMercado));
                 break;
             case 8:
                 System.out.println("Seleccione el area de mercado a eliminar");
