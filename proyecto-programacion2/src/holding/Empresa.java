@@ -171,7 +171,7 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
             System.out.println("La empresa registra empleados activos!");
             System.out.println("Empleados:");
             for(int i = 0; i<asesores.size(); i++){
-                System.out.println(asesores.get(i).toString());
+                System.out.println(asesores.get(i).getAsesor().getNombre()+" - Usuario N: "+asesores.get(i).getAsesor().getCodigoUsuario());
             }
             for(int i = 0; i<vendedores.size(); i++){
                 System.out.println(vendedores.get(i).toString());

@@ -13,12 +13,12 @@ public class MenuModificarAreaDeMercado implements CapazDeEjecutarAccionMenu {
     }
     @Override
     public void ejecutar() {
-        System.out.println("Seleccione el pais a modificar:");
-        BaseDeDatosSingleton.listarEmpresas();
+        System.out.println("Seleccione el area a modificar:");
+        BaseDeDatosSingleton.listarAreasDeMercado();
         int keyAreaMercado = seleccionarAreaMercado(areas);
         System.out.println("Determine que atributo modificar:");
-        System.out.print("1 - Nombre '\t'"+" 2- Descripción"+"\n"+
-                "3 - Salir");
+        System.out.print("1 - Nombre \t"+" 2- Descripción"+"\n"+
+                "3 - Salir\n");
         int opcion = 0;
         while(opcion<1 || opcion>3){
             opcion = Consola.leerEntero();
@@ -29,13 +29,13 @@ public class MenuModificarAreaDeMercado implements CapazDeEjecutarAccionMenu {
                 System.out.println("Ingrese el nuevo nombre:");
                 String nombre = Consola.leerString();
                 areaSeleccionada.setNombre(nombre.toUpperCase());
-                System.out.println("Nombre modificado!"+areaSeleccionada);
+                System.out.println("Nombre modificado!: "+areaSeleccionada);
                 break;
             case 2:
                 System.out.println("Ingrese nueva Descripción:");
                 String descripcion = Consola.leerString();
                 areaSeleccionada.setDescripcion(descripcion);
-                System.out.println("Descripción modificada!"+areaSeleccionada);
+                System.out.println("Descripción modificada!: "+areaSeleccionada);
                 break;
             default:
                 break;

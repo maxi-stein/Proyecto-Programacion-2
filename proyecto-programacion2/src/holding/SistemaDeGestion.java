@@ -36,6 +36,7 @@ public class SistemaDeGestion implements Serializable {
             serializarBD(BaseDeDatosSingleton.obtenerUsuarios(), BaseDeDatosSingleton.obtenerEmpresas(),
                         BaseDeDatosSingleton.obtenerAreasDeMercado(), BaseDeDatosSingleton.obtenerCiudades(),
                         BaseDeDatosSingleton.obtenerPaises());
+            System.out.println("* Base de Datos Serializada *");
         }while(num!=2);
     }
     public int mostrarMenu(){

@@ -72,24 +72,33 @@ public class MenuModificarEmpresa implements CapazDeEjecutarAccionMenu{
                 }
                 empresaSeleccionada.eliminarCiudad(ciudadesDeEmpresa.get(opcionEmpresa));
             case 7:
-                System.out.println("Seleccione el area de mercado a agregar");
+                System.out.println("Seleccione el area de mercado a agregar - 0 para cancelar -");
                 BaseDeDatosSingleton.listarAreasDeMercado();
                 int opcionAreaMercado = 0;
-                while (opcionAreaMercado<1 || opcionAreaMercado>areas.size()){
+                do{
                     opcionAreaMercado = Consola.leerEntero();
+                }while(opcionAreaMercado<0 || opcionAreaMercado>areas.size());
+                if(opcionAreaMercado!=0){
+                    //empresaSeleccionada.agregarAreaMercado(areas.get(opcionAreaMercado));
+                    BaseDeDatosSingleton.agregarAreaMercadoAEmpresa(keyEmpresa, areas.get(opcionAreaMercado));
+                }else {
+                    System.out.println("Modificación cancelada...");
                 }
-                //empresaSeleccionada.agregarAreaMercado(areas.get(opcionAreaMercado));
-                BaseDeDatosSingleton.agregarAreaMercadoAEmpresa(keyEmpresa, areas.get(opcionAreaMercado));
                 break;
             case 8:
-                System.out.println("Seleccione el area de mercado a eliminar");
+                System.out.println("Seleccione el area de mercado a eliminar - 0 para Cancelar -: ");
                 empresaSeleccionada.listarAreasDeMercado();
                 HashMap<Integer, AreasMercado> areasMercadoAEliminar = empresaSeleccionada.obtenerAreasDeMercado();
                 int opcionAreaMercadoAEliminar = 0;
-                while (opcionAreaMercadoAEliminar<1 || opcionAreaMercadoAEliminar>areasMercadoAEliminar.size()){
+               do{
                     opcionAreaMercadoAEliminar = Consola.leerEntero();
-                }
-                empresaSeleccionada.eliminarAreaMercado(areasMercadoAEliminar.get(opcionAreaMercadoAEliminar));
+                } while (opcionAreaMercadoAEliminar<0 || opcionAreaMercadoAEliminar>areasMercadoAEliminar.size());
+               if(opcionAreaMercadoAEliminar != 0){
+                   empresaSeleccionada.eliminarAreaMercado(areasMercadoAEliminar.get(opcionAreaMercadoAEliminar));//CAMBIAR POR BASEDEDATOSHOLDING
+                   //BaseDeDatosSingleton.
+               }else {
+                   System.out.println("Modificación Cancelada...");
+               }
                 break;
             default:
                 break;

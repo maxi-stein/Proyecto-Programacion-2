@@ -53,14 +53,17 @@ public class Asesor extends Usuario{
 
         switch (opcion){
             case 1:
+                System.out.println("Ingrese Nombre: ");
                 String nombre = Consola.leerString();
                 setNombre(nombre);
                 break;
             case 2:
+                System.out.println("Ingrese nueva Contraseña: ");
                 String pass = Consola.leerString();
                 setPass(pass);
                 break;
             case 3:
+                System.out.println("Ingrese Dirección: ");
                 String direccion = Consola.leerString();
                 setDireccion(direccion);
                 break;
@@ -70,6 +73,7 @@ public class Asesor extends Usuario{
                 setTitulacion(titulacion);
                 break;
             case 5:
+                System.out.println("Seleccione Area de Mercado:\n");
                 BaseDeDatosSingleton.listarAreasDeMercado();
                 HashMap <Integer,AreasMercado> areas = BaseDeDatosSingleton.obtenerAreasDeMercado();
                 int keyArea = 0;
@@ -86,7 +90,8 @@ public class Asesor extends Usuario{
                 }
                 break;
             case 6:
-                listarMercadosCubiertos();
+                System.out.println("Seleccione Area de Mercado:\n");
+                this.listarMercadosCubiertos();
                 int keyAreaCubierta = 0;
                 do {
                     keyArea = Consola.leerEntero();
@@ -94,6 +99,7 @@ public class Asesor extends Usuario{
                 eliminarAreaMercadoCubierto(keyAreaCubierta);
                 break;
             case 7:
+                System.out.println("Seleccione Empresa:\n");
                 BaseDeDatosSingleton.listarEmpresas();
                 do {
                     keyEmpresa = Consola.leerEntero();
@@ -111,7 +117,6 @@ public class Asesor extends Usuario{
                 }
                 break;
             case 8:
-                //IMPLEMENTAR EMPRESAS QUE SE VINCULAN CON EL ASESOR
                 System.out.println("SELECCIONE EMPRESA A DESVINCULAR - 0 para salir -:");
                 BaseDeDatosSingleton.listarEmpresasDeAsesor(this);
                 do {
