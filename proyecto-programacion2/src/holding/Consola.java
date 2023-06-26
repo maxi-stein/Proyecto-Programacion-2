@@ -1,10 +1,8 @@
 package holding;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -23,25 +21,28 @@ public class Consola {
             }
             catch (NumberFormatException  | InputMismatchException e){
                 System.out.println("Ingrese un valor correcto!");
+                sc.nextLine();
             }
         }
         return lectura;
     }
 
     public static LocalDate leerFecha() {
-        String dateString = sc.next();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = null;
+        LocalDate fechaActual = LocalDate.now();
+        LocalDate fechaIngresada = null;
 
-        while (date == null) {
+        while (fechaIngresada == null || fechaIngresada.isAfter(fechaActual)) {
+            System.out.print("Ingrese una fecha (dd/MM/yyyy): ");
+            String dateString = sc.nextLine();
+
             try {
-                date = dateFormat.parse(dateString);
-            } catch (ParseException e) {
+                fechaIngresada = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            } catch (DateTimeParseException e) {
                 System.out.println("Fecha incorrecta, intente de nuevo.");
-                dateString = sc.nextLine();
             }
         }
-        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        return fechaIngresada;
     }
     public static double leerDouble(){
         Double lectura = null;
@@ -52,6 +53,7 @@ public class Consola {
             }
             catch (NumberFormatException | InputMismatchException e){
                 System.out.println("Ingrese un valor correcto!");
+                sc.nextLine();
             }
         }
         return lectura;
