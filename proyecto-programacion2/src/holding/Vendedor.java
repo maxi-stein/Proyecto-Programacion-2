@@ -41,16 +41,15 @@ public class Vendedor extends Usuario {
         System.out.println("El vendedor posee un total de "+getCantidadVendedoresCapt()+" vendedores captados");
         listarVendedoresCaptados();
     }
-    private void listarVendedoresCaptados(){
-        if(vendedoresCaptados.size()==0){
-            System.out.println("Aun no posee vendedores captados");
-        }
-        else {
-            System.out.println("Los empleados captados son:");
+    private String listarVendedoresCaptados(){
+        StringBuilder sb = new StringBuilder();
+        if(vendedoresCaptados.size()>0) {
+            sb.append("Los empleados captados son: "+'\n');
             for (Vendedor v : vendedoresCaptados) {
-                System.out.println(v.getNombre());
+                sb.append(v.getCodigoUsuario()+" - "+v.getNombre()+'\n');
             }
         }
+        return sb.toString();
     }
     public void modificar(){
         BaseDeDatosSingleton bd = BaseDeDatosSingleton.getInstance();
@@ -97,5 +96,15 @@ public class Vendedor extends Usuario {
     }
     public Empresa getEmpresaTrabajo() {
         return empresaTrabajo;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getCodigoUsuario()+" - "+getNombre()+'\n'+ "Empleado en: "+empresaTrabajo.getNombre()+
+                "(Captado: "+fechaCaptado.getDayOfMonth()+"/"+fechaCaptado.getMonth()+"/"+fechaCaptado.getYear()+")"+'\n'
+                + "El vendedor posee un total de "+getCantidadVendedoresCapt()+" vendedores captados");
+        sb.append(listarVendedoresCaptados());
+        return sb.toString();
     }
 }

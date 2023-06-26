@@ -152,11 +152,7 @@ public class Asesor extends Usuario{
 
     @Override
     public String toString() {
-        return "Asesor{" +
-                "titulacion='" + titulacion + '\'' +
-                ", mercadosCubiertos=" + mercadosCubiertos +
-                ", cantidadMercadosCubiertos=" + cantidadMercadosCubiertos +
-                '}';
+        return getCodigoUsuario() + "-" + getNombre()+", "+ titulacion;
     }
     public void setTitulacion(String titulacion) {
         this.titulacion = titulacion;

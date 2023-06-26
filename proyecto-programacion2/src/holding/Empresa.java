@@ -188,5 +188,23 @@ public class Empresa implements CapazDeSerBloqueado, Serializable {
         areasMercado.clear();
     }
 
-
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(nombre + ", actividad comenzada en: " + fechaEntrada + '\n' +
+                "Facturacion Anual: $" + facturacionAnual + '\n' +
+                "Ciudades sede: "+ sede + '\n'+"Vendedores: "+'\n');
+        for(int i=0;i<vendedores.size();i++){
+            sb.append(vendedores.get(i).getCodigoUsuario()+"-"+vendedores.get(i).getNombre()+'\n');
+        }
+        sb.append("Asesores: "+'\n');
+        for(int i=0;i<asesores.size();i++){
+            sb.append(asesores.get(i).getAsesor().toString()+" (iniciado "+asesores.get(i).getFechaInicio()+")"+'\n');
+        }
+        sb.append("Areas de Mercado: ");
+        for(int i=1;i<= areasMercado.size();i++){
+            sb.append(areasMercado.get(i).getNombre()+'\n');
+        }
+        return sb.toString();
+    }
 }

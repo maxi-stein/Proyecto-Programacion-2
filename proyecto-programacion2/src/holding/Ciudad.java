@@ -26,7 +26,7 @@ public class Ciudad implements CapazDeSerBloqueado, Serializable {
     }
     @Override
     public String toString() {
-        return nombre +"," + paisOrigen;
+        return nombre +"," + paisOrigen.toString();
     }
     public String getNombre() {
         return nombre;

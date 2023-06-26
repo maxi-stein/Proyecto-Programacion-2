@@ -97,7 +97,6 @@ public class BaseDeDatosSingleton {
     public static void agregarAsesorAEmpresa(int keyEmpresa, Asesor a, LocalDate fechaInicio){ //cambie Integer por int
         System.out.println("Empresa modificada: "+empresas.get(keyEmpresa).getNombre());
         empresas.get(keyEmpresa).agregarAsesor(a,fechaInicio);
-        System.out.println("Nuevo Asesor: "+empresas.get(keyEmpresa).esAsesoradoPor(a));
     }
     public static void eliminarAsesorDeEmpresa(int keyEmpresa, Asesor a){
         System.out.println("Empresa modificada: "+empresas.get(keyEmpresa).getNombre());
@@ -118,7 +117,7 @@ public class BaseDeDatosSingleton {
             for (int i = 1; i <= usuarios.size(); i++) {
                 Usuario usuario = usuarios.get(i);
                 if(usuario.noEstaBloqueado() && usuario instanceof Vendedor){
-                    System.out.println(i + " - " + usuario.toString());
+                    System.out.println(usuario.toString());
                 }
             }
         }catch (NullPointerException e){
