@@ -19,11 +19,13 @@ public class Admin extends Usuario {
     @Override
     public void mostrarInfo() {
         super.mostrarCredenciales();
+        System.out.println("*".repeat(10));
         System.out.println("Empresas registradas:");
         HashMap<Integer,Empresa> empresas = BaseDeDatosSingleton.obtenerEmpresas();
         for(int i=1;i<=empresas.size();i++){
             System.out.println(empresas.get(i).toString());
         }
+        System.out.println("*".repeat(10));
         System.out.println("Usuarios registrados: ");
         HashMap<Integer,Usuario> usuarios = BaseDeDatosSingleton.obtenerUsuarios();
         for(int i=1;i<=usuarios.size();i++){
@@ -31,6 +33,7 @@ public class Admin extends Usuario {
                 System.out.println(usuarios.get(i).toString());
             }
         }
+        System.out.println("*".repeat(10));
         System.out.println("Las areas de mercado registradas son: ");
         HashMap<Integer,AreasMercado> areas = BaseDeDatosSingleton.obtenerAreasDeMercado();
         for(int i = 1;i<=areas.size();i++){
@@ -38,6 +41,7 @@ public class Admin extends Usuario {
                 System.out.println(areas.get(i).getNombre());
             }
         }
+        System.out.println("*".repeat(10));
         System.out.println("Las ciudades registradas son: ");
         HashMap<Integer,Ciudad> ciudades = BaseDeDatosSingleton.obtenerCiudades();
         for(int i=1;i<=ciudades.size();i++){
