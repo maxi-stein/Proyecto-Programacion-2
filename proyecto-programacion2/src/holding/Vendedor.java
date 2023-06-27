@@ -1,91 +1,110 @@
 package holding;
 
+import menues.MenuPrincipalNoAdmin;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Vendedor extends Usuario {
-
     private LocalDate fechaCaptado;
     private ArrayList<Vendedor> vendedoresCaptados;
     private Empresa empresaTrabajo;
-
-
     public Vendedor(String nombre, String direccion, String pass, LocalDate fechaCaptado,Empresa empresaTrabajo) {
         super(nombre, direccion, pass);
         this.fechaCaptado = fechaCaptado;
         this.empresaTrabajo = empresaTrabajo;
         vendedoresCaptados = new ArrayList<>();
     }
-
+    public Vendedor(){
+        super();
+        this.fechaCaptado = LocalDate.now();
+        vendedoresCaptados = new ArrayList<>();
+    }
     public void captarVendedor(Vendedor vendedor){
         vendedoresCaptados.add(vendedor);
     }
-    public int contadorVendedoresCapt(){
+    public int getCantidadVendedoresCapt(){
         return vendedoresCaptados.size();
+
     }
     @Override
     public void proceder() {
-        int opcion = mostrarMenu();
-        while(opcion != 5){
-            switch (opcion){
-                case 1:
-                    mostrarInformacionUsuario();
-                    break;
-                case 2:
-                    mostrarEmpresaActual();
-                    break;
-                case 3:
-                    mostrarCantVendCaptados();
-                    break;
-                case 4:
-                    listarVendedoresCaptados();
-                    break;
-            }
-            opcion = mostrarMenu();
-        }
+        MenuPrincipalNoAdmin mp = new MenuPrincipalNoAdmin();
+        mp.ejecutar();
     }
-
     @Override
-    public void mostrarInformacionUsuario() {
-        System.out.println("Datos del Usuario: "+toString()+" || Fecha de Ingreso: "+ fechaCaptado);
+    public void mostrarInfo() {
+        mostrarCredenciales();
+        System.out.println("Empresa de trabajo actual: ");
+        System.out.print(empresaTrabajo.getNombre()+ "(Captado: "+fechaCaptado.getDayOfMonth()+"/"+fechaCaptado.getMonth()+"/"+fechaCaptado.getYear()+")");
+        System.out.println("El vendedor posee un total de "+getCantidadVendedoresCapt()+" vendedores captados");
+        listarVendedoresCaptados();
     }
-
-    @Override
-    public int mostrarMenu() {
-        int opcion = 0;
-        while(opcion>6 || opcion<1){
-            System.out.print("1 - Mostrar Datos de Usuario. \n" +
-                    "2 - Mostrar empresa actual. \n" +
-                    "3 - Mostrar cantidad vendedores captados. \n" +
-                    "4 - Listar vendedores captados. \n" +
-                    "5 - Salir.-  \n-");
-            opcion = leerNum();
-            if(opcion>5 || opcion<1) System.out.println("Opcion incorrecta, intente de nuevo.");
-        }
-        return opcion;
-    }
-
-    public int leerNum(){
-        String numero = input.nextLine();
-        return Integer.parseInt(numero);
-    }
-
-    public void mostrarEmpresaActual(){
-        System.out.println(empresaTrabajo.displayInfo());
-    }
-
-    public void mostrarCantVendCaptados(){
-        System.out.println("La cantidad de vendedores captados es: "+contadorVendedoresCapt());
-    }
-
-    private void listarVendedoresCaptados(){
-        if(vendedoresCaptados.size()==0){
-            System.out.println("Aun no posee vendedores captados");
-        }
-        else {
+    private String listarVendedoresCaptados(){
+        StringBuilder sb = new StringBuilder();
+        if(vendedoresCaptados.size()>0) {
+            sb.append("Los empleados captados son: "+'\n');
             for (Vendedor v : vendedoresCaptados) {
-                System.out.println(v.toString());
+                sb.append(v.getCodigoUsuario()+" - "+v.getNombre()+'\n');
             }
         }
+        return sb.toString();
+    }
+    public void modificar(){
+        BaseDeDatosSingleton bd = BaseDeDatosSingleton.getInstance();
+        super.modificar();
+        System.out.println("4 - Cambiar Empresa de Trabajo");
+        System.out.println("5 - Salir");
+        int opcion = 0;
+        while(opcion<1 || opcion>5){
+            opcion = Consola.leerEntero();
+        }
+        switch (opcion){
+            case 1:
+                String nombre = Consola.leerString();
+                setNombre(nombre);
+                break;
+            case 2:
+                String pass = Consola.leerString();
+                setPass(pass);
+                break;
+            case 3:
+                String direccion = Consola.leerString();
+                setDireccion(direccion);
+                break;
+            case 4:
+                System.out.println("Seleccione la empresa a la cual cambiar: ");
+                bd.listarEmpresas();
+                HashMap<Integer,Empresa> empresas = bd.obtenerEmpresas();
+                int keyEmpresa = 0;
+                do {
+                    keyEmpresa = Consola.leerEntero();
+                } while (keyEmpresa < 0 || keyEmpresa > empresas.size());
+
+                empresaTrabajo.eliminarVendedor(this); //retiro el vendedor de la empresa vieja
+                empresas.get(keyEmpresa).agregarVendedor(this); //ingreso el vendedor a la empresa nueva
+                empresaTrabajo = empresas.get(keyEmpresa); //actualizo el atributo de la empresa de trabajo del vendedor
+                fechaCaptado = LocalDate.now();
+                break;
+            default:
+                break;
+        }
+    }
+    public void setEmpresaTrabajo(Empresa empresaTrabajo) {
+        this.empresaTrabajo = empresaTrabajo;
+    }
+    public Empresa getEmpresaTrabajo() {
+        return empresaTrabajo;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getCodigoUsuario()+" - "+getNombre()+'\n'+ "Empleado en: "+empresaTrabajo.getNombre()+
+                "(Captado: "+fechaCaptado.getDayOfMonth()+"/"+fechaCaptado.getMonth()+"/"+fechaCaptado.getYear()+")"+'\n'
+                + "El vendedor posee un total de "+getCantidadVendedoresCapt()+" vendedores captados");
+        sb.append(listarVendedoresCaptados());
+        return sb.toString();
     }
 }

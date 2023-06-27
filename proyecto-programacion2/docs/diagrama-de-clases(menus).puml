@@ -1,0 +1,143 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam backgroundColor transparent
+skinparam monochrome true
+skinparam shadowing false
+
+abstract class Menu {
+    -acciones : Hashmap<Integer, CapazDeEjecutarAccionMenu>
+    +agregarAccion(Integer,  CapazDeEjecutarAccionMenu) : Void
+    +getAccion(Integer) : CapazDeEjecutarAccionMenu
+    +Menu()
+}
+
+class MenuSalir{
+  -ejecutar() : Void
+}
+
+class MenuABMCAreasMercado extends Menu{
+    +MenuABMCAreasMercado()
+    +ejecutar() : Void
+    +ejecutarAccion() : Void
+}
+class MenuABMCEmpresas extends Menu{
+    +MenuABMCEmpresas();
+    +ejecutar() : Void
+    +ejecutarAccion() : Void
+}
+class MenuABMCUbicaciones extends Menu{
+    +MenuABMCUbicaciones();
+    +ejecutar() : Void
+    +ejecutarAccion() : Void
+}
+class MenuABMCUsuarios extends Menu{
+    +MenuABMCUsuarios();
+    +ejecutar() : Void
+    +ejecutarAccion() : Void
+}
+class MenuCrearAreaDeMercado{
+    +ejecutar() : Void
+}
+class MenuCrearCiudad{
+    +ejecutar() : Void
+}
+class MenuCrearEmpresa{
+    -HashMap<Integer, Ciudad> : ciudades
+    +ejecutar() : Void
+}
+class MenuCrearPais {
+    +ejecutar() : Void
+}
+class MenuCrearUsuario {
+    +ejecutar() : Void
+    +elegirOpcion() : Integer
+}
+class MenuEliminarAreaDeMercado {
+    -HashMap<Integer, AreasMercado> : areas
+    +MenuEliminarAreaDeMercado()
+    +ejecutar() : Void
+    +elegirOpcion() : Integer
+}
+class MenuEliminarCiudad {
+    -HashMap<Integer, Ciudad> : ciudades
+    +MenuEliminarCiudad()
+    +ejecutar() : Void
+}
+class MenuEliminarEmpresa {
+    -HashMap<Integer, Empresa> : empresas
+    +MenuEliminarEmpresa()
+    +ejecutar() : Void
+}
+class MenuEliminarUsuario {
+    +ejecutar() : Void
+    +elegirUsuario() : Void
+}
+class MenuModificarAreaDeMercado {
+    -HashMap<Integer, AreasMercado> : areas
+    +MenuModificarAreaDeMercado()
+    +ejecutar() : Void
+    +seleccionarAreaMercado(HashMap<Integer, AreasMercado> areaMercado) : Integer
+}
+class MenuModificarCiudad {
+    -HashMap<Integer, Ciudad> : ciudades
+    -HashMap<Integer, Pais> : paises
+    +MenuModificarCiudad()
+    +ejecutar() : Void
+}
+class MenuModificarEmpresa {
+    -HashMap<Integer, Ciudad> : ciudades
+    -HashMap<Integer, Pais> : paises
+    -HashMap<Integer,Ciudad> : ciudadesDeEmpresa
+    -HashMap<Integer, AreasMercado> : areas
+    +MenuModificarEmpresa()
+    +ejecutar() : Void
+}
+class MenuModificarPais {
+    -HashMap<Integer, Pais> : paises
+    +MenuModificarPais()
+    +ejecutar() : Void
+    +seleccionarPais() : Void
+}
+class MenuModificarUsuario {
+    +MenuModificarUsuario()
+    +ejecutar() : Void
+    +elegirUsuario() : Integer
+}
+class MenuPrincipalAdmin {
+    +MenuPrincipalAdmin()
+    +ejecutar() : Void
+    +ejecutarAccion(Integer) : Void
+}
+class MenuPrincipalNoAdmin {
+    +MenuPrincipalNoAdmin()
+    +ejecutar() : Void
+    +ejecutarAccion(Integer) : Void
+}
+class MenuVendedorCaptado {
+    +ejecutar() : Void
+}
+
+interface CapazDeEjecutarAccionMenu <<interface>>{
+    +ejecutar() : Void
+}
+Menu -.|> CapazDeEjecutarAccionMenu
+MenuCrearAreaDeMercado --.|> CapazDeEjecutarAccionMenu
+MenuCrearCiudad --.|> CapazDeEjecutarAccionMenu
+MenuCrearEmpresa --.|> CapazDeEjecutarAccionMenu
+MenuCrearPais --.|> CapazDeEjecutarAccionMenu
+MenuCrearUsuario ---.|> CapazDeEjecutarAccionMenu
+MenuEliminarAreaDeMercado ---.|> CapazDeEjecutarAccionMenu
+MenuEliminarCiudad ---.|> CapazDeEjecutarAccionMenu
+MenuEliminarEmpresa ---.|> CapazDeEjecutarAccionMenu
+MenuEliminarUsuario ---.|> CapazDeEjecutarAccionMenu
+MenuModificarAreaDeMercado ---.|> CapazDeEjecutarAccionMenu
+MenuModificarCiudad ---.|> CapazDeEjecutarAccionMenu
+MenuModificarEmpresa --.|> CapazDeEjecutarAccionMenu
+MenuModificarPais --.|> CapazDeEjecutarAccionMenu
+MenuModificarUsuario --.|> CapazDeEjecutarAccionMenu
+MenuPrincipalAdmin -.|> CapazDeEjecutarAccionMenu
+MenuPrincipalNoAdmin -.|> CapazDeEjecutarAccionMenu
+MenuVendedorCaptado -.|> CapazDeEjecutarAccionMenu
+MenuSalir -.|> CapazDeEjecutarAccionMenu
+@enduml

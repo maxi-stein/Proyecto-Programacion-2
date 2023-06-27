@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+:Admin: as ad
+:Vendedor: as vend
+:Asesor: as ase
+Usuario <|- ad
+Usuario <|-- vend
+Usuario <|- ase
+
+rectangle "Sistema de Gestion de Holding"{
+    usecase "Registrar empresa" as re
+    usecase "Registrar admin" as rad
+    usecase "Registrar vendedor" as rv
+    usecase "Registrar asesor" as rase
+    usecase "Registrar pais" as rp
+    usecase "Registrar ciudad" as rc
+    usecase "Registrar area de mercado" as ram
+    usecase "Modificar registros" as mr
+    usecase "Bloquear registros" as br
+    usecase "Consultar registros" as cr
+    usecase "Consultar datos propios" as cdp
+    usecase "Registrar vendedor captado" as rvc
+}
+ad --> re
+ad -> rad
+ad -> rv
+ad -> rase
+ad -> rp
+ad -> rc
+ad -> ram
+ad -> mr
+ad -> br
+ad -> cr
+vend --> cdp
+ase --> cdp
+rv .. rvc
+@enduml

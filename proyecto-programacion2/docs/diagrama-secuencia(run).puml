@@ -1,0 +1,86 @@
+@startuml
+participant Actor
+
+Actor -> SistemaDeGestion: run
+activate SistemaDeGestion
+
+
+SistemaDeGestion -> SistemaDeGestion: mostrarMenu
+activate SistemaDeGestion
+SistemaDeGestion -> Consola: leerEntero
+activate Consola
+Consola --> SistemaDeGestion
+deactivate SistemaDeGestion
+deactivate Consola
+
+SistemaDeGestion -> BaseDeDatosSingleton: desloguearUsuario
+activate BaseDeDatosSingleton
+BaseDeDatosSingleton --> SistemaDeGestion
+deactivate BaseDeDatosSingleton
+
+SistemaDeGestion -> BaseDeDatosSingleton: iniciarSesion
+activate BaseDeDatosSingleton
+BaseDeDatosSingleton -> Consola: leerEntero
+activate Consola
+Consola --> BaseDeDatosSingleton
+deactivate Consola
+BaseDeDatosSingleton -> Consola: leerString
+activate Consola
+Consola --> BaseDeDatosSingleton
+deactivate Consola
+BaseDeDatosSingleton -> BaseDeDatosSingleton: autenticarUsuario
+activate BaseDeDatosSingleton
+BaseDeDatosSingleton -> Usuario: validarPass
+activate Usuario
+Usuario --> BaseDeDatosSingleton
+deactivate Usuario
+deactivate BaseDeDatosSingleton
+BaseDeDatosSingleton --> SistemaDeGestion
+deactivate BaseDeDatosSingleton
+
+SistemaDeGestion -> Usuario: proceder
+activate Usuario
+Usuario --> SistemaDeGestion
+deactivate Usuario
+
+SistemaDeGestion -> BaseDeDatosSingleton: desloguearUsuario
+activate BaseDeDatosSingleton
+BaseDeDatosSingleton --> SistemaDeGestion
+deactivate BaseDeDatosSingleton
+
+SistemaDeGestion -> BaseDeDatosSingleton: obtenerUsuarios
+activate BaseDeDatosSingleton
+BaseDeDatosSingleton --> SistemaDeGestion
+deactivate BaseDeDatosSingleton
+
+SistemaDeGestion -> BaseDeDatosSingleton: obtenerEmpresas
+activate BaseDeDatosSingleton
+BaseDeDatosSingleton --> SistemaDeGestion
+deactivate BaseDeDatosSingleton
+
+SistemaDeGestion -> BaseDeDatosSingleton: obtenerAreasDeMercado
+activate BaseDeDatosSingleton
+BaseDeDatosSingleton --> SistemaDeGestion
+deactivate BaseDeDatosSingleton
+
+SistemaDeGestion -> BaseDeDatosSingleton: obtenerCiudades
+activate BaseDeDatosSingleton
+BaseDeDatosSingleton --> SistemaDeGestion
+deactivate BaseDeDatosSingleton
+
+SistemaDeGestion -> BaseDeDatosSingleton: obtenerPaises
+activate BaseDeDatosSingleton
+BaseDeDatosSingleton --> SistemaDeGestion
+deactivate BaseDeDatosSingleton
+
+SistemaDeGestion -> SistemaDeGestion: serializarBD
+
+
+activate SistemaDeGestion
+SistemaDeGestion -> SistemaDeGestion:writeObject
+
+
+activate SistemaDeGestion
+SistemaDeGestion -> SistemaDeGestion: crearObjectOutputStream
+
+@enduml

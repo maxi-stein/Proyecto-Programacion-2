@@ -1,29 +1,44 @@
 package holding;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Pais implements ISede {
-    private boolean esSede;
+public class Pais implements CapazDeSerBloqueado, Serializable {
     private String nombre;
     private double pbi;
     private double numHabitantes;
-    private ArrayList<Ciudad> ciudades;
-
-
+    private boolean bloqueado;
     public Pais(String nombre, double pbi, double numHabitantes){
         this.nombre = nombre;
         this.pbi = pbi;
         this.numHabitantes = numHabitantes;
-        esSede = false;
     }
-
     @Override
-    public void hacerSede() {
-        esSede = true;
+    public void setBloqueo(boolean valor) {
+        bloqueado = valor;
     }
-
     @Override
-    public void eliminarSede() {
-        esSede = false;
+    public boolean noEstaBloqueado() {
+        return !bloqueado;
+    }
+    public boolean esIgual(Pais p){
+        return nombre.equals(p.nombre);
+    }
+    @Override
+    public String toString() {
+        return nombre +
+                "(PBI:" + pbi +
+                "- Habitantes=" + numHabitantes +")";
+    }
+    public String getNombre(){
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public void setPbi(double pbi) {
+        this.pbi = pbi;
+    }
+    public void setNumHabitantes(double numHabitantes) {
+        this.numHabitantes = numHabitantes;
     }
 }

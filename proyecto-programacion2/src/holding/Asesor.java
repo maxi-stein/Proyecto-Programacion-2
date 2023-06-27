@@ -1,106 +1,160 @@
 package holding;
 
+import menues.MenuPrincipalNoAdmin;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Asesor extends Usuario{
     private String titulacion;
-    private ArrayList<AREAS_MERCADO> mercadosCubiertos;
-    private ArrayList<Empresa> empresasAsesoradas;
-    private ArrayList<LocalDate> fechasInicio;
+    private HashMap<Integer,AreasMercado> mercadosCubiertos;
+    private int cantidadMercadosCubiertos;
 
     public Asesor(String nombre, String direccion, String pass, String titulacion) {
         super(nombre, direccion, pass);
         this.titulacion = titulacion;
-        mercadosCubiertos = new ArrayList<>();
-        empresasAsesoradas = new ArrayList<>();
-        fechasInicio = new ArrayList<>();
+        mercadosCubiertos = new HashMap<>();
+        cantidadMercadosCubiertos = 0;
+    }
+    public Asesor(){
+        super();
+        mercadosCubiertos = new HashMap<>();
+        cantidadMercadosCubiertos = 0;
     }
     @Override
     public void proceder() {
-        int opcion = mostrarMenu();
-        while(opcion != 4){
-            switch (opcion){
-                case 1:
-                    mostrarInformacionUsuario();
-                    break;
-                case 2:
-                    listarEmpresas();
-                    break;
-                case 3:
-                    listarAreasMercado();
-                    break;
-            }
-            opcion = mostrarMenu();
-            if(opcion>4 || opcion<1) System.out.println("Opcion incorrecta, intente de nuevo.");
+        MenuPrincipalNoAdmin mpa = new MenuPrincipalNoAdmin();
+        mpa.ejecutar();
+    }
+    @Override
+    public void mostrarInfo() {
+        super.mostrarCredenciales();
+        System.out.println("Titulacion: "+titulacion);
+        System.out.println("Mercados cubiertos:");
+        listarMercadosCubiertos();
+        System.out.println();
+        System.out.println("Empresas asesoradas:");
+        BaseDeDatosSingleton.listarEmpresasDeAsesor(this);
+    }
+    @Override
+    public void modificar() {
+        super.modificar();
+        System.out.println("4 - Titulacion");
+        System.out.println("5 - Agregar Area de Mercado Cubierto"+'\t'+"6 - Eliminar Area de Mercado Cubierto");
+        System.out.println("7 - Vincular a una Empresa"+'\t'+"8 - Desvincular de una Empresa");
+        System.out.println("9 - Salir");
+        int opcion = 0;
+        while(opcion<1 || opcion>9){
+            opcion = Consola.leerEntero();
         }
 
+        HashMap<Integer,Empresa> empresas = BaseDeDatosSingleton.obtenerEmpresas();
+        int keyEmpresa = 0;
+
+        switch (opcion){
+            case 1:
+                System.out.println("Ingrese Nombre: ");
+                String nombre = Consola.leerString();
+                setNombre(nombre);
+                break;
+            case 2:
+                System.out.println("Ingrese nueva Contraseña: ");
+                String pass = Consola.leerString();
+                setPass(pass);
+                break;
+            case 3:
+                System.out.println("Ingrese Dirección: ");
+                String direccion = Consola.leerString();
+                setDireccion(direccion);
+                break;
+            case 4:
+                System.out.println("Ingrese Titulación: ");
+                String titulacion = Consola.leerString();
+                setTitulacion(titulacion);
+                break;
+            case 5:
+                System.out.println("Seleccione Area de Mercado:\n");
+                BaseDeDatosSingleton.listarAreasDeMercado();
+                HashMap <Integer,AreasMercado> areas = BaseDeDatosSingleton.obtenerAreasDeMercado();
+                int keyArea = 0;
+                do {
+                    keyArea = Consola.leerEntero();
+                } while (keyArea < 0 || keyArea > areas.size());
+
+                //verifico si el area agregada ya esta en el asesor
+                if(asesoraElArea(areas.get(keyArea))){
+                    System.out.println("Area ya cubierta, no se aceptan duplicados.");
+                }
+                else{
+                    agregarAreaMercadoCubierto(areas.get(keyArea));
+                }
+                break;
+            case 6:
+                System.out.println("Seleccione Area de Mercado:\n");
+                this.listarMercadosCubiertos();
+                int keyAreaCubierta = 0;
+                do {
+                    keyArea = Consola.leerEntero();
+                } while (keyArea < 0 || keyArea > cantidadMercadosCubiertos);
+                eliminarAreaMercadoCubierto(keyAreaCubierta);
+                break;
+            case 7:
+                System.out.println("Seleccione Empresa:\n");
+                BaseDeDatosSingleton.listarEmpresas();
+                do {
+                    keyEmpresa = Consola.leerEntero();
+                } while (keyEmpresa < 0 || keyEmpresa > empresas.size());
+                //if(BaseDeDatosSingleton.usuarioAsesoraAEmpresa(this,empresas.get(keyEmpresa))){
+                if(empresas.get(keyEmpresa).esAsesoradoPor(this)){
+                    System.out.println("El usuario ya asesora dicha empresa!");
+                }
+                else{
+                    System.out.println("Ingrese la fecha de inicio dd/mm/aaaa:");
+                    LocalDate fechaInicioModif = Consola.leerFecha();
+                    Asesor asesorModif = this;
+                    BaseDeDatosSingleton.agregarAsesorAEmpresa(keyEmpresa, asesorModif, fechaInicioModif);
+                    //empresas.get(keyEmpresa).agregarAsesor(this,Consola.leerFecha());
+                }
+                break;
+            case 8:
+                System.out.println("SELECCIONE EMPRESA A DESVINCULAR - 0 para salir -:");
+                BaseDeDatosSingleton.listarEmpresasDeAsesor(this);
+                do {
+                    keyEmpresa = Consola.leerEntero();
+                } while (keyEmpresa < 0 || !empresas.containsKey(keyEmpresa));
+
+                if(BaseDeDatosSingleton.usuarioAsesoraAEmpresa(this,empresas.get(keyEmpresa))){
+                   // empresas.get(keyEmpresa).eliminarAsesor(this);
+                    BaseDeDatosSingleton.eliminarAsesorDeEmpresa(keyEmpresa, this);
+                    System.out.println("El asesor " + getNombre() + " se desvinculo exitosamente de la empresa " +
+                            empresas.get(keyEmpresa).getNombre());
+                }
+            default:
+                break;
+        }
+    }
+
+    public void listarMercadosCubiertos(){
+        for(var merc : mercadosCubiertos.entrySet()){
+            System.out.println("-"+merc.getValue());
+        }
+    }
+    public void agregarAreaMercadoCubierto(AreasMercado area){
+        mercadosCubiertos.put(cantidadMercadosCubiertos+1,area);
+        cantidadMercadosCubiertos++;
+    }
+    private void eliminarAreaMercadoCubierto(int keyArea){
+        mercadosCubiertos.remove(keyArea);
+    }
+    public boolean asesoraElArea(AreasMercado area){
+        return mercadosCubiertos.entrySet().contains(area);
     }
 
     @Override
-    public void mostrarInformacionUsuario() {
-        System.out.println("Datos del Usuario: "+this.toString()+" || Titulacion: "+ titulacion);
+    public String toString() {
+        return getCodigoUsuario() + "-" + getNombre()+", "+ titulacion;
     }
-
-    @Override
-    public int mostrarMenu() {
-        int opcion=0;
-        while (opcion < 1 || opcion > 4) {
-            System.out.print("1-Mostrar Datos de Usuario. \n" +
-                    "2-Listar Empresas Asesoradas. \n" +
-                    "3-Listar Areas de Mercado asesoradas. \n" +
-                    "4-Salir.-");
-            opcion = leerNum();
-        }
-        return opcion;
-    }
-
-    public void listarEmpresas(){
-        if(empresasAsesoradas.isEmpty()){
-            System.out.println("No hay empresas que asesore el usuario.");
-        }
-        else {
-            for (int i = 0; i < empresasAsesoradas.size(); i++) {
-                System.out.println(empresasAsesoradas.get(i).getNombre() + "(desde " + fechasInicio.get(i) + ")");
-            }
-            System.out.println();
-        }
-    }
-
-    public void listarAreasMercado(){
-        if(mercadosCubiertos.isEmpty()){
-            System.out.println("El usuario no asesora ningun area de mercado aún.");
-        }
-        else {
-            System.out.println("AREAS:");
-            for (AREAS_MERCADO area : mercadosCubiertos) {
-                System.out.println(area.name() + " - " + area.getDescripcion());
-            }
-            System.out.println();
-        }
-    }
-
-    public void agregarEmpresaAsesorada(Empresa empresa,LocalDate fechaInicio){
-        empresasAsesoradas.add((empresa));
-        fechasInicio.add((fechaInicio));
-    }
-
-    public void eliminarEmpresaAsesorada(Empresa empresa,LocalDate fechaInicio){
-        empresasAsesoradas.remove((empresa));
-        fechasInicio.remove((fechaInicio));
-    }
-
-    public void agregarAreaMercadoCubierto(AREAS_MERCADO area){
-        mercadosCubiertos.add((area));
-    }
-
-    public void eliminarAreaMercadoCubierto(AREAS_MERCADO area){
-        mercadosCubiertos.remove((area));
-    }
-
-    @Override
-    public int leerNum() {
-        String numero = input.nextLine();
-        return Integer.parseInt(numero);
+    public void setTitulacion(String titulacion) {
+        this.titulacion = titulacion;
     }
 }
