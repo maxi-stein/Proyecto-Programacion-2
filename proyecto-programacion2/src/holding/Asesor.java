@@ -5,6 +5,9 @@ import menues.MenuPrincipalNoAdmin;
 import java.time.LocalDate;
 import java.util.HashMap;
 
+/**
+ * Se encarga de asesorar a las empresas del holding que utilicen las areas de mercado de dicho asesor
+ */
 public class Asesor extends Usuario{
     private String titulacion;
     private HashMap<Integer,AreasMercado> mercadosCubiertos;
@@ -26,6 +29,10 @@ public class Asesor extends Usuario{
         MenuPrincipalNoAdmin mpa = new MenuPrincipalNoAdmin();
         mpa.ejecutar();
     }
+
+    /**
+     * Muestra la informacion del usuario
+     */
     @Override
     public void mostrarInfo() {
         super.mostrarCredenciales();
@@ -36,6 +43,10 @@ public class Asesor extends Usuario{
         System.out.println("Empresas asesoradas:");
         BaseDeDatosSingleton.listarEmpresasDeAsesor(this);
     }
+
+    /**
+     * Permite modificar la informacion del usuario
+     */
     @Override
     public void modificar() {
         super.modificar();
@@ -134,18 +145,38 @@ public class Asesor extends Usuario{
         }
     }
 
+    /**
+     * Muestra por pantalla las areas de mercado que cubre el usuario
+     */
     public void listarMercadosCubiertos(){
         for(var merc : mercadosCubiertos.entrySet()){
             System.out.println("-"+merc.getValue());
         }
     }
+
+    /**
+     * Permite agregar un area de mercado determinada al listado de areas de mercados que puede asesorar el usuario
+     * @param area Area de mercado a agregar
+     */
     public void agregarAreaMercadoCubierto(AreasMercado area){
         mercadosCubiertos.put(cantidadMercadosCubiertos+1,area);
         cantidadMercadosCubiertos++;
     }
+
+    /**
+     * Elimina el area de mercado que asesora el usuario
+     * @param keyArea
+     */
+
     private void eliminarAreaMercadoCubierto(int keyArea){
         mercadosCubiertos.remove(keyArea);
     }
+
+    /**
+     * Evalua si el usuario asesora un area de mercado en particular
+     * @param area Area de mercado a evaluar
+     * @return boolean de la evaluacion
+     */
     public boolean asesoraElArea(AreasMercado area){
         return mercadosCubiertos.entrySet().contains(area);
     }

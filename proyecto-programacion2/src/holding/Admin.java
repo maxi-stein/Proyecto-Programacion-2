@@ -4,6 +4,10 @@ import menues.MenuPrincipalAdmin;
 
 import java.util.HashMap;
 
+/**
+ * El admin es la clase heredada de {@link Usuario} que permite realizar el CRUD o ABMC de todos los datos de
+ * la base de datos
+ */
 public class Admin extends Usuario {
     public Admin(String nombre, String direccion, String pass) {
         super(nombre, direccion, pass);
@@ -16,6 +20,10 @@ public class Admin extends Usuario {
         MenuPrincipalAdmin mp = new MenuPrincipalAdmin();
         mp.ejecutar();
     }
+
+    /**
+     * Muestra la informacion del usuario
+     */
     @Override
     public void mostrarInfo() {
         super.mostrarCredenciales();
@@ -48,6 +56,10 @@ public class Admin extends Usuario {
             System.out.println(ciudades.get(i).toString());
         }
     }
+
+    /**
+     * Permite modificar los datos del usuario
+     */
     @Override
     public void modificar() {
         super.modificar();

@@ -6,6 +6,9 @@ import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Esta clase permite al usuario ingresar por consola valores del tipo int, double o String
+ */
 public class Consola {
     private static Scanner sc = new Scanner(System.in);
     private Consola(){}
