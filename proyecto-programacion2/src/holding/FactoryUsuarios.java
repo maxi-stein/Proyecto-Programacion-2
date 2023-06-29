@@ -3,6 +3,10 @@ package holding;
 import java.time.LocalDate;
 import java.util.HashMap;
 
+/**
+ * Implementacion del patron de diseño Factory para poder crear Asesores, Vendedores, Vendedores captados y Administradores
+ */
+
 public class FactoryUsuarios {
     public static void crearUsuario(int opcion) {
         if(opcion == 1){
@@ -27,7 +31,7 @@ public class FactoryUsuarios {
     private static void crearVendedor(){
         Vendedor v = new Vendedor();
         v.pedirDatosBasicos();
-        System.out.println("Seleccione la empresa en la que trabaja: ");
+        Consola.mostrarUnRenglon("Seleccione la empresa en la que trabaja: ");
         BaseDeDatosSingleton.listarEmpresas();
         HashMap<Integer, Empresa> empresas = BaseDeDatosSingleton.obtenerEmpresas();
         int key = 0;
@@ -43,10 +47,10 @@ public class FactoryUsuarios {
     private static void crearAsesor(){
         Asesor asesor = new Asesor();
         asesor.pedirDatosBasicos();
-        System.out.println("Ingrese la titulacion");
+        Consola.mostrarUnRenglon("Ingrese la titulacion");
         String titulacion = Consola.leerString();
         asesor.setTitulacion(titulacion);
-        System.out.println("Seleccione el area de mercado que asesora - 0 para Cancelar - :");
+        Consola.mostrarUnRenglon("Seleccione el area de mercado que asesora - 0 para Cancelar - :");
         BaseDeDatosSingleton.listarAreasDeMercado();
         HashMap <Integer,AreasMercado> areas = BaseDeDatosSingleton.obtenerAreasDeMercado();
         Integer keyArea = 0;
@@ -56,11 +60,11 @@ public class FactoryUsuarios {
 
         //se agrega el area de mercado cubierta
         asesor.agregarAreaMercadoCubierto(areas.get(keyArea));
-        System.out.println("Asesora: ");
+        Consola.mostrarUnRenglon("Asesora: ");
         asesor.listarMercadosCubiertos();
 
         //se agrega la empresa para la que trabaja y se establece VinculacionAsesorEmpresa
-        System.out.println("Seleccione la empresa que asesora (0 para salir): ");
+        Consola.mostrarUnRenglon("Seleccione la empresa que asesora (0 para salir): ");
         BaseDeDatosSingleton.listarEmpresas();
         HashMap<Integer, Empresa> empresas = BaseDeDatosSingleton.obtenerEmpresas();
         int keyEmpresa = 0;
@@ -74,13 +78,12 @@ public class FactoryUsuarios {
                 compatible = empresas.get(keyEmpresa).contieneAreaDeMercado(areas.get(keyArea));
 
                 if(!compatible) {
-                    System.out.println("El area de mercado no es compatible con la Empresa.");
-                    System.out.println("Ingrese otra empresa o 0 para salir.");
+                    Consola.mostrarVariosRenglones("El area de mercado no es compatible con la Empresa.","Ingrese otra empresa o 0 para salir.");
                 }
             }
         } while (keyEmpresa < 0 || keyEmpresa > empresas.size() || !compatible);
         if(keyEmpresa!=0) {
-            System.out.println("Ingresa la fecha de inicio (dd/mm/aaaa): ");
+            Consola.mostrarUnRenglon("Ingresa la fecha de inicio (dd/mm/aaaa): ");
             LocalDate fechaInicio = Consola.leerFecha();
             asesor.mostrarCredenciales();
             BaseDeDatosSingleton.agregarUsuario(asesor);//se agrega el asesor a la base de datos de usuarios
@@ -92,14 +95,14 @@ public class FactoryUsuarios {
         HashMap<Integer,Vendedor> vendedores = null;
         Vendedor vendedorCaptado = new Vendedor();
         vendedorCaptado.pedirDatosBasicos();
-        System.out.println("Determine el vendedor maestro - 0 para Cancelar -: ");
+        Consola.mostrarUnRenglon("Determine el vendedor maestro - 0 para Cancelar -: ");
         BaseDeDatosSingleton.listarVendedores();
         vendedores = BaseDeDatosSingleton.obtenerVendedores();
         if(!vendedores.isEmpty())
         {
             int opcion = Consola.leerEntero();
             while (!vendedores.containsKey(opcion) && opcion != 0){
-                System.out.println("Ingrese una opcion correcta");
+                Consola.mostrarUnRenglon("Ingrese una opcion correcta");
                 opcion = Consola.leerEntero();
             }
             if(opcion!= 0){
@@ -110,11 +113,11 @@ public class FactoryUsuarios {
                 vendedorCaptado.mostrarCredenciales();
                 BaseDeDatosSingleton.agregarUsuario(vendedorCaptado); //se agrega el vendedor a la base de datos
             }else{
-                System.out.println("- Proceso Cancelado - ");
+                Consola.mostrarUnRenglon("- Proceso Cancelado - ");
             }
 
         }else{
-            System.out.println("Sin registros de Vendedores!");
+            Consola.mostrarUnRenglon("Sin registros de Vendedores!");
         }
 
     }

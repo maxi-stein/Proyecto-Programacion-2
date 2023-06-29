@@ -61,4 +61,13 @@ public class Consola {
         }
         return lectura;
     }
+
+    public static void mostrarUnRenglon(String texto){
+        System.out.println(texto);
+    }
+    public static void mostrarVariosRenglones(String ... texto){
+        for(String t : texto){
+            System.out.println(t);
+        }
+    }
 }
