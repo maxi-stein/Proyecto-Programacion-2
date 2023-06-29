@@ -6,35 +6,34 @@ skinparam monochrome true
 skinparam shadowing false
 
 abstract class Menu {
-    -acciones : Hashmap<Integer, CapazDeEjecutarAccionMenu>
-    +agregarAccion(Integer,  CapazDeEjecutarAccionMenu) : Void
+    +agregarAccion(Integer,  CapazDeEjecutarAccionMenu)
     +getAccion(Integer) : CapazDeEjecutarAccionMenu
     +Menu()
 }
 
 class MenuSalir{
-  -ejecutar() : Void
+  -ejecutar()
 }
 
 class MenuABMCAreasMercado extends Menu{
     +MenuABMCAreasMercado()
-    +ejecutar() : Void
-    +ejecutarAccion() : Void
+    +ejecutar(
+    +ejecutarAccion()
 }
 class MenuABMCEmpresas extends Menu{
     +MenuABMCEmpresas();
     +ejecutar() : Void
-    +ejecutarAccion() : Void
+    +ejecutarAccion()
 }
 class MenuABMCUbicaciones extends Menu{
     +MenuABMCUbicaciones();
     +ejecutar() : Void
-    +ejecutarAccion() : Void
+    +ejecutarAccion()
 }
 class MenuABMCUsuarios extends Menu{
     +MenuABMCUsuarios();
     +ejecutar() : Void
-    +ejecutarAccion() : Void
+    +ejecutarAccion()
 }
 class MenuCrearAreaDeMercado{
     +ejecutar() : Void
@@ -43,7 +42,7 @@ class MenuCrearCiudad{
     +ejecutar() : Void
 }
 class MenuCrearEmpresa{
-    -HashMap<Integer, Ciudad> : ciudades
+    -Ciudad[] : ciudades
     +ejecutar() : Void
 }
 class MenuCrearPais {
@@ -54,73 +53,74 @@ class MenuCrearUsuario {
     +elegirOpcion() : Integer
 }
 class MenuEliminarAreaDeMercado {
-    -HashMap<Integer, AreasMercado> : areas
+    -AreasMercado[] : areas
     +MenuEliminarAreaDeMercado()
-    +ejecutar() : Void
+    +ejecutar()
     +elegirOpcion() : Integer
 }
 class MenuEliminarCiudad {
-    -HashMap<Integer, Ciudad> : ciudades
+    -Ciudad[] : ciudades
     +MenuEliminarCiudad()
     +ejecutar() : Void
 }
 class MenuEliminarEmpresa {
-    -HashMap<Integer, Empresa> : empresas
+    -Empresa[] : empresas
     +MenuEliminarEmpresa()
-    +ejecutar() : Void
+    +ejecutar()
 }
 class MenuEliminarUsuario {
-    +ejecutar() : Void
-    +elegirUsuario() : Void
+    +ejecutar()
+    +elegirUsuario()
 }
 class MenuModificarAreaDeMercado {
-    -HashMap<Integer, AreasMercado> : areas
+    -AreasMercado[] : areas
     +MenuModificarAreaDeMercado()
-    +ejecutar() : Void
-    +seleccionarAreaMercado(HashMap<Integer, AreasMercado> areaMercado) : Integer
+    +ejecutar()
+    +seleccionarAreaMercado(AreasMercado[] areaMercado) : Integer
 }
 class MenuModificarCiudad {
-    -HashMap<Integer, Ciudad> : ciudades
-    -HashMap<Integer, Pais> : paises
+    -Ciudad[]] : ciudades
+    -Pais[] : paises
     +MenuModificarCiudad()
-    +ejecutar() : Void
+    +ejecutar()
 }
 class MenuModificarEmpresa {
-    -HashMap<Integer, Ciudad> : ciudades
-    -HashMap<Integer, Pais> : paises
-    -HashMap<Integer,Ciudad> : ciudadesDeEmpresa
-    -HashMap<Integer, AreasMercado> : areas
+    -Ciudad[] : ciudades
+    -Pais[] : paises
+    -Ciudad[] : ciudadesDeEmpresa
+    -AreasMercado[] : areas
     +MenuModificarEmpresa()
-    +ejecutar() : Void
+    +ejecutar()
 }
 class MenuModificarPais {
-    -HashMap<Integer, Pais> : paises
+    -Pais[] : paises
     +MenuModificarPais()
-    +ejecutar() : Void
-    +seleccionarPais() : Void
+    +ejecutar()
+    +seleccionarPais()
 }
 class MenuModificarUsuario {
     +MenuModificarUsuario()
-    +ejecutar() : Void
+    +ejecutar()
     +elegirUsuario() : Integer
 }
 class MenuPrincipalAdmin {
     +MenuPrincipalAdmin()
-    +ejecutar() : Void
-    +ejecutarAccion(Integer) : Void
+    +ejecutar()
+    +ejecutarAccion(Integer)
 }
 class MenuPrincipalNoAdmin {
     +MenuPrincipalNoAdmin()
-    +ejecutar() : Void
-    +ejecutarAccion(Integer) : Void
+    +ejecutar()
+    +ejecutarAccion(Integer)
 }
 class MenuVendedorCaptado {
-    +ejecutar() : Void
+    +ejecutar()
 }
 
 interface CapazDeEjecutarAccionMenu <<interface>>{
-    +ejecutar() : Void
+    +ejecutar()
 }
+
 Menu -.|> CapazDeEjecutarAccionMenu
 MenuCrearAreaDeMercado --.|> CapazDeEjecutarAccionMenu
 MenuCrearCiudad --.|> CapazDeEjecutarAccionMenu
@@ -140,4 +140,6 @@ MenuPrincipalAdmin -.|> CapazDeEjecutarAccionMenu
 MenuPrincipalNoAdmin -.|> CapazDeEjecutarAccionMenu
 MenuVendedorCaptado -.|> CapazDeEjecutarAccionMenu
 MenuSalir -.|> CapazDeEjecutarAccionMenu
+
+Menu --> "*" CapazDeEjecutarAccionMenu : acciones
 @enduml
