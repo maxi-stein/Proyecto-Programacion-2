@@ -55,36 +55,34 @@ class Empresa{
     -facturacionAnual : Double
     -codigoEmpresa : Integer
     -bloqueado() : Boolean
-    -ciudades : HashMap<Integer, Ciudad>
-    -areasMercado : HashMap<Integer, AreaMercado>
-    -asesores : ArrayList<VinculacionAsesorEmpresa>
+
 
     +Empresa(String,Date,Double)
-    +agregarAreaMercado(AreasMercado) : void
-    +agregarCiudad(Integer) : void
-    +agregarVendedor(Vendedor) : void
+    +agregarAreaMercado(AreasMercado)
+    +agregarCiudad(Integer)
+    +agregarVendedor(Vendedor)
     +areaCompatible(AreaMercado) : Boolean
-    +eliminarAreaDeMercado(AreaMercado) : void
-    +eliminarAsesor(Asesor) : void
-    +eliminarCiudad(Ciudad) : void
-    +eliminarRegistrosAreaDeMercado() : void
-    +eliminarVendedor(Vendedor) : void
-    +esAsesoradoPor(Asesor) : void
+    +eliminarAreaDeMercado(AreaMercado)
+    +eliminarAsesor(Asesor)
+    +eliminarCiudad(Ciudad)
+    +eliminarRegistrosAreaDeMercado()
+    +eliminarVendedor(Vendedor)
+    +esAsesoradoPor(Asesor)
     +estaBloqueado() : Boolean
     +estaUbicadaEnCiudad(Ciudad) : Boolean
     +getFacturacionAnual() : Double
     +getNombre() : String
     +getSede() : Ciudad
-    +listarAreasDeMercado() : void
-    +listarCiudades() : void
-    +mostrarFechaInicioAsesor(Asesor) : void
-    +obtenerAreasDeMercado() : HashMap<Integer, AreaMercado>
-    +obtenerCiudades() : HashMap<Integer, Ciudad>
-    +seleccionarSede(Ciudad) : void
-    +setBloqueo(Boolean) : void
-    +setFacturacionAnual(Double) : void
-    +setFechaEntrada(LocalDate) : void
-    +setNombre(String) : void
+    +listarAreasDeMercado()
+    +listarCiudades()
+    +mostrarFechaInicioAsesor(Asesor)
+    +obtenerAreasDeMercado() : AreaMercado[]
+    +obtenerCiudades() : Ciudad[]
+    +seleccionarSede(Ciudad)
+    +setBloqueo(Boolean)
+    +setFacturacionAnual(Double)
+    +setFechaEntrada(LocalDate)
+    +setNombre(String)
     +tieneTrabajadores() : Boolean
 }
 
@@ -248,7 +246,7 @@ Vendedor -> "*" Vendedor : vendedoresCaptados
 Empresa "1"--> "*" AreaMercado : areasMercado
 
 VinculacionAsesorEmpresa "*" <- Empresa: asesores
-Ciudad <-o Pais : paisOrigen
+Ciudad o-> Pais : paisOrigen
 Ciudad -> "*" Empresa : ciudades
 Empresa <- Ciudad : sede
 Asesor "*" --> "*" AreaMercado : mercadosCubiertos
