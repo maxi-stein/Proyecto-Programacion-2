@@ -6,6 +6,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Vendedor es una clase heredada de {@link Usuario} el cual puede poseer de manera jeraquica vendedores captados. Trabajan todos para una unica {@link Empresa}
+ */
+
 public class Vendedor extends Usuario {
     private LocalDate fechaCaptado;
     private ArrayList<Vendedor> vendedoresCaptados;
@@ -36,9 +40,9 @@ public class Vendedor extends Usuario {
     @Override
     public void mostrarInfo() {
         mostrarCredenciales();
-        System.out.println("Empresa de trabajo actual: ");
-        System.out.print(empresaTrabajo.getNombre()+ "(Captado: "+fechaCaptado.getDayOfMonth()+"/"+fechaCaptado.getMonth()+"/"+fechaCaptado.getYear()+")");
-        System.out.println("El vendedor posee un total de "+getCantidadVendedoresCapt()+" vendedores captados");
+        Consola.mostrarUnRenglon("Empresa de trabajo actual: ");
+        Consola.mostrarUnRenglon(empresaTrabajo.getNombre()+ "(Captado: "+fechaCaptado.getDayOfMonth()+"/"+fechaCaptado.getMonth()+"/"+fechaCaptado.getYear()+")");
+        Consola.mostrarUnRenglon("El vendedor posee un total de "+getCantidadVendedoresCapt()+" vendedores captados");
         listarVendedoresCaptados();
     }
     private String listarVendedoresCaptados(){
@@ -52,10 +56,8 @@ public class Vendedor extends Usuario {
         return sb.toString();
     }
     public void modificar(){
-        BaseDeDatosSingleton bd = BaseDeDatosSingleton.getInstance();
         super.modificar();
-        System.out.println("4 - Cambiar Empresa de Trabajo");
-        System.out.println("5 - Salir");
+        Consola.mostrarVariosRenglones("4- Cambiar Empresa de Trabajo","5- Salir");
         int opcion = 0;
         while(opcion<1 || opcion>5){
             opcion = Consola.leerEntero();
@@ -74,9 +76,9 @@ public class Vendedor extends Usuario {
                 setDireccion(direccion);
                 break;
             case 4:
-                System.out.println("Seleccione la empresa a la cual cambiar: ");
-                bd.listarEmpresas();
-                HashMap<Integer,Empresa> empresas = bd.obtenerEmpresas();
+                Consola.mostrarUnRenglon("Seleccione la empresa a la cual cambiar: ");
+                BaseDeDatosSingleton.listarEmpresas();
+                HashMap<Integer,Empresa> empresas = BaseDeDatosSingleton.obtenerEmpresas();
                 int keyEmpresa = 0;
                 do {
                     keyEmpresa = Consola.leerEntero();

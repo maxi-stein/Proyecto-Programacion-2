@@ -2,6 +2,10 @@ package holding;
 
 import java.io.Serializable;
 
+/**
+ * Esta clase detalla las ciudades en las cuales las empresas desarrollaran actividades o bien las utilizaran
+ * como sede fiscal
+ */
 public class Ciudad implements CapazDeSerBloqueado, Serializable {
     private String nombre;
     private Pais paisOrigen;
@@ -21,6 +25,12 @@ public class Ciudad implements CapazDeSerBloqueado, Serializable {
     public boolean esIgual(Ciudad c){
         return (nombre.equals(c.nombre)) && paisOrigen.getNombre().equalsIgnoreCase(c.paisOrigen.getNombre());
     }
+
+    /**
+     * Evalua si esta ciudad pertenece a un determinado Pais
+     * @param p Pais a evaluar
+     * @return boolean del resultado
+     */
     public boolean tieneAlPais(Pais p){
         return paisOrigen.esIgual(p);
     }

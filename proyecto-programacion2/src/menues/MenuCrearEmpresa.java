@@ -34,7 +34,7 @@ public class MenuCrearEmpresa implements CapazDeEjecutarAccionMenu{
         emp.agregarCiudad(keyCiudad);
         emp.seleccionarSede(ciudades.get(keyCiudad));
 
-        System.out.println("Seleccione Área de Mercado:");
+        System.out.println("Seleccione Area de Mercado:");
         BaseDeDatosSingleton.listarAreasDeMercado();
 
         int opcAreaMercado=0;
